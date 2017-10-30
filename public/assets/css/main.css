@@ -2527,26 +2527,20 @@
 				border-top: 0;
 			}
 
-/* Button */
+/*Button_fixed*/
 
 	input[type="submit"],
-	input[type="reset"],
 	input[type="button"],
 	button,
 	.button {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
 		-moz-transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
 		-webkit-transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
 		background-color: transparent;
 		border: 0;
-		border-radius: 0;
-		box-shadow: inset 0 0 0 2px #ffffff;
-		color: #ffffff;
+		box-shadow: inset 0 0 0 2px #fff;
+		color: #fff;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.8em;
@@ -2558,132 +2552,88 @@
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
-		white-space: nowrap;
+		white-space: nowrap;	
+		border-radius: 50px;
+		overflow: hidden;
 	}
 
-		input[type="submit"]:hover, input[type="submit"]:active,
-		input[type="reset"]:hover,
-		input[type="reset"]:active,
-		input[type="button"]:hover,
-		input[type="button"]:active,
-		button:hover,
-		button:active,
-		.button:hover,
-		.button:active {
-			box-shadow: inset 0 0 0 2px #fcf458;
-			color: #fcf458;
-		}
+/*.button {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	padding: 15px 80px;
+	display: inline-block;
+	margin: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	border-radius: 15px;
+	border: 2px solid #fff;
+	color: #fff;
+	overflow: hidden;
+}*/
+/*
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
 
-		input[type="submit"]:active,
-		input[type="reset"]:active,
-		input[type="button"]:active,
-		button:active,
-		.button:active {
-			background-color: rgba(155, 241, 255, 0.1);
-			box-shadow: inset 0 0 0 2px #FAC92F;
-			color: #FAC92F;
-		}
+/* Pseudo elements for icons */
 
-		input[type="submit"].icon:before,
-		input[type="reset"].icon:before,
-		input[type="button"].icon:before,
-		button.icon:before,
-		.button.icon:before {
-			margin-right: 0.5em;
-		}
+.btn:before,
+/*.button {
+	border-radius: 15px;
+	border: 2px solid #fff;
+	color: #fff;
+	overflow: hidden;
+}*/
 
-		input[type="submit"].fit,
-		input[type="reset"].fit,
-		input[type="button"].fit,
-		button.fit,
-		.button.fit {
-			display: block;
-			margin: 0 0 1em 0;
-			width: 100%;
-		}
 
-		input[type="submit"].small,
-		input[type="reset"].small,
-		input[type="button"].small,
-		button.small,
-		.button.small {
-			font-size: 0.6em;
-		}
+.button:active {
+	/*border-color: #0E0737;*/
+	/*color: #181048;*/
+}
 
-		input[type="submit"].big,
-		input[type="reset"].big,
-		input[type="button"].big,
-		button.big,
-		.button.big {
-			font-size: 1.25em;
-			height: 3em;
-			line-height: 3em;
-		}
+.button:hover {
+	/*background: #0E0737;*/
+}
 
-		input[type="submit"].next,
-		input[type="reset"].next,
-		input[type="button"].next,
-		button.next,
-		.button.next {
-			padding-right: 4.5em;
-			position: relative;
-		}
+.button:before {
+	position: absolute;
+	height: 100%;
+	font-size: 125%;
+	line-height: 3.5;
+	color: #fff;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
 
-			input[type="submit"].next:before, input[type="submit"].next:after,
-			input[type="reset"].next:before,
-			input[type="reset"].next:after,
-			input[type="button"].next:before,
-			input[type="button"].next:after,
-			button.next:before,
-			button.next:after,
-			.button.next:before,
-			.button.next:after {
-				-moz-transition: opacity 0.2s ease-in-out;
-				-webkit-transition: opacity 0.2s ease-in-out;
-				-ms-transition: opacity 0.2s ease-in-out;
-				transition: opacity 0.2s ease-in-out;
-				background-position: center right;
-				background-repeat: no-repeat;
-				background-size: 36px 24px;
-				content: '';
-				display: block;
-				height: 100%;
-				position: absolute;
-				right: 1.5em;
-				top: 0;
-				vertical-align: middle;
-				width: 36px;
-			}
+.button:active:before {
+	/*color: #0E0737;*/
+}
 
-			input[type="submit"].next:before,
-			input[type="reset"].next:before,
-			input[type="button"].next:before,
-			button.next:before,
-			.button.next:before {
-				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='36px' height='24px' viewBox='0 0 36 24' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23ffffff%3B stroke-width: 2px%3B %7D%3C/style%3E%3Cline x1='0' y1='12' x2='34' y2='12' /%3E%3Cline x1='25' y1='4' x2='34' y2='12.5' /%3E%3Cline x1='25' y1='20' x2='34' y2='11.5' /%3E%3C/svg%3E");
-			}
+/* Button 4a */
+/*.button:before {
+	left: 100%;
+	top: 0;
+}
 
-			input[type="submit"].next:after,
-			input[type="reset"].next:after,
-			input[type="button"].next:after,
-			button.next:after,
-			.button.next:after {
-				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='36px' height='24px' viewBox='0 0 36 24' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %239bf1ff%3B stroke-width: 2px%3B %7D%3C/style%3E%3Cline x1='0' y1='12' x2='34' y2='12' /%3E%3Cline x1='25' y1='4' x2='34' y2='12.5' /%3E%3Cline x1='25' y1='20' x2='34' y2='11.5' /%3E%3C/svg%3E");
-				opacity: 0;
-				z-index: 1;
-			}
-
-			input[type="submit"].next:hover:after, input[type="submit"].next:active:after,
-			input[type="reset"].next:hover:after,
-			input[type="reset"].next:active:after,
-			input[type="button"].next:hover:after,
-			input[type="button"].next:active:after,
-			button.next:hover:after,
-			button.next:active:after,
-			.button.next:hover:after,
-			.button.next:active:after {
-				opacity: 1;
-			}
+.button:hover:before {
+	left: 100%;
+}*/
 
 			@media screen and (max-width: 1280px) {
 

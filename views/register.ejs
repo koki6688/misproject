@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+!DOCTYPE HTML>
 <!--
 	Forty by HTML5 UP
 	html5up.net | @ajlkn
@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-	<title>Forty by HTML5 UP</title>
+	<title>register</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -41,40 +41,34 @@
 		</ul>
 	</nav>
 
-	<!-- Banner -->
-	<section id="banner" class="major">
-		<table class="banner_tb">
-			<tr>
-				<td width="57%">
-					<div class="inner">
-						<header class="major">
-							<h1>Hi, 想要接單嗎？</h1>
-						</header>
-						<div class="content">
-							<p>只要註冊成為會員就可以立即發布任務或是接取任務喔<br />
-								blablablablablablablabalbalbalab.</p>
-							<ul class="actions">
-								<li><a href="#one" class="button next scrolly">成為會員</a></li>
-							</ul>
-						</div>
-					</div>
-				</td>
-				<td width="43%">
-					<div class="login_form">
-						<h2>登入</h2>
-						<form id="login">
-							<p>帳號：</p>
-							<input type="email" placeholder="請輸入電子郵件">
-							<p>密碼：</p>
-							<input type="password" placeholder="請輸入密碼">
-							<a>忘記密碼<a>
-									<br>
-									<input type="submit" class="submit">
-						</form>
-					</div>
-				</td>
-			</tr>
-		</table>
+	<!-- Main -->
+	<section class="register">
+		<form>
+			電子郵件：<input type="email" id="email" name="email">
+			密碼：<input type="password" id="password" name="password">
+			確認密碼：<input type="password" id="recheck" name="recheck">
+			姓名：<input type="text" id="name" name="name">
+			暱稱：<input type="text" id="nickname" name="nickname">
+			主修：<select id="major" name="major">
+				　								<option value="mis">資訊管理學系</option>
+				　								<option value="communication">傳播學系</option>
+			</select>
+
+			生日：<input type="date" id="bDate" name="bDate">
+
+			手機：<input type="text" id="cell" name="cell">
+
+
+			<input type="submit" id="rSubmit" name="rSubmit">
+
+
+
+
+
+
+		</form>
+
+
 	</section>
 
 
