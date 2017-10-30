@@ -8,3 +8,5 @@ router.get('/register', signController.showRegister);
 
 /* 提交註冊訊息 */
 router.post('/register', signController.register);
+
+module.exports = router;

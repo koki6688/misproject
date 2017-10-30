@@ -8,7 +8,7 @@ const saltRounds = 10;
 
 
 exports.showRegister = function (req, res) {
-    res.render('/register');
+    res.render('register');
 };
 
 exports.register = function (req, res) {
@@ -29,10 +29,10 @@ exports.register = function (req, res) {
 
     //檢驗內容
 
-    var hasEmptyInfo = [username, pass, recheck, email].some(function (t) {
+    var hasEmptyInfo = [name, password, recheck, email].some(function (t) {
         return t === '';
     });
-    var isPassDiff = pass !== recheck;
+    var isPassDiff = password !== recheck;
 
     ep.on('info_error', function (msg) {
         res.status(422);
@@ -46,7 +46,7 @@ exports.register = function (req, res) {
 
     //存至DB
 
-    MemberModel.getUserBySignupInfo(username, email, function (err, users) {
+    MemberModel.getUserBySignupInfo(name, email, function (err, users) {
         if (err) {
             ep.emit('info_error', '用戶資料接收失敗！');
             return;

@@ -13,8 +13,8 @@ var MemberSchema = new mongoose.Schema({
     createTime: String
 });
 
-MemberSchema.statics.getUserBySignupInfo = function (username, email, callback) {
-    this.find({$or: [{username: username}, {email: email}]}, callback);
+MemberSchema.statics.getUserBySignupInfo = function (user, email, callback) {
+    this.find({$or: [{user: user}, {email: email}]}, callback);
 };
 
 MemberSchema.statics.addUser = function (user, callback) {
@@ -24,3 +24,5 @@ MemberSchema.statics.addUser = function (user, callback) {
 MemberSchema.statics.getUser = function (username, pass, callback) {
     this.findOne({username: username, pass: pass}, callback);
 };
+
+module.exports = mongoose.model('Member', MemberSchema);
