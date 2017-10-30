@@ -17,12 +17,12 @@ MemberSchema.statics.getUserBySignupInfo = function (user, email, callback) {
     this.find({$or: [{user: user}, {email: email}]}, callback);
 };
 
-MemberSchema.statics.addUser = function (user, callback) {
-    this.create(user, callback);
+MemberSchema.statics.addUser = function (member, callback) {
+    this.create(member, callback);
 };
 
-MemberSchema.statics.getUser = function (username, pass, callback) {
-    this.findOne({username: username, pass: pass}, callback);
+MemberSchema.statics.getUser = function (name, pass, callback) {
+    this.findOne({name: name, pass: pass}, callback);
 };
 
 module.exports = mongoose.model('Member', MemberSchema);
