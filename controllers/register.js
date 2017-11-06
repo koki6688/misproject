@@ -27,20 +27,7 @@ exports.register = function (req, res) {
 
     //檢驗內容
 
-    var hasEmptyInfo = [name, password, recheck, email].some(function (t) {
-        return t === '';
-    });
-    var isPassDiff = password !== recheck;
 
-    ep.on('info_error', function () {
-        res.status(422);
-        res.render('/register');
-    });
-
-    if (hasEmptyInfo || isPassDiff) {
-        ep.emit('info_error', '註冊訊息錯誤');
-        return;
-    }
 
     //存至DB
 
@@ -70,4 +57,3 @@ exports.register = function (req, res) {
     });
 
 };
-
