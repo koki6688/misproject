@@ -4,7 +4,7 @@ var router = express.Router();
 var signController = require('../controllers/register');
 var postController = require('../controllers/post_task');
 var acceptController = require('../controllers/accept_task');
-var taskController = require('../Controllers/task')
+var taskController = require('../controllers/task');
 
 
 router.get('/', function (req, res) {
