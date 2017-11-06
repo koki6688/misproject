@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var taskSchema = new mongoose.Schema({
     category: String,
+    title: String,
     duetime: String,
     content: String,
     chat: String,
