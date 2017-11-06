@@ -54,9 +54,11 @@ exports.register = function (req, res) {
             return;
         }
 
-        bcrypt.hash(password, saltRounds, function(err, hash) {
-            MemberModel.addUser({name: name, password: hash, bDate:bDate, cell:cell,
-                email: email, nickname:nickname, major:major, createTime:date}, function (err, result) {
+        bcrypt.hash(password, saltRounds, function (err, hash) {
+            MemberModel.addMember({
+                name: name, password: hash, bDate: bDate, cell: cell,
+                email: email, nickname: nickname, major: major, createTime: date
+            }, function (err, result) {
                 if (result) {
                     res.render('index');
                 } else {

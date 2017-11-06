@@ -17,11 +17,11 @@ MemberSchema.statics.getUserBySignupInfo = function (user, email, callback) {
     this.find({$or: [{user: user}, {email: email}]}, callback);
 };
 
-MemberSchema.statics.addUser = function (member, callback) {
+MemberSchema.statics.addMember = function (member, callback) {
     this.create(member, callback);
 };
 
-MemberSchema.statics.getUser = function (name, pass, callback) {
+MemberSchema.statics.getMember = function (name, pass, callback) {
     this.findOne({name: name, pass: pass}, callback);
 };
 
