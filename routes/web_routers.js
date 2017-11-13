@@ -18,10 +18,10 @@ router.get('/register', signController.showRegister);
 router.post('/register', signController.register);
 
 /* 顯示task頁面 */
-router.get('/task', taskController.showTask);
+router.get('/new-task', taskController.showTask);
 
 /* 提交task訊息 */
-router.post('/task', taskController.task);
+router.post('/new-task', taskController.task);
 
 /* 貼出任務 */
 router.post('/post', postController.post);

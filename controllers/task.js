@@ -4,7 +4,7 @@ var ep = new eventproxy();
 var TaskModel = require('../models/task');
 
 exports.showTask = function (req, res) {
-    res.render('register');
+    res.render('new-task');
 };
 
 exports.task = function (req, res) {
