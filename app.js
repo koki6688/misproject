@@ -5,9 +5,30 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//導入 session 外部插件
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+
+
+
 
 var webRouter = require('./routes/web_routers');
 var app = express();
+
+//建立session
+app.use(session({
+    secret:'asasasas',
+    store: new RedisStore({
+        port:6379,
+        host:'127.0.0.1'
+    }),
+    resave:true,
+    saveUninitialized:true
+}));
+app.use(function (req, res, next) {
+    app.locals.current_member = req.session.email;
+    next();
+});
 
 
 // view engine setup

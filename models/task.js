@@ -1,6 +1,4 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
+var mongoose = require('../db').mongoose;
 
 var taskSchema = new mongoose.Schema({
     category: String,
@@ -11,7 +9,7 @@ var taskSchema = new mongoose.Schema({
     chat: String,
     tRatings: String,
     status: String,
-    level: String
+    limited_level: String
 
 });
 
@@ -19,8 +17,8 @@ taskSchema.statics.addTask = function (task, callback) {
     this.create(task, callback);
 };
 
-taskSchema.statics.getTask = function (task, category, dueTime, callback) {
-    this.findOne({name: task, category: category, due_time: dueTime}, callback);
+taskSchema.statics.getTasks = function (query, option, callback) {
+    this.find(query, {}, option, callback);
 };
 
 

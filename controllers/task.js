@@ -4,6 +4,17 @@ var ep = new eventproxy();
 var TaskModel = require('../models/task');
 
 exports.showTask = function (req, res) {
+
+    var query = {status: 'uncompleted'};
+    var option = {sort: '-createTime'};
+    TaskModel.getTasks(query, option, function (err, tasks) {
+
+        res.render('all-task', {tasks: tasks});
+    });
+
+};
+
+exports.addTask = function (req, res) {
     res.render('new-task');
 };
 
