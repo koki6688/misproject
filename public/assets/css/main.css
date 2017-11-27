@@ -1950,6 +1950,7 @@
 	input[type="search"],
 	input[type="url"],
 	input[type="date"],
+	input[type="datetime-local"],
 	select,
 	textarea {
 		-moz-appearance: none;
@@ -1973,6 +1974,7 @@
 		input[type="tel"]:invalid,
 		input[type="search"]:invalid,
 		input[type="url"]:invalid,
+input[type="datetime-local"]:invalid,
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -1984,6 +1986,7 @@
 		input[type="tel"]:focus,
 		input[type="search"]:focus,
 		input[type="url"]:focus,
+input[type="datetime-local"]:focus,
 		select:focus,
 		textarea:focus {
 	border: medium #fcf458;
@@ -2032,6 +2035,7 @@
 	input[type="tel"],
 	input[type="search"],
 	input[type="url"],
+input[type="datetime-local"],
 	select {
 		height: 2.75em;
 	}
