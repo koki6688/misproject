@@ -41,8 +41,7 @@
 		</ul>
 	</nav>
 
-	<!-- Banner -->
-	<section id="banner" class="major">
+	<section  class="major">
 		<table class="banner_tb">
 			<tr>
 				<td width="57%">
@@ -54,28 +53,34 @@
 							<p>只要註冊成為會員就可以立即發布任務或是接取任務喔<br />
 								blablablablablablablabalbalbalab.</p>
 							<ul class="actions">
-								<li><a href="#one" class="button next scrolly">成為會員</a></li>
+								<li><a href="/register" class="button">成為會員</a></li>
 							</ul>
 						</div>
 					</div>
 				</td>
 				<td width="43%">
-					<div class="login_form">
-						<h2>登入</h2>
-						<form id="login">
-							<p>帳號：</p>
-							<input type="email" placeholder="請輸入電子郵件">
-							<p>密碼：</p>
-							<input type="password" placeholder="請輸入密碼">
-							<a>忘記密碼<a>
-									<br>
-									<input type="submit" class="submit">
-						</form>
+					<div class="content" id="login_form">
+						<div class="inner">
+							<header class="major">
+								<h2>登入</h2>
+							</header>
+							<form id="login" action="/" method="post">
+								<p>帳號：</p>
+								<input type="email" id="email" name="email" placeholder="請輸入電子郵件">
+								<p>密碼：</p>
+								<input type="password" id="password" name="password" placeholder="請輸入密碼">
+								<a>忘記密碼<a>
+										<br>
+										<input type="submit" class="submit">
+							</form>
+
+						</div>
 					</div>
 				</td>
 			</tr>
 		</table>
 	</section>
+
 
 
 	<!-- Footer -->

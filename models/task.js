@@ -22,6 +22,7 @@ taskSchema.statics.getTask = function (task, category, dueTime, callback) {
     this.findOne({name: task, category: category, due_time: dueTime}, callback);
 };
 
+
 var Task = mongoose.model('task', taskSchema);
 
 
