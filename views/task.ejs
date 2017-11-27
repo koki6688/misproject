@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>register</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu" onload="checkSession()">
+        <script>
+            function checkSession()
+            {
+                if(email != '')
+                {
+                <META http-equiv="refresh" content="5;URL=/">
+                }	    }
+
+        </script>
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="landing.html">Landing</a></li>
+            <li><a href="generic.html">Generic</a></li>
+            <li><a href="elements.html">Elements</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button special fit">Get Started</a></li>
+            <li><a href="#" class="button fit">Log In</a></li>
+        </ul>
+    </nav>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="landing.html">Landing</a></li>
+            <li><a href="generic.html">Generic</a></li>
+            <li><a href="elements.html">Elements</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button special fit">Get Started</a></li>
+            <li><a href="#" class="button fit">Log In</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+
+    <section class="new_task">
+        <div>
+            <h2>發布任務1</h2>
+            <form action="/task" method="post" >
+
+                <table width="200" border="1">
+                    <tbody>
+
+
+                    <tr>
+                        <td>任務名稱：<input name="title" type="text" id="title" ></td>
+                        <td>任務類別：<select id="category" name="category">
+                                <option value="purchase">代購</option>
+                                　								<option value="deliver">遞送貨物</option>
+                                <option value="transportation">交通運輸</option>
+                                <option value="others">其他</option>
+
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>等級限制：<select id="limited_level" name="limited_level">
+                                <option value="1">1</option>
+                                　								<option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+
+                            </select>
+                        </td>
+                        <td>到期時間：<input id="due_time" type="datetime-local" name="due_time" placeholder=" "/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <input type="submit" id="tSubmit" name="tSubmit">
+
+
+            </form>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            </ul>
+
+        </div>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]>
+<script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
