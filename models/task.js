@@ -6,6 +6,7 @@ var taskSchema = new mongoose.Schema({
     category: String,
     title: String,
     due_time: String,
+    createTime: String,
     content: String,
     chat: String,
     tRatings: String,

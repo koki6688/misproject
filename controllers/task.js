@@ -15,10 +15,10 @@ exports.task = function (req, res) {
     var chat = req.body.chat;
     var category = req.body.category;
     var createTime = new Date().toLocaleString();
-    var due_time = new Date().toLocaleString();
+    var due_time = req.body.due_time;
     var content = req.body.content;
     var level = req.body.level;
-    var status = req.body.level;
+    var status = req.body.status;
 
 
 //存至DB
