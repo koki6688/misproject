@@ -17,13 +17,14 @@ exports.task = function (req, res) {
     var due_time = new Date().toLocaleString();
     var content = req.body.content;
     var level = req.body.level;
+    var status = req.body.level;
 
 
 //存至DB
 
     TaskModel.addTask({
         title: title, category: category, content: content,
-        chat: chat, level: level, due_time: due_time
+        chat: chat, level: level, due_time: due_time , status: status
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
