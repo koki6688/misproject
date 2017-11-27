@@ -45,7 +45,16 @@
     </nav>
 
     <!-- Menu -->
-    <nav id="menu">
+    <nav id="menu" onload="checkSession()">
+        <script>
+            function checkSession()
+            {
+                if(email != '')
+                {
+                <META http-equiv="refresh" content="5;URL=/">
+                }	    }
+
+        </script>
         <ul class="links">
             <li><a href="index.html">Home</a></li>
             <li><a href="landing.html">Landing</a></li>
