@@ -14,6 +14,7 @@ exports.task = function (req, res) {
     var title = req.body.title;
     var chat = req.body.chat;
     var category = req.body.category;
+    var createTime = new Date().toLocaleString();
     var due_time = new Date().toLocaleString();
     var content = req.body.content;
     var level = req.body.level;
@@ -24,7 +25,7 @@ exports.task = function (req, res) {
 
     TaskModel.addTask({
         title: title, category: category, content: content,
-        chat: chat, level: level, due_time: due_time , status: status
+        chat: chat, level: level, due_time: due_time , status: status, createTime: createTime
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
