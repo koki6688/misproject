@@ -1,0 +1,14 @@
+<header id="header" class="alt">
+    <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+
+    <nav>
+        <% if (locals.current_member) { %>
+        <font size="1">您好, <%= current_member %></font>
+        <a href="/logout">登出</a>
+        <% }
+        else{ %>
+        <META http-equiv="refresh" content="1;URL=/">
+        <% }%>
+        <a href="#menu"></a>
+    </nav>
+</header>
