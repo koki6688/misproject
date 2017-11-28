@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
-
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 <head>
-    <title>Project-發布任務</title>
+    <title>Project-首頁</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!--[if lte IE 8]>
@@ -13,6 +17,9 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
 </head>
+
+
+
 <body>
 
 <!-- Wrapper -->
@@ -20,9 +27,9 @@
 
     <!-- Header -->
     <% include ./header %>
-    <!-- Menu -->
-    <nav id="menu"">
 
+    <!-- Menu -->
+    <nav id="menu">
         <ul class="links">
             <li><a href="index.html">Home</a></li>
             <li><a href="landing.html">Landing</a></li>
@@ -35,56 +42,39 @@
         </ul>
     </nav>
 
+    <!-- Banner -->
+
 
     <!-- Main -->
+    <div id="main">
 
-    <section class="new_task">
-        <div>
-
-            <h2>發布任務1</h2>
-            <form action="/new-task" method="post" >
-
-                <table width="200" border="1">
-                    <tbody>
-
-
-                    <tr>
-                        <td>任務名稱：<input name="title" type="text" id="title" ></td>
-                        <td>任務類別：<select id="category" name="category">
-                                <option value="purchase">代購</option>
-                                　								<option value="deliver">遞送貨物</option>
-                                <option value="transportation">交通運輸</option>
-                                <option value="others">其他</option>
-
-                            </select></td>
-                    </tr>
-                    <tr>
-                        <td>等級限制：<select id="limited＿level" name="limited_level">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-
-                            </select>
-                        </td>
-                        <td>到期時間：<input id="due_time" type="datetime-local" name="due_time" placeholder=" "/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
-                        <td><input type="hidden"  id="status"  name="status" value="uncompleted"></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <!-- One -->
+        <section id="one" class="tiles">
+            <article>
+                <a href="/new-task" class="link">
+                    <span class="image">
+                        <img src="images/pic01.jpg" alt="" />
+									</span>
+                <header class="major">
+                    <h3>發布任務<</h3>
+                    <p>As A User</p></a>
+                </header>
+            </article>
+            <article>
+									<span class="image">
+										<img src="images/pic01.jpg" alt="" />
+									</span>
+                <header class="major">
+                    <h3><a href="/all-task" class="link">接受任務</a></h3>
+                    <p>As A Tasker</p>
+                </header>
+            </article>
 
 
-                <input type="submit" id="tSubmit" name="tSubmit">
+
+    </div>
 
 
-            </form>
-
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer id="footer">
@@ -96,7 +86,9 @@
                 <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
                 <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
             </ul>
-
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+            </ul>
         </div>
     </footer>
 
@@ -108,8 +100,7 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
-<!--[if lte IE 8]>
-<script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
 
 </body>
