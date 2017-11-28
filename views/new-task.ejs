@@ -25,13 +25,22 @@
     <!-- Header -->
     <header id="header" class="alt">
         <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+
         <nav>
-            <a href="#menu">Menu</a>
+            <% if (locals.current_member) { %>
+            <font size="1">您好, <%= current_member %></font>
+            <a href="/logout">登出</a>
+            <% }
+            else{ %>
+            <META http-equiv="refresh" content="1;URL=/">
+            <% }%>
+            <a href="#menu"></a>
         </nav>
     </header>
 
     <!-- Menu -->
-    <nav id="menu">
+    <nav id="menu"">
+
         <ul class="links">
             <li><a href="index.html">Home</a></li>
             <li><a href="landing.html">Landing</a></li>
@@ -44,33 +53,12 @@
         </ul>
     </nav>
 
-    <!-- Menu -->
-    <nav id="menu" onload="checkSession()">
-        <script>
-            function checkSession()
-            {
-                if(email != '')
-                {
-                <META http-equiv="refresh" content="5;URL=/">
-                }	    }
-
-        </script>
-        <ul class="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="landing.html">Landing</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-        </ul>
-        <ul class="actions vertical">
-            <li><a href="#" class="button special fit">Get Started</a></li>
-            <li><a href="#" class="button fit">Log In</a></li>
-        </ul>
-    </nav>
 
     <!-- Main -->
 
     <section class="new_task">
         <div>
+
             <h2>發布任務1</h2>
             <form action="/new-task" method="post" >
 
@@ -91,7 +79,7 @@
                     <tr>
                         <td>等級限制：<select id="limited＿level" name="limited_level">
                                 <option value="1">1</option>
-                                　								<option value="2">2</option>
+                                <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
 
@@ -102,7 +90,7 @@
                     </tr>
                     <tr>
                         <td>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
-                        <td><input  id="status"  name="status" value="uncomplete"></td>
+                        <td><input type="hidden"  id="status"  name="status" value="uncompleted"></td>
                     </tr>
                     </tbody>
                 </table>
