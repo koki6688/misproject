@@ -1,5 +1,6 @@
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
+var flash = require('connect-flash');
 
 var MemberModel = require('../models/members');
 
@@ -34,7 +35,7 @@ exports.register = function (req, res) {
 
     ep.on('info_error', function (msg) {
         res.status(422);
-        res.render('index', {error: msg, success: false});
+        //res.render('index', {error: msg, success: false});
     });
 
     if (hasEmptyInfo || isPassDiff) {
@@ -48,10 +49,14 @@ exports.register = function (req, res) {
 
     MemberModel.getUserBySignupInfo(name, email, function (err, users) {
         if (err) {
+
             ep.emit('info_error', '用戶資料接收失敗！');
             return;
         }
         if (users.length > 0) {
+            var send=req.flash('error','用戶名或信箱已被占用');
+            res.render('register',{r_error:send});
+
             ep.emit('info_error', '用戶名或信箱已被占用');
             return;
         }
@@ -62,8 +67,11 @@ exports.register = function (req, res) {
                 email: email, nickname: nickname, major: major, createTime: date
             }, function (err, result) {
                 if (result) {
-                    res.render('index');
+                    var send=req.flash('success','success register');
+                    res.render('register',{r_success:send});
                 } else {
+                    var send=req.flash('error','用戶名或信箱已被占用');
+                    res.render('register',{r_error:send});
                     ep.emit('info_error', '註冊失敗！');
                 }
             })

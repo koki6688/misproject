@@ -7,8 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="/assets/css/main.css" />
+	<link rel="stylesheet" href="/assets/css/alertify.css" />
 	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
 	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+
 </head>
 <body>
 
@@ -19,12 +21,13 @@
 	<header id="header" class="alt">
 		<a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
 		<nav>
-			<a href="#menu">Menu</a>
+			<a href="#menu"></a>
 		</nav>
 	</header>
 
 	<!-- Menu -->
 	<nav id="menu">
+
 		<ul class="links">
 			<li><a href="index.html">Home</a></li>
 			<li><a href="landing.html">Landing</a></li>
@@ -39,6 +42,29 @@
 
 	<!-- Main -->
 	<section class="register">
+		<!-- Notification -->
+		<div class="notification">
+        <% if (locals.r_success!=null) { %>
+			<div class="suc_not">
+				<i class="fa fa-check-circle" aria-hidden="true">&nbsp;&nbsp;
+					<strong>註冊成功：將導回登入頁，請重新登入</strong>
+				</i>
+			<META http-equiv="refresh" content="3;URL=/">
+			</div>
+        <% }
+		else if(locals.r_error!=null){ %>
+			<div class="err_not">
+				<i class="fa fa-exclamation-circle" aria-hidden="true">&nbsp;&nbsp;
+					<strong>錯誤訊息： 電子郵件已被佔用</strong>
+				</i>
+			</div>
+        <% }else{
+			%>
+        <% }%>
+		</div>
+		<!-- Notification End -->
+
+		<!-- Register Form -->
 		<form action="/register" id="memberForm" method="post">
 			電子郵件：<input type="email" id="email" name="email">
 			密碼：<input type="password" id="password" name="password">
@@ -55,18 +81,14 @@
 			手機：<input type="text" id="cell" name="cell">
 
 
-			<input type="submit" id="rSubmit" name="rSubmit">
-
-
-
-
-
+			<input type="submit" id="rSubmit" name="rSubmit" class="rSubmit">
 
 		</form>
+        <input type="button" class="run" onclick="c()">按按看</input>
 
 
 	</section>
-
+	<!-- Register Form End -->
 
 	<!-- Footer -->
 	<footer id="footer">
@@ -81,8 +103,10 @@
 
 		</div>
 	</footer>
+	<!-- Footer End-->
 
 </div>
+<!-- Main End -->
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>

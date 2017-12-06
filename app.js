@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 
 //導入 session 外部插件
 var session = require('express-session');
@@ -40,6 +41,21 @@ app.use(session({
 app.use(function (req, res, next) {
     app.locals.current_member = req.session.member;
     next();
+});
+app.use(flash());
+
+app.use(function (req,res,next) {
+    app.locals.user = req.session.user;
+    var suc = req.flash('success');
+    res.locals.r_success = suc.length ? suc:null;
+
+    var err = req.flash('error');
+    res.locals.r_error = err.length ? err:null;
+
+
+    next();
+
+
 });
 
 
