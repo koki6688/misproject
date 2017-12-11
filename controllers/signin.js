@@ -12,7 +12,7 @@ exports.signin = function (req, res) {
 
     if (!email || !password) {
         res.status(422);
-        return res.render('index', {error: '您輸入的資料不完整', success: false});
+        return res.render('index', {s_error: '您輸入的資料不完整', success: false});
     }
     MemberModel.getMember(email, function (err, member) {
         if (member) {
@@ -22,13 +22,14 @@ exports.signin = function (req, res) {
                 res.redirect('new-task');
             } else {
                 res.status(422);
-                res.render('index', {error: '密碼錯誤', success: false});
+                var send=req.flash('s_error','帳號或密碼錯誤')
+                res.render('index', {s_error: send, success: false});
             }
 
         } else {
-
+            var send=req.flash('s_error','帳號或密碼錯誤')
             res.status(422);
-            res.render('index', {error: '用戶名錯誤', success: false});
+            res.render('index', {s_error: 'send', success: false});
         }
     })
 

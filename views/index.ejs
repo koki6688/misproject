@@ -66,6 +66,14 @@
 								<input type="email" id="email" name="email" placeholder="請輸入電子郵件">
 								<p>密碼：</p>
 								<input type="password" id="password" name="password" placeholder="請輸入密碼">
+                                <% if (s_error!=null) { %>
+									<div class="err_not">
+										<i class="fa fa-exclamation-circle" aria-hidden="true">&nbsp;&nbsp;
+											<strong>帳號或密碼輸入錯誤</strong>
+										</i>
+									</div>
+                                <% }%>
+
 								<a>忘記密碼<a>
 										<br>
 										<input type="submit" class="submit">

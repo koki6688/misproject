@@ -52,6 +52,9 @@ app.use(function (req,res,next) {
     var err = req.flash('error');
     res.locals.r_error = err.length ? err:null;
 
+    var s_err=req.flash('s_error');
+    res.locals.s_error=s_err.length ? s_err:null;
+
 
     next();
 
