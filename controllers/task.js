@@ -42,7 +42,7 @@ exports.task = function (req, res) {
         if (err) {
             ep.emit('info_error', 'error')
         } else
-            res.render('new-task')
+            res.render('home')
     });
 
 };
@@ -64,5 +64,12 @@ exports.request = function (req, res) {
         }
     })
 
+};
+
+exports.detail = function (req, res) {
+    var tID = req.params.tid;
+    TaskModel.getTaskDetail(tID, function (err, task) {
+        res.render('detail', {task: task});
+    });
 };
 

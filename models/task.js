@@ -30,6 +30,9 @@ taskSchema.statics.addRequest = function (query, update, callback) {
     this.update(query, update, callback);
 };
 
+taskSchema.statics.getTaskDetail = function (tID, callback) {
+    this.findOne({_id: tID}, callback);
+};
 
 var Task = mongoose.model('task', taskSchema);
 
