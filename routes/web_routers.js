@@ -3,7 +3,6 @@ var router = express.Router();
 
 var signController = require('../controllers/register');
 var signinController = require('../controllers/signin');
-var requestController = require('../controllers/request_task');
 var taskController = require('../controllers/task');
 
 
@@ -39,7 +38,10 @@ router.get('/new-task', taskController.showAddTask);
 router.post('/new-task', taskController.task);
 
 /* tasker接取任務 */
-router.post('/request', requestController.request);
+router.post('/request', taskController.request);
+
+/* user同意tasker接取任務 */
+router.post('/accept', taskController.accept);
 
 
 module.exports = router;

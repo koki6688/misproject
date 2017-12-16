@@ -5,7 +5,7 @@ var TaskModel = require('../models/task');
 
 exports.showTask = function (req, res) {
 
-    var query = {status: 'uncompleted'};
+    var query = {status: 'available'};
     var option = {sort: '-createTime'};
     TaskModel.getTasks(query, option, function (err, tasks) {
 
@@ -44,6 +44,25 @@ exports.task = function (req, res) {
         } else
             res.render('new-task')
     });
+
+};
+
+exports.request = function (req, res) {
+
+    var rmID = req.body.rmID;
+    var tID = req.body.tID;
+    var status = req.body.status;
+    var date = new Date().toLocaleString();
+
+    var query = {tID: tID};
+
+    TaskModel.addRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+        if (result) {
+            res.render('new-task');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    })
 
 };
 
