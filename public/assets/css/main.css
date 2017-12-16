@@ -1649,7 +1649,7 @@
 
 /* Type */
 
-	body, input, select, textarea,datetime-local {
+	body, input, select, textarea,datetime-local,time {
 		color: #ffffff;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 17pt;
@@ -1964,6 +1964,7 @@
 	input[type="url"],
 	input[type="date"],
 	input[type="datetime-local"],
+	input[type="time"],
 	select,
 	textarea {
 		-moz-appearance: none;
@@ -1988,6 +1989,7 @@
 		input[type="search"]:invalid,
 		input[type="url"]:invalid,
 input[type="datetime-local"]:invalid,
+		input[type="time"]:invalid,
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -2000,6 +2002,7 @@ input[type="datetime-local"]:invalid,
 		input[type="search"]:focus,
 		input[type="url"]:focus,
 input[type="datetime-local"]:focus,
+		input[type="time"]:focus,
 		select:focus,
 		textarea:focus {
 	border: medium #fcf458;
@@ -2049,6 +2052,7 @@ input[type="datetime-local"]:focus,
 	input[type="search"],
 	input[type="url"],
 input[type="datetime-local"],
+	input[type="time"],
 	select {
 		height: 2.75em;
 	}
