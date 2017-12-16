@@ -2,7 +2,7 @@ var mongoose = require('../db').mongoose;
 
 var RequestSchema = new mongoose.Schema({
 
-    amID: String,
+    rmID: String,
     tID: String,
     createTime: String
 });

@@ -19,7 +19,7 @@ exports.signin = function (req, res) {
 
             if (bcrypt.compareSync(password, member.password)) {
                 req.session.member = member;
-                res.redirect('new-task');
+                res.redirect('home');
             } else {
                 res.status(422);
                 var send=req.flash('s_error','帳號或密碼錯誤');

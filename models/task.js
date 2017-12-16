@@ -1,6 +1,9 @@
 var mongoose = require('../db').mongoose;
 
 var taskSchema = new mongoose.Schema({
+
+    pmID:String,
+    rmID:String,
     category: String,
     title: String,
     due_time: String,

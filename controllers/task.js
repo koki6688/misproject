@@ -14,7 +14,7 @@ exports.showTask = function (req, res) {
 
 };
 
-exports.addTask = function (req, res) {
+exports.showAddTask = function (req, res) {
     res.render('new-task');
 };
 
@@ -22,6 +22,7 @@ exports.task = function (req, res) {
 
     //獲取輸入內容
 
+    var pmID = req.body.pmID;
     var title = req.body.title;
     var chat = req.body.chat;
     var category = req.body.category;
@@ -35,8 +36,8 @@ exports.task = function (req, res) {
 //存至DB
 
     TaskModel.addTask({
-        title: title, category: category, content: content,
-        chat: chat, level: level, due_time: due_time , status: status, createTime: createTime
+        pmID: pmID, title: title, category: category, content: content,
+        chat: chat, level: level, due_time: due_time, status: status, createTime: createTime
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
