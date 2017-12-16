@@ -2,7 +2,7 @@ var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
 var TaskModel = require('../models/task');
-var MemberModel = require('../models/members');
+
 
 exports.showTask = function (req, res) {
 
@@ -75,3 +75,20 @@ exports.detail = function (req, res) {
     });
 };
 
+exports.accept = function (req, res) {
+
+    var tID = req.body.tID;
+    var status = req.body.status;
+    var date = new Date().toLocaleString();
+
+    var query = {_id: tID};
+
+    TaskModel.addAccept(query, {status: status, acceptTime: date}, function (err, result) {
+        if (result) {
+            res.render('home');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    })
+
+};

@@ -40,6 +40,7 @@ app.use(session({
 }));
 app.use(function (req, res, next) {
     app.locals.current_member = req.session.member;
+    app.locals.current_requests = req.session.requests;
     next();
 });
 app.use(flash());

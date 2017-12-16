@@ -43,5 +43,8 @@ router.post('/request', taskController.request);
 /* 顯示任務細節 */
 router.get('/all-task/:tid',taskController.detail);
 
+/* user同意tasker接取任務 */
+router.post('/accept', taskController.accept);
+
 
 module.exports = router;
