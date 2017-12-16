@@ -12,14 +12,18 @@
     <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+    <link rel="stylesheet" href="/assets/css/lobibox.min.css"/>
 </head>
 <body>
+
 
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Header -->
     <% include ./header %>
+
+
     <!-- Menu -->
 
 
@@ -40,7 +44,7 @@
                         <td>任務名稱：<input name="title" type="text" id="title" ></td>
                         <td>任務類別：<select id="category" name="category">
                                 <option value="purchase">代購</option>
-                                　								<option value="deliver">遞送貨物</option>
+                                <option value="deliver">遞送貨物</option>
                                 <option value="transportation">交通運輸</option>
                                 <option value="others">其他</option>
 
@@ -61,6 +65,7 @@
                     <tr>
                         <td>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
                         <td><input type="hidden"  id="status"  name="status" value="available"></td>
+                        <td><input type="hidden"  id="pmID"  name="pmID" value="<%= current_member._id %>"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -73,6 +78,9 @@
 
         </div>
     </section>
+
+
+    <button id="popupYesNoBasic" class="btn btn-raised btn-primary">Confirm<div class="ripple-container"></div></button>
 
     <!-- Footer -->
     <footer id="footer">
@@ -99,6 +107,8 @@
 <!--[if lte IE 8]>
 <script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/lobibox.min.js"></script>
+
 
 </body>
 </html>

@@ -20,7 +20,9 @@
 	<header id="header" class="alt">
 		<a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
 		<nav>
-			<a href="#menu">Menu</a>
+            <% if (locals.current_member) { %>
+			<META http-equiv="refresh" content="1;URL=/home">
+            <% }%>
 		</nav>
 	</header>
 
