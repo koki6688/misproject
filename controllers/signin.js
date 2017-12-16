@@ -27,7 +27,7 @@ exports.signin = function (req, res) {
             }
 
         } else {
-            var send=req.flash('s_error','帳號或密碼錯誤')
+            send=req.flash('s_error','帳號或密碼錯誤')
             res.status(422);
             res.render('index', {s_error: 'send', success: false});
         }
