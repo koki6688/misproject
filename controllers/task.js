@@ -56,11 +56,11 @@ exports.request = function (req, res) {
     var status = req.body.status;
     var date = new Date().toLocaleString();
 
-    var query = {tID: tID};
+    var query = {_id: tID};
 
     TaskModel.addRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
         if (result) {
-            res.render('new-task');
+            res.render('home');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
