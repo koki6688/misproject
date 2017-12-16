@@ -25,13 +25,7 @@
 
 
     <script>
-        <% if (locals.current_member) { %>
-        <font size="1">您好, <%= current_member.nickname %></font>
-        <a href="/signout">登出</a>
-                <% }
-                else{ %>
-            <META http-equiv="refresh" content="1;URL=/">
-        <% }%>
+
 
 
     </script>
@@ -66,7 +60,8 @@
 
                             </select>
                         </td>
-                        <td>到期時間：<input id="due_time" type="datetime-local" name="due_time" placeholder=" "/>
+                        <td>到期時間：<input id="due_date" type="date" name="due_date" placeholder=" "/>
+                            <input id="due_time" type="time" name="due_time">
                         </td>
                     </tr>
                     <tr>
