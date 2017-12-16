@@ -38,15 +38,20 @@
                 <th>到期時間</th>
                 <th></th>
             </tr>
-            <tr><%=a_task._id%>已請求執行此任務</tr>
-            <% if(a_task){
-            for(var i = 0;i < a_task.length;i++) { %>
+            <tr><%=tasks._id%>已請求執行此任務</tr>
+            <% if(tasks){
+            for(var i = 0;i < tasks.length;i++) { %>
             <tr>
-                <td><%=a_task[i].title%></td>
-                <td><%=a_task[i].category%></td>
-                <td><%=a_task[i].createTime%></td>
-                <td><%=a_task[i].due_time%></td>
-                <td><a class="a-inside edit" href="../all-task/<%=a_task[i]._id%>">接受</a></td>
+                <td><%=tasks[i].title%></td>
+                <td><%=tasks[i].category%></td>
+                <td><%=tasks[i].createTime%></td>
+                <td><%=tasks[i].due_time%></td>
+                <td><%=tasks[i].rmID%></td>
+                <form>
+                    <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
+                    <input type="hidden" id="status" name="status" value="progressing">
+                <td><a class="a-inside edit" href="../accept">接受</a></td>
+                </form>
 
             </tr>
             <%}} %>
