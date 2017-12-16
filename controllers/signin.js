@@ -22,14 +22,14 @@ exports.signin = function (req, res) {
                 res.redirect('new-task');
             } else {
                 res.status(422);
-                var send=req.flash('s_error','帳號或密碼錯誤')
+                var send=req.flash('s_error','帳號或密碼錯誤');
                 res.render('index', {s_error: send, success: false});
             }
 
         } else {
-            send=req.flash('s_error','帳號或密碼錯誤')
+            send=req.flash('s_error','帳號或密碼錯誤');
             res.status(422);
-            res.render('index', {s_error: 'send', success: false});
+            res.render('index', {s_error: send, success: false});
         }
     })
 
