@@ -24,10 +24,17 @@
     <% include ./header %>
 
 
-    <!-- Menu -->
+    <script>
+        <% if (locals.current_member) { %>
+        <font size="1">您好, <%= current_member.nickname %></font>
+        <a href="/signout">登出</a>
+                <% }
+                else{ %>
+            <META http-equiv="refresh" content="1;URL=/">
+        <% }%>
 
 
-
+    </script>
     <!-- Main -->
 
     <section class="new_task">
@@ -43,10 +50,10 @@
                     <tr>
                         <td>任務名稱：<input name="title" type="text" id="title" ></td>
                         <td>任務類別：<select id="category" name="category">
-                                <option value="purchase">代購</option>
-                                <option value="deliver">遞送貨物</option>
-                                <option value="transportation">交通運輸</option>
-                                <option value="others">其他</option>
+                                <option value="代購">代購</option>
+                                <option value="遞送貨物">遞送貨物</option>
+                                <option value="交通運輸">交通運輸</option>
+                                <option value="其他">其他</option>
 
                             </select></td>
                     </tr>
