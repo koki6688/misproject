@@ -6,7 +6,7 @@ var taskSchema = new mongoose.Schema({
     rmID: String,
     category: String,
     title: String,
-    due_date:String,
+    due_date: String,
     due_time: String,
     createTime: String,
     requestTime: String,
@@ -38,6 +38,14 @@ taskSchema.statics.getTaskDetail = function (tID, callback) {
 
 taskSchema.statics.addAccept = function (query, update, callback) {
     this.update(query, update, callback);
+};
+
+taskSchema.statics.declineRequest = function (query, update, callback) {
+    this.update(query, update, callback);
+};
+
+taskSchema.statics.getRequestTask = function (pmID, callback) {
+    this.find({pmID: pmID, status: "request"}, callback);
 };
 
 var Task = mongoose.model('task', taskSchema);

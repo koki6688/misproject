@@ -1,7 +1,9 @@
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
+
 var TaskModel = require('../models/task');
+var MemberModel = require('../models/members');
 
 
 exports.showTask = function (req, res) {
@@ -91,5 +93,32 @@ exports.accept = function (req, res) {
             ep.emit('info_error', '接收失敗！');
         }
     })
+
+};
+
+exports.decline = function (req, res) {
+
+    var rmID = null;
+    var tID = req.body.tID;
+    var status = req.body.status;
+    var date = null;
+
+    var query = {_id: tID};
+
+    TaskModel.declineRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+        if (result) {
+            res.render('home');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    })
+
+};
+
+exports.accept_tasks = function (req, res) {
+
+    TaskModel.getRequestTask(req.session.member._id, function (err, tasks) {
+        res.render('accept-task', {tasks:tasks});
+    });
 
 };
