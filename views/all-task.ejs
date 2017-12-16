@@ -62,133 +62,22 @@
         <% if(tasks){
         for(var i = 0;i < tasks.length;i++) { %>
         <tr>
-            <td><%=tasks[i].tID%></td>
+            <td><%=tasks[i]._id%></td>
             <td><%=tasks[i].category%></td>
             <td><%=tasks[i].title%></td>
             <td><%=tasks[i].due_time%></td>
             <td><%=tasks[i].pmID%></td>
-            <td>	<a class="a-inside edit" href="../all-task/<%=tasks[i].id%>">詳細內容</a></td>
+            <td>	<a class="a-inside edit" href="../all-task/<%=tasks[i]._id%>">詳細內容</a></td>
 
         </tr>
-        <% }
-        }else{ %>
+        <%}}else{ %>
         <tr>
             <td colspan="5" >查無結果</td>
         </tr>
         <% } %>
     </table>
 
-    <table>
-        <tr>
-            <th>任務編號</th>
-            <th>任務類別</th>
-            <th>任務名稱</th>
-            <th>到期時間</th>
-            <th>發布者</th>
-        </tr>
-        <% if(tasks){
-        if(<%tasks[i].category%>=="purchase"){
-        for(var i = 0;i < tasks.length;i++) { %>
-        <tr>
-            <td><%=tasks[i].tID%></td>
-            <td><%=tasks[i].category%></td>
-            <td><%=tasks[i].title%></td>
-            <td><%=tasks[i].due_time%></td>
-            <td><%=tasks[i].pmID%></td>
-            <td><a class="a-inside edit" href="../all-task/<%=tasks[i].id%>">詳細內容</a></td>
 
-        </tr>
-        <% }}
-        }else{ %>
-        <tr>
-            <td colspan="5" >查無結果</td>
-        </tr>
-        <% } %>
-    </table>
-
-    <table>
-        <tr>
-            <th>任務編號</th>
-            <th>任務類別</th>
-            <th>任務名稱</th>
-            <th>到期時間</th>
-            <th>發布者</th>
-        </tr>
-        <% if(tasks){
-        if(<%tasks[i].category%>=="deliver"){
-        for(var i = 0;i < tasks.length;i++) { %>
-        <tr>
-            <td><%=tasks[i].tID%></td>
-            <td><%=tasks[i].category%></td>
-            <td><%=tasks[i].title%></td>
-            <td><%=tasks[i].due_time%></td>
-            <td><%=tasks[i].pmID%></td>
-            <td><a class="a-inside edit" href="../all-task/<%=tasks[i].id%>">詳細內容</a></td>
-
-        </tr>
-        <% }}
-        }else{ %>
-        <tr>
-            <td colspan="5" >查無結果</td>
-        </tr>
-        <% } %>
-    </table>
-
-    <table>
-        <tr>
-            <th>任務編號</th>
-            <th>任務類別</th>
-            <th>任務名稱</th>
-            <th>到期時間</th>
-            <th>發布者</th>
-        </tr>
-        <% if(tasks){
-        if(<%tasks[i].category%>=="transport"){
-        for(var i = 0;i < tasks.length;i++) { %>
-        <tr>
-            <td><%=tasks[i].tID%></td>
-            <td><%=tasks[i].category%></td>
-            <td><%=tasks[i].title%></td>
-            <td><%=tasks[i].due_time%></td>
-            <td><%=tasks[i].pmID%></td>
-            <td><a class="a-inside edit" href="../all-task/<%=tasks[i].id%>">詳細內容</a></td>
-
-        </tr>
-        <% }}
-        }else{ %>
-        <tr>
-            <td colspan="5" >查無結果</td>
-        </tr>
-        <% } %>
-    </table>
-
-    <table>
-        <tr>
-            <th>任務編號</th>
-            <th>任務類別</th>
-            <th>任務名稱</th>
-            <th>到期時間</th>
-            <th>發布者</th>
-        </tr>
-        <% if(tasks){
-        if(<%tasks[i].category%>=="others"){
-        for(var i = 0;i < tasks.length;i++) { %>
-        <tr>
-            <td><%=tasks[i].tID%></td>
-            <td><%=tasks[i].category%></td>
-            <td><%=tasks[i].title%></td>
-            <td><%=tasks[i].due_time%></td>
-            <td><%=tasks[i].pmID%></td>
-            <td><a class="a-inside edit" href="../all-task/<%=tasks[i].id%>">詳細內容</a></td>
-
-        </tr>
-        <% }}
-        }else{ %>
-        <tr>
-            <td colspan="5" >查無結果</td>
-        </tr>
-        <% } %>
-    </table>
 
 
     <!-- Footer -->
