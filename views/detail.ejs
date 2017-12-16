@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Project-任務列表</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <% include ./header %>
+
+
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="landing.html">Landing</a></li>
+            <li><a href="generic.html">Generic</a></li>
+            <li><a href="elements.html">Elements</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button special fit">Get Started</a></li>
+            <li><a href="#" class="button fit">Log In</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+
+
+
+	<table>
+                  <tr>
+                      <th>任務名稱</th>
+                      <th>任務類別</th>
+
+                    <th>到期時間</th>
+                      <th>等級限制</th>
+					<th>發布者</th> 
+					  <th>任務內容</th>
+                  </tr>
+                  <% if(tasks){
+                    
+                      <tr>
+                          <td><%=tasks[i].title%></td>
+                        <td><%=tasks[i].category%></td>
+
+						<td><%=tasks[i].due_time%></td>
+						<td><%=tasks[i].limited_level%></td>
+                        <td><%=tasks[i].pmID%></td>	
+						<td><%=task[i].content%></td>
+                      </tr>
+                    <tr>
+
+                        <th>到期時間</th>
+                        <th>等級限制</th>
+                         <th>發布者</th>
+
+                    </tr>
+                    <% if(tasks){
+
+                    <tr>
+
+                        <td><%=tasks[i].due_time%></td>
+                        <td><%=tasks[i].limited_level%></td>
+                        <td><%=tasks[i].pmID%></td>
+
+                    </tr>
+                     <tr>
+
+                        <th>任務內容</th>
+
+                        </tr>
+                        <tr>
+
+                            <td><%=task[i].content%></td>
+                        </tr>
+
+
+
+                       </tr>
+                            
+                    </table>
+
+
+        <form action="/request" id="requestForm" method="post">
+            <input type="hidden"  id="tID"  name="tID" value="<%=tasks[i]._id%>">
+            <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
+
+            <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit">接受任務
+        </form>
+
+
+
+						  
+    </form>
+</div>
+
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
