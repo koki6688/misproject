@@ -14,7 +14,7 @@ exports.signin = function (req, res) {
         res.status(422);
         return res.render('index', {s_error: '您輸入的資料不完整', success: false});
     }
-    MemberModel.getMember(email, function (err, member) {
+    MemberModel.getMemberByEmail(email, function (err, member) {
         if (member) {
 
             if (bcrypt.compareSync(password, member.password)) {

@@ -6,6 +6,7 @@ var taskSchema = new mongoose.Schema({
     rmID: String,
     category: String,
     title: String,
+    due_date:String,
     due_time: String,
     createTime: String,
     requestTime: String,

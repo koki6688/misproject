@@ -21,8 +21,13 @@ MemberSchema.statics.addMember = function (member, callback) {
     this.create(member, callback);
 };
 
-MemberSchema.statics.getMember = function (email, callback) {
+MemberSchema.statics.getMemberByEmail = function (email, callback) {
     this.findOne({email: email}, callback);
 };
+
+MemberSchema.statics.getMemberBypmID = function (pmID, callback) {
+    this.find({_id: pmID}, callback);
+};
+
 
 module.exports = mongoose.model('Member', MemberSchema);

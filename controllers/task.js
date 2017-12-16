@@ -2,16 +2,16 @@ var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
 var TaskModel = require('../models/task');
+var MemberModel = require('../models/members');
 
 exports.showTask = function (req, res) {
 
     var query = {status: 'available'};
     var option = {sort: '-createTime'};
-    TaskModel.getTasks(query, option, function (err, tasks) {
 
+    TaskModel.getTasks(query, option, function (err, tasks) {
         res.render('all-task', {tasks: tasks});
     });
-
 };
 
 exports.showAddTask = function (req, res) {
@@ -27,6 +27,7 @@ exports.task = function (req, res) {
     var chat = req.body.chat;
     var category = req.body.category;
     var createTime = new Date().toLocaleString();
+    var due_date = req.body.due_date;
     var due_time = req.body.due_time;
     var content = req.body.content;
     var limited_level = req.body.limited_level;
@@ -37,7 +38,8 @@ exports.task = function (req, res) {
 
     TaskModel.addTask({
         pmID: pmID, title: title, category: category, content: content, chat: chat,
-        limited_level: limited_level, due_time: due_time, status: status, createTime: createTime
+        limited_level: limited_level, due_date: due_date, due_time: due_time,
+        status: status, createTime: createTime
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
