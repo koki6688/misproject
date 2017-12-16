@@ -4,7 +4,7 @@ var router = express.Router();
 var signController = require('../controllers/register');
 var signinController = require('../controllers/signin');
 var postController = require('../controllers/post_task');
-var acceptController = require('../controllers/accept_task');
+var requestController = require('../controllers/request_task');
 var taskController = require('../controllers/task');
 
 
@@ -15,6 +15,9 @@ router.get('/', function (req, res) {
 
 /* 提交登入訊息 */
 router.post('/', signinController.signin);
+
+/* 登出 */
+router.get('/signout', signinController.signout);
 
 /* 顯示註冊頁面 */
 router.get('/register', signController.showRegister);
@@ -35,6 +38,8 @@ router.post('/new-task', taskController.task);
 router.post('/post', postController.post);
 
 /* 雙方確認任務 */
-router.post('/accept', acceptController.accept);
+router.post('/request', requestController.request);
+
+
 
 module.exports = router;

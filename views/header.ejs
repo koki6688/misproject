@@ -3,7 +3,7 @@
 
     <nav>
         <% if (locals.current_member) { %>
-        <font size="1">您好, <%= current_member %></font>
+        <font size="1">您好, <%= current_member.nickname %></font>
         <a href="/signout">登出</a>
         <% }
         else{ %>

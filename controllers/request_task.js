@@ -1,17 +1,17 @@
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 
-var AcceptModel = require('../models/accept_task');
+var RequestModel = require('../models/request_task');
 
-exports.accept = function (req, res) {
+exports.request = function (req, res) {
 
-    var amID = req.body.amID;
+    var rmID = req.body.rmID;
     var tID = req.body.tID;
     var date = new Date().toLocaleString();
 
     //
 
-    AcceptModel.addAcceptance({amID: amID, tID: tID, createTime: date}, function (err, result) {
+    RequestModel.addRequest({rmID: rmID, tID: tID, createTime: date}, function (err, result) {
         if (result) {
             res.render('index');
         } else {
