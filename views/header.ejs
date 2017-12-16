@@ -1,6 +1,9 @@
 <header id="header" class="alt">
     <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+    <script>
 
+
+    </script>
     <nav>
         <% if (locals.current_member) { %>
         <font size="1">您好, <%= current_member.nickname %></font>
@@ -9,7 +12,17 @@
         else{ %>
         <META http-equiv="refresh" content="1;URL=/">
         <% }%>
+
+        通知：
     </nav>
 
 
 </header>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->

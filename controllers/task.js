@@ -85,6 +85,7 @@ exports.accept = function (req, res) {
 
     TaskModel.addAccept(query, {status: status, acceptTime: date}, function (err, result) {
         if (result) {
+
             res.render('home');
         } else {
             ep.emit('info_error', '接收失敗！');

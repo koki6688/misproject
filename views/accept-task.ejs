@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>register</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <% include ./header %>
+
+    <!-- Menu -->
+
+
+    <section class="new_task">
+        <table>
+
+            <tr>
+                <th>任務名稱</th>
+                <th>任務類別</th>
+                <th>發布時間</th>
+                <th>到期時間</th>
+                <th></th>
+            </tr>
+            <tr><%=a_task._id%>已請求執行此任務</tr>
+            <% if(a_task){
+            for(var i = 0;i < a_task.length;i++) { %>
+            <tr>
+                <td><%=a_task[i].title%></td>
+                <td><%=a_task[i].category%></td>
+                <td><%=a_task[i].createTime%></td>
+                <td><%=a_task[i].due_time%></td>
+                <td><a class="a-inside edit" href="../all-task/<%=a_task[i]._id%>">接受</a></td>
+
+            </tr>
+            <%}} %>
+        </table>
+    </section>
+
+    <!-- Footer -->
+
+
+</div>
+
+
+
+</body>
+</html>
