@@ -29,15 +29,15 @@ exports.task = function (req, res) {
     var createTime = new Date().toLocaleString();
     var due_time = req.body.due_time;
     var content = req.body.content;
-    var level = req.body.level;
+    var limited_level = req.body.limited_level;
     var status = req.body.status;
 
 
 //存至DB
 
     TaskModel.addTask({
-        pmID: pmID, title: title, category: category, content: content,
-        chat: chat, level: level, due_time: due_time, status: status, createTime: createTime
+        pmID: pmID, title: title, category: category, content: content, chat: chat,
+        limited_level: limited_level, due_time: due_time, status: status, createTime: createTime
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
