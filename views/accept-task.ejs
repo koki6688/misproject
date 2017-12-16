@@ -38,21 +38,22 @@
                 <th>到期時間</th>
                 <th></th>
             </tr>
-            <tr><%=tasks._id%>已請求執行此任務</tr>
+
             <% if(tasks){
             for(var i = 0;i < tasks.length;i++) { %>
+            <tr><%=tasks.[i].rmID%>已請求執行此任務</tr>
             <tr>
                 <td><%=tasks[i].title%></td>
                 <td><%=tasks[i].category%></td>
                 <td><%=tasks[i].createTime%></td>
                 <td><%=tasks[i].due_time%></td>
-                <td><%=tasks[i].rmID%></td>
                 <form action="/accept" method="post">
 
                     <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
                     <input type="hidden" id="status" name="status" value="progressing">
                     <td> 接受<input type="submit" id="aSubmit" name="aSubmit"></td>
                 </form>
+
                 <form action="/decline" method="post">
 
                     <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
@@ -65,7 +66,7 @@
         </table>
     </section>
 
-    <!-- Footer -->
+
 
 
 </div>
