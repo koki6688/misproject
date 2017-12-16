@@ -51,8 +51,8 @@
                   <% if(task){%>
                     
                       <tr>
-                        <td><%=task[i].title%></td>
-                        <td><%=task[i].category%></td>
+                        <td><%=task.title%></td>
+                        <td><%=task.category%></td>
 
                     <% }%>
                       </tr>
@@ -65,9 +65,9 @@
                     </tr>
                         <% if(task){%>
                         <tr>
-                        <td><%=task[i].due_time%></td>
-                        <td><%=task[i].limited_level%></td>
-                        <td><%=task[i].pmID%></td>
+                        <td><%=task.due_time%></td>
+                        <td><%=task.limited_level%></td>
+                        <td><%=task.pmID%></td>
                         <% }%>
                         </tr>
                      <tr>
@@ -81,7 +81,7 @@
 
                             <tr>
 
-                            <td><%=task[i].content%></td>
+                            <td><%=task.content%></td>
                             <% }%>
                         </tr>
 
@@ -93,7 +93,7 @@
 
 
         <form action="/request" id="requestForm" method="post">
-            <input type="hidden"  id="tID"  name="tID" value="<%=task[i]._id%>">
+            <input type="hidden"  id="tID"  name="tID" value="<%=task._id%>">
             <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
 
             <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit">接受任務
