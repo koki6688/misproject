@@ -47,10 +47,17 @@
                 <td><%=tasks[i].createTime%></td>
                 <td><%=tasks[i].due_time%></td>
                 <td><%=tasks[i].rmID%></td>
-                <form>
+                <form action="/accept" method="post">
+
                     <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
                     <input type="hidden" id="status" name="status" value="progressing">
-                <td><a class="a-inside edit" href="../accept">接受</a></td>
+                    <td> 接受<input type="submit" id="aSubmit" name="aSubmit"></td>
+                </form>
+                <form action="/decline" method="post">
+
+                    <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
+                    <input type="hidden" id="status" name="status" value="available">
+                    <td> 取消<input type="submit" id="dSubmit" name="dSubmit"></td>
                 </form>
 
             </tr>
