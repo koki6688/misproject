@@ -3197,12 +3197,48 @@ button:disabled,
 	position: relative;
 	vertical-align: middle;
 	top:0;
-	position:relative;  right:7em;
+	position:relative;
+	right:7em;
+
 
 }
 #header nav a[href="/logout"] {
 	padding-right: 20em !important;
 }
+#header nav #count {
+	 padding-right: 0em !important;
+	 right:8em;
+	 font-size:12px;
+	 border-radius: 50%;
+	 height:30px;
+	 width:30px;
+	 text-align: center;
+	 margin-right: 4.5em;
+	 margin-top:1em;
+	 line-height:30px;
+	 background-color: #1e865c;
+	 color:#fff;
+
+
+
+ }
+#header nav #bell {
+	padding-right: 0em !important;
+	right:8em;
+	font-size:12px;
+	border-radius: 50%;
+	height:30px;
+	width:30px;
+	text-align: center;
+	margin-right: 4.5em;
+	margin-top:1em;
+	line-height:30px;
+	background-color: #252A42;
+	color:#fff;
+	z-index: 500;
+
+}
+
 
 #header nav a:last-child {
 	padding-right: 1.5em;

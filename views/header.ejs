@@ -1,28 +1,46 @@
 <header id="header" class="alt">
     <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+    <!-- Scripts -->
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-
+        var socket = io.connect();
+        socket.on('count', function(data) {
+            if(data.count!=null) {
+                $('#count').text(data.count);
+                console.log(data.count);
+                $('#bell').hide();
+            }
+            else{
+                $('#bell').show();
+            }
+        });
 
     </script>
     <nav>
         <% if (locals.current_member) { %>
         <font size="1">您好, <%= current_member.nickname %></font>
+        <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>
+        <div id="count"></div>
         <a href="/signout">登出</a>
         <% }
         else{ %>
         <META http-equiv="refresh" content="1;URL=/">
         <% }%>
 
-        通知：
+
     </nav>
+    <iframe id="accept-task" src=""> </iframe>
 
 
 </header>
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->

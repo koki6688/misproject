@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('misproject:server');
 var http = require('http');
+var io = require('socket.io');
+var TaskModel = require('../models/task');
+
 
 /**
  * Get port from environment and store in Express.
@@ -18,7 +21,6 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
 /**
@@ -88,3 +90,25 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+io.listen(server);
+var serv_io = io.listen(server);
+var c=null;
+function counting() {
+      TaskModel.count({status: "request"}, function (err, count) {
+          c = count;
+          //console.log(c);
+      })
+
+  console.log(c);
+    return c;
+}
+
+
+
+    serv_io.sockets.on('connection', function (socket) {
+        setInterval(function () {
+            socket.emit('count', {'count':counting()});
+        }, 10000);
+    });
+
+
