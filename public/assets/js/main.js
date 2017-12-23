@@ -97,9 +97,12 @@
 			$wrapper = $('#wrapper'),
 			$header = $('#header'),
 			$banner = $('#banner');
+        var $sidebar = $('#sidebar');
 
 		// Disable animations/transitions until the page has loaded.
 			//$body.addClass('is-loading');
+			//$sidebar.addClass('inactive');
+
 
 
 			$window.on('load pageshow', function() {
@@ -248,17 +251,16 @@
 			});
 
 // Sidebar.
-			var $sidebar = $('#sidebar'),
-				$sidebar_inner = $sidebar.children('.inner');
-        	$sidebar.addClass('inactive');
+			var $sidebar_inner = $sidebar.children('.inner');
+
 
 
 			// Inactive by default on <= large.
 				skel.on('+large', function() {
-						$sidebar.addClass('inactive');
+						$sidebar.removeClass('inactive');
 					})
 					.on('-large !large', function() {
-						$sidebar.removeClass('inactive');
+						$sidebar.addClass('inactive');
 					});
 
 			// Hack: Workaround for Chrome/Android scrollbar position bug.

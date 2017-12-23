@@ -3984,7 +3984,7 @@ body.is-loading #banner > .inner {
 	margin-right: -13em;
 }
 
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 3000px) {
 
 	#sidebar {
 		box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
@@ -4077,7 +4077,7 @@ body.is-loading #banner > .inner {
 		margin-right: -0.4375em;
 	}
 
-	body.is-loading #sidebar {
+	body.is-loading #sidebar  {
 		display: none;
 	}
 
