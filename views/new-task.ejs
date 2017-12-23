@@ -13,6 +13,8 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
     <link rel="stylesheet" href="/assets/css/lobibox.min.css"/>
+    <script src="/markdownit/jquery-3.2.1.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -23,9 +25,7 @@
     <!-- Header -->
     <% include ./header %>
 
-
     <script>
-
 
 
     </script>
@@ -35,14 +35,14 @@
         <div>
 
             <h2>發布任務1</h2>
-            <form action="/new-task" method="post" >
+            <form action="/new-task" method="post">
 
                 <table width="200" border="1">
                     <tbody>
 
 
                     <tr>
-                        <td>任務名稱：<input name="title" type="text" id="title" ></td>
+                        <td>任務名稱：<input name="title" type="text" id="title"></td>
                         <td>任務類別：<select id="category" name="category">
                                 <option value="代購">代購</option>
                                 <option value="遞送貨物">遞送貨物</option>
@@ -65,15 +65,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
-                        <td><input type="hidden"  id="status"  name="status" value="available"></td>
-                        <td><input type="hidden"  id="pmID"  name="pmID" value="<%= current_member._id %>"></td>
+                        <td>任務內容：
+                            <div class="markdown_in_editor">
+                                <textarea name="content" id="content" cols="40" rows="20" class="editor"></textarea>
+
+
+                        <td><input type="hidden" id="status" name="status" value="available"></td>
+                        <td><input type="hidden" id="pmID" name="pmID" value="<%= current_member._id %>"></td>
                     </tr>
                     </tbody>
                 </table>
 
 
-                <input type="submit" id="tSubmit" name="tSubmit">
+                <div class="editor-buttons">
+                    <input type="submit" class="span-primary submit_btn" value="回覆">
+                </div>
 
 
             </form>
@@ -82,7 +88,11 @@
     </section>
 
 
-    <button id="popupYesNoBasic" class="btn btn-raised btn-primary">Confirm<div class="ripple-container"></div></button>
+
+
+    <button id="popupYesNoBasic" class="btn btn-raised btn-primary">Confirm
+        <div class="ripple-container"></div>
+    </button>
 
     <!-- Footer -->
     <footer id="footer">
@@ -112,5 +122,24 @@
 <script src="assets/js/lobibox.min.js"></script>
 
 
+<link rel="stylesheet" href="/markdownit/webuploader/webuploader.css">
+<link rel='stylesheet' href='/markdownit/editor/editor.css'/>
+<script src='/markdownit/markdownit.js'></script>
+<script src='/markdownit/webuploader/webuploader.withoutimage.js'></script>
+<script src='/markdownit/editor/editor.js'></script>
+<script src='/markdownit/editor/ext.js'></script>
+
+<!--編輯器實作-->
+<script>
+    $(function () {
+        var editor = new Editor();
+        editor.render($('.editor')[0]);
+    })
+</script>
+
+
+
+
 </body>
 </html>
+

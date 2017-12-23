@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
 
+//導入編輯器外部插件
+var MarkDownIt =require('markdown-it');
+var md = new MarkDownIt();
+
 //導入 session 外部插件
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -64,6 +68,8 @@ app.use(function (req, res, next) {
 
 
 });
+
+app.locals.md= md;
 
 
 app.use('/', webRouter);
