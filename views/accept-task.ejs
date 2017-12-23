@@ -37,9 +37,9 @@
 
             <% if(tasks){
             for(var i = 0;i < tasks.length;i++) { %>
-            <tr><%=tasks[i].rmID%>已請求執行此任務</tr>
+            <tr><td align="center"><%=tasks[i].rmID%>已請求執行此任務</td></tr>
             <tr>
-                <td><%=tasks[i].title%></td>
+                <td align="left"><a href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
                 <td><%=tasks[i].category%></td>
                 <td><%=tasks[i].createTime%></td>
                 <td><%=tasks[i].due_time%></td>

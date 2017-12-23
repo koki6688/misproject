@@ -5,13 +5,12 @@
         crossorigin="anonymous"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-<script src="/socket.io/socket.io.js"></script>
+
 <script>
     var socket = io.connect();
     socket.on('count', function(data) {
@@ -27,10 +26,11 @@
 
 </script>
 <header id="header" class="alt">
-    <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
+    <a href="/home" class="logo"><strong>project</strong> <span>LOGO</span></a>
     <!-- Scripts -->
 
     <nav>
+
         <% if (locals.current_member) { %>
         <font size="1">您好, <%= current_member.nickname %></font>
         <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>

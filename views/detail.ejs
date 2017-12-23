@@ -21,17 +21,13 @@
     <!-- Header -->
     <% include ./header %>
 
-    <!-- Menu -->
-
-
-    <!-- Main -->
-
 
 
 	<table>
                   <tr>
                       <th>任務名稱</th>
                       <th>任務類別</th>
+                      <th>佣金 NT$</th>
 
 
                   </tr>
@@ -40,6 +36,7 @@
                       <tr>
                         <td><%=task.title%></td>
                         <td><%=task.category%></td>
+                          <td><%=task.reward%></td>
 
                     <% }%>
                       </tr>
@@ -47,6 +44,7 @@
 
                         <th>到期時間</th>
                         <th>等級限制</th>
+
                          <th>發布者</th>
 
                     </tr>
@@ -54,7 +52,9 @@
                         <tr>
                         <td><%=task.due_date%> <%=task.due_time%></td>
                         <td><%=task.limited_level%></td>
+
                         <td><%=task.pmID%></td>
+
                         <% }%>
                         </tr>
                      <tr>
@@ -67,11 +67,9 @@
                             <% if(task){%>
 
                             <tr>
-
                             <td><%- md.render(task.content) %></td>
                             <% }%>
                         </tr>
-
                        </tr>
                             
                     </table>
@@ -84,13 +82,7 @@
             <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit" value="接取任務">
         </form>
 
-
-
-
-
 </div>
-
-
 
 
 
