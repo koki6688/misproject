@@ -20,9 +20,7 @@ exports.signin = function (req, res) {
 
             if (bcrypt.compareSync(password, member.password)) {
                 req.session.member = member;
-                TaskModel.count({status: "request"}, function (err, count) {
-                    req.session.requests = count;
-                });
+
                 res.redirect('home');
             } else {
                 res.status(422);
