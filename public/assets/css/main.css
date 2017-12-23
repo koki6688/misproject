@@ -1965,6 +1965,7 @@ input[type="url"],
 input[type="date"],
 input[type="datetime-local"],
 input[type="time"],
+input[type="number"],
 select,
 textarea {
 	-moz-appearance: none;
@@ -1990,6 +1991,7 @@ input[type="search"]:invalid,
 input[type="url"]:invalid,
 input[type="datetime-local"]:invalid,
 input[type="time"]:invalid,
+input[type="number"]:invalid,
 select:invalid,
 textarea:invalid {
 	box-shadow: none;
@@ -2003,6 +2005,7 @@ input[type="search"]:focus,
 input[type="url"]:focus,
 input[type="datetime-local"]:focus,
 input[type="time"]:focus,
+input[type="number"]:focus,
 select:focus,
 textarea:focus {
 	border: medium #fcf458;
@@ -2053,6 +2056,7 @@ input[type="search"],
 input[type="url"],
 input[type="datetime-local"],
 input[type="time"],
+input[type="number"],
 select {
 	height: 2.75em;
 }
@@ -2280,6 +2284,13 @@ a.icon.alt:active:before {
 	}
 
 }
+div.navbar{
+	height:45px;
+	background:#444;
+	font-size:15px;
+}
+
+
 
 /* List */
 
@@ -3193,27 +3204,24 @@ button:disabled,
 	font-size: 0.8em;
 	height: inherit;
 	line-height: inherit;
-	padding: 0 0.75em;
+	padding: 0 em;
 	position: relative;
 	vertical-align: middle;
 	top:0;
-	position:relative;
-	right:7em;
+	margin-right:8em;
 
 
 }
-#header nav a[href="/logout"] {
-	padding-right: 20em !important;
-}
+
 #header nav #count {
-	 padding-right: 0em !important;
-	 right:8em;
+	 padding-right: 1em !important;
+	 right:0em;
 	 font-size:12px;
 	 border-radius: 50%;
 	 height:30px;
 	 width:30px;
 	 text-align: center;
-	 margin-right: 4.5em;
+	 margin-right: 5em;
 	 margin-top:1em;
 	 line-height:30px;
 	 background-color: #1e865c;
@@ -3224,13 +3232,13 @@ button:disabled,
  }
 #header nav #bell {
 	padding-right: 0em !important;
-	right:8em;
+
 	font-size:12px;
 	border-radius: 50%;
 	height:30px;
 	width:30px;
 	text-align: center;
-	margin-right: 4.5em;
+	margin-right: 5em;
 	margin-top:1em;
 	line-height:30px;
 	background-color: #252A42;
@@ -3840,7 +3848,7 @@ body.is-loading #banner > .inner {
 	opacity: 0;
 }
 
-#wrapper > * > .inner {
+#wrapper > .main > .inner {
 	padding: 4em 0 2em 0;
 	margin-top: 0;
 	margin-right: auto;
@@ -3852,7 +3860,7 @@ body.is-loading #banner > .inner {
 
 @media screen and (max-width: 736px) {
 
-	#wrapper > * > .inner {
+	#wrapper > .main > .inner {
 		padding: 3em 0 1em 0 ;
 		width: calc(100% - 3em);
 	}
@@ -3868,7 +3876,9 @@ body.is-loading #banner > .inner {
 }
 
 
-.submit {
+
+#toggle{
+ margin-top:50em;
 }
 #sidebar {
 	-moz-flex-grow: 0;
@@ -3936,13 +3946,14 @@ body.is-loading #banner > .inner {
 	border: 0;
 	display: block;
 	height: 7.5em;
-	right: 13em;
-	line-height: 7.5em;
+	right: 11em;
+	margin-top:1em;
+	line-height: 0px;
 	outline: 0;
 	overflow: hidden;
 	position: absolute;
 	text-align: center;
-	text-indent: 7.5em;
+	text-indent: 7em;
 	top: 0;
 	width: 6em;
 	z-index: 10000;
@@ -3973,42 +3984,7 @@ body.is-loading #banner > .inner {
 	margin-right: -13em;
 }
 
-@media screen and (max-width: 1680px) {
-
-	#sidebar {
-		width: 12em;
-	}
-
-	#sidebar > .inner {
-		padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
-		width: 12em;
-	}
-
-	#sidebar > .inner > .alt {
-		margin: -1.66667em 0 3.33333em -1.66667em;
-		padding: 1.66667em;
-		width: calc(50% + 3.33333em);
-	}
-
-	#sidebar .toggle {
-		height: 6.25em;
-		right: 12em;
-		line-height: 6.25em;
-		text-indent: 5em;
-		width: 5em;
-	}
-
-	#sidebar .toggle:before {
-		font-size: 1.5rem;
-	}
-
-	#sidebar.inactive {
-		margin-right: -12em;
-	}
-
-}
-
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 2000px) {
 
 	#sidebar {
 		box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
@@ -4021,6 +3997,7 @@ body.is-loading #banner > .inner {
 
 	#sidebar.inactive {
 		box-shadow: none;
+		margin-right:-12em;
 	}
 
 	#sidebar > .inner {
@@ -4047,7 +4024,57 @@ body.is-loading #banner > .inner {
 
 	#sidebar .toggle:before {
 		font-size: 1.5rem;
-		margin-left: -0.4375em;
+		margin-right: -0.4375em;
+	}
+
+	body.is-loading #sidebar {
+		display: none;
+	}
+
+
+}
+
+@media screen and (max-width: 1280px) {
+
+	#sidebar {
+		box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
+		height: 100%;
+		right: 0;
+		position: fixed;
+		top: 0;
+		z-index: 10000;
+	}
+
+	#sidebar.inactive {
+		box-shadow: none;
+		margin-right:-12em;
+	}
+
+	#sidebar > .inner {
+		-webkit-overflow-scrolling: touch;
+		height: 100%;
+		right: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		position: absolute;
+		top: 0;
+	}
+
+	#sidebar > .inner:after {
+		content: '';
+		display: block;
+		height: 4em;
+		width: 50%;
+	}
+
+	#sidebar .toggle {
+		text-indent: 6em;
+		width: 6em;
+	}
+
+	#sidebar .toggle:before {
+		font-size: 1.5rem;
+		margin-right: -0.4375em;
 	}
 
 	body.is-loading #sidebar {

@@ -99,7 +99,8 @@
 			$banner = $('#banner');
 
 		// Disable animations/transitions until the page has loaded.
-			$body.addClass('is-loading');
+			//$body.addClass('is-loading');
+
 
 			$window.on('load pageshow', function() {
 				window.setTimeout(function() {
@@ -246,106 +247,204 @@
 
 			});
 
-		// Menu.
-			var $menu = $('#menu'),
-				$menuInner;
+// Sidebar.
+			var $sidebar = $('#sidebar'),
+				$sidebar_inner = $sidebar.children('.inner');
+        	$sidebar.addClass('inactive');
 
-			$menu.wrapInner('<div class="inner"></div>');
-			$menuInner = $menu.children('.inner');
-			$menu._locked = false;
 
-			$menu._lock = function() {
+			// Inactive by default on <= large.
+				skel.on('+large', function() {
+						$sidebar.addClass('inactive');
+					})
+					.on('-large !large', function() {
+						$sidebar.removeClass('inactive');
+					});
 
-				if ($menu._locked)
-					return false;
+			// Hack: Workaround for Chrome/Android scrollbar position bug.
+				if (skel.vars.os == 'android'
+				&&	skel.vars.browser == 'chrome')
+					$('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')
+						.appendTo($head);
 
-				$menu._locked = true;
+			// Toggle.
+				if (skel.vars.IEVersion > 9) {
 
-				window.setTimeout(function() {
-					$menu._locked = false;
-				}, 350);
+					$('<a href="#sidebar" class="toggle">Toggle</a>')
+						.appendTo($sidebar)
+						.on('click', function(event) {
 
-				return true;
+							// Prevent default.
+								event.preventDefault();
+								event.stopPropagation();
 
-			};
+							// Toggle.
+								$sidebar.toggleClass('inactive');
 
-			$menu._show = function() {
+						});
 
-				if ($menu._lock())
-					$body.addClass('is-menu-visible');
+				}
 
-			};
+			// Events.
 
-			$menu._hide = function() {
+				// Link clicks.
+					$sidebar.on('click', 'a', function(event) {
 
-				if ($menu._lock())
-					$body.removeClass('is-menu-visible');
+						// >large? Bail.
+							if (!skel.breakpoint('large').active)
+								return;
 
-			};
+						// Vars.
+							var $a = $(this),
+								href = $a.attr('href'),
+								target = $a.attr('target');
 
-			$menu._toggle = function() {
+						// Prevent default.
+							event.preventDefault();
+							event.stopPropagation();
 
-				if ($menu._lock())
-					$body.toggleClass('is-menu-visible');
+						// Check URL.
+							if (!href || href == '#' || href == '')
+								return;
 
-			};
+						// Hide sidebar.
+							$sidebar.addClass('inactive');
 
-			$menuInner
-				.on('click', function(event) {
-					event.stopPropagation();
-				})
-				.on('click', 'a', function(event) {
+						// Redirect to href.
+							setTimeout(function() {
 
-					var href = $(this).attr('href');
+								if (target == '_blank')
+									window.open(href);
+								else
+									window.location.href = href;
 
-					event.preventDefault();
-					event.stopPropagation();
+							}, 500);
 
-					// Hide.
-						$menu._hide();
+					});
 
-					// Redirect.
-						window.setTimeout(function() {
-							window.location.href = href;
-						}, 250);
+				// Prevent certain events inside the panel from bubbling.
+					$sidebar.on('click touchend touchstart touchmove', function(event) {
 
-				});
+						// >large? Bail.
+							if (!skel.breakpoint('large').active)
+								return;
 
-			$menu
-				.appendTo($body)
-				.on('click', function(event) {
+						// Prevent propagation.
+							event.stopPropagation();
 
-					event.stopPropagation();
-					event.preventDefault();
+					});
 
-					$body.removeClass('is-menu-visible');
+				// Hide panel on body click/tap.
+					$body.on('click touchend', function(event) {
 
-				})
-				.append('<a class="close" href="#menu">Close</a>');
+						// >large? Bail.
+							if (!skel.breakpoint('large').active)
 
-			$body
-				.on('click', 'a[href="#menu"]', function(event) {
+								return;
 
-					event.stopPropagation();
-					event.preventDefault();
+						// Deactivate.
+							$sidebar.addClass('inactive');
 
-					// Toggle.
-						$menu._toggle();
+					});
 
-				})
-				.on('click', function(event) {
+			// Scroll lock.
+			// Note: If you do anything to change the height of the sidebar's content, be sure to
+			// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
 
-					// Hide.
-						$menu._hide();
+				$window.on('load.sidebar-lock', function() {
 
-				})
-				.on('keydown', function(event) {
+					var sh, wh, st;
 
-					// Hide on escape.
-						if (event.keyCode == 27)
-							$menu._hide();
+					// Reset scroll position to 0 if it's 1.
+						if ($window.scrollTop() == 1)
+							$window.scrollTop(0);
 
-				});
+					$window
+						.on('scroll.sidebar-lock', function() {
+
+							var x, y;
+
+							// IE<10? Bail.
+								if (skel.vars.IEVersion < 10)
+									return;
+
+							// <=large? Bail.
+								if (skel.breakpoint('large').active) {
+
+									$sidebar_inner
+										.data('locked', 0)
+										.css('position', '')
+										.css('top', '');
+
+									return;
+
+								}
+
+							// Calculate positions.
+								x = Math.max(sh - wh, 0);
+								y = Math.max(0, $window.scrollTop() - x);
+
+							// Lock/unlock.
+								if ($sidebar_inner.data('locked') == 1) {
+
+									if (y <= 0)
+										$sidebar_inner
+											.data('locked', 0)
+											.css('position', '')
+											.css('top', '');
+									else
+										$sidebar_inner
+											.css('top', -1 * x);
+
+								}
+								else {
+
+									if (y > 0)
+										$sidebar_inner
+											.data('locked', 1)
+
+
+								}
+
+						})
+						.on('resize.sidebar-lock', function() {
+
+							// Calculate heights.
+								wh = $window.height();
+								sh = $sidebar_inner.outerHeight() + 30;
+
+							// Trigger scroll.
+								$window.trigger('scroll.sidebar-lock');
+
+						})
+						.trigger('resize.sidebar-lock');
+
+					});
+        // Menu.
+        var $menu = $('#menu'),
+            $menu_openers = $menu.children('ul').find('.opener');
+
+        // Openers.
+        $menu_openers.each(function() {
+
+            var $this = $(this);
+
+            $this.on('click', function(event) {
+
+                // Prevent default.
+                event.preventDefault();
+
+                // Toggle.
+                $menu_openers.not($this).removeClass('active');
+                $this.toggleClass('active');
+
+                // Trigger resize (sidebar lock).
+                $window.triggerHandler('resize.sidebar-lock');
+
+            });
+
+        });
+
 
 	});
 

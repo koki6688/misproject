@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 <head>
     <title>register</title>
@@ -51,14 +47,14 @@
 
                     <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
                     <input type="hidden" id="status" name="status" value="progressing">
-                    <td> 接受<input type="submit" id="aSubmit" name="aSubmit"></td>
+                    <td> <input type="submit" id="aSubmit" name="aSubmit" value="接受"></td>
                 </form>
 
                 <form action="/decline" method="post">
 
                     <input type="hidden" id="tID" name="tID" value="<%=tasks[i]._id%>">
                     <input type="hidden" id="status" name="status" value="available">
-                    <td> 取消<input type="submit" id="dSubmit" name="dSubmit"></td>
+                    <td> <input type="submit" id="dSubmit" name="dSubmit" value="取消"></td>
                 </form>
 
             </tr>
