@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
+var $ = require('jquery');
+
 
 //導入編輯器外部插件
 var MarkDownIt =require('markdown-it');
