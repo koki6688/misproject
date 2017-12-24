@@ -9,11 +9,18 @@ var MemberModel = require('../models/members');
 exports.showTask = function (req, res) {
 
     var query = {status: 'available'};
-    var option = {sort: '-createTime'};
+    var sort = {creatTime: -1};
+    var path_select = 'pmID';
 
-    TaskModel.getTasks(query, option, function (err, tasks) {
+    TaskModel.getTasks(query, path_select, sort, function (err, tasks) {
+        if (err) {
+            console.log('err')
+        }
+        //console.log(tasks[0].pmID.nickname);
         res.render('all-task', {tasks: tasks});
     });
+
+
 };
 
 exports.showAddTask = function (req, res) {
@@ -28,7 +35,6 @@ exports.task = function (req, res) {
     var title = req.body.title;
     var chat = req.body.chat;
     var category = req.body.category;
-    var createTime = new Date().toLocaleString();
     var due_date = req.body.due_date;
     var due_time = req.body.due_time;
     var content = req.body.content;
@@ -41,7 +47,7 @@ exports.task = function (req, res) {
     TaskModel.addTask({
         pmID: pmID, title: title, category: category, content: content, chat: chat,
         limited_level: limited_level, due_date: due_date, due_time: due_time,
-        status: status, createTime: createTime
+        status: status
     }, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error')
@@ -118,7 +124,7 @@ exports.decline = function (req, res) {
 exports.accept_tasks = function (req, res) {
 
     TaskModel.getRequestTask(req.session.member._id, function (err, tasks) {
-        res.render('accept-task', {tasks:tasks});
+        res.render('accept-task', {tasks: tasks});
     });
 
 };

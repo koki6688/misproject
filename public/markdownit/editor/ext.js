@@ -8,7 +8,7 @@
       breaks:       true,        // Convert '\n' in paragraphs into <br>
       langPrefix:   'language-',  // CSS language prefix for fenced blocks
       linkify:      false,        // Autoconvert URL-like text to links
-      typographer:  false,        // Enable smartypants and other sweet transforms
+      typographer:  false        // Enable smartypants and other sweet transforms
     });
 
     window.markdowniter = md;
