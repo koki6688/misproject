@@ -40,7 +40,8 @@ router.post('/new-task', taskController.task);
 /* tasker接取任務 */
 router.post('/request', taskController.request);
 
-/* 顯示任務細節 */
+/* user同意tasker接取任務 */
+
 router.get('/all-task/:tid',taskController.detail);
 
 /* user同意tasker接取任務 */
@@ -51,6 +52,7 @@ router.post('/decline', taskController.decline);
 
 /* 顯示已被tasker接取任務 */
 router.get('/accept-task',taskController.accept_tasks);
+
 
 
 
