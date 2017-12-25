@@ -44,6 +44,9 @@ router.post('/request', taskController.request);
 
 router.get('/all-task/:tid',taskController.detail);
 
+/* 顯示個人資料細節 */
+router.get('/member/:mid',signController.showmember);
+
 /* user同意tasker接取任務 */
 router.post('/accept', taskController.accept);
 

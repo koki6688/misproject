@@ -103,7 +103,7 @@ function counting(member) {
         //console.log(c);
     });
 
-    console.log(c);
+    //console.log(c);
     return c;
 }
 

@@ -10,7 +10,7 @@ var MemberSchema = new mongoose.Schema({
     nickname: String,
     major: String,
     level: String,
-    createTime: String
+    createTime: {type:Date, default:Date.now()}
 });
 
 MemberSchema.statics.getUserBySignupInfo = function (user, email, callback) {

@@ -24,7 +24,7 @@ exports.register = function (req, res) {
     var email = req.body.email;
     var nickname = req.body.nickname;
     var major = req.body.major;
-    var date = new Date().toLocaleString();
+
 
     //檢驗內容
 
@@ -64,19 +64,28 @@ exports.register = function (req, res) {
         bcrypt.hash(password, saltRounds, function (err, hash) {
             MemberModel.addMember({
                 name: name, password: hash, bDate: bDate, cell: cell,
-                email: email, nickname: nickname, major: major, createTime: date
+                email: email, nickname: nickname, major: major
             }, function (err, result) {
                 if (result) {
                     var send=req.flash('success','success register');
                     res.render('register',{r_success:send});
                 } else {
-                    var send=req.flash('error','用戶名或信箱已被占用');
+                    send=req.flash('error','用戶名或信箱已被占用');
                     res.render('register',{r_error:send});
                     ep.emit('info_error', '註冊失敗！');
                 }
             })
         });
 
+    });
+
+};
+
+exports.showmember = function (req, res) {
+
+    var mID = req.params.mid;
+    MemberModel.getMemberByID(mID, function (err, member) {
+        res.render('member', {member: member});
     });
 
 };

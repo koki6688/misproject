@@ -9,7 +9,7 @@ var MemberModel = require('../models/members');
 exports.showTask = function (req, res) {
 
     var query = {status: 'available'};
-    var sort = {creatTime: -1};
+    var sort = {createTime: -1};
     var path_select = 'pmID';
 
     TaskModel.getTasks(query, path_select, sort, function (err, tasks) {
@@ -33,7 +33,7 @@ exports.task = function (req, res) {
 
     var pmID = req.body.pmID;
     var title = req.body.title;
-    var chat = req.body.chat;
+    var reward = req.body.reward;
     var category = req.body.category;
     var due_date = req.body.due_date;
     var due_time = req.body.due_time;
@@ -45,7 +45,7 @@ exports.task = function (req, res) {
 //存至DB
 
     TaskModel.addTask({
-        pmID: pmID, title: title, category: category, content: content, chat: chat,
+        pmID: pmID, title: title, category: category, content: content, reward: reward,
         limited_level: limited_level, due_date: due_date, due_time: due_time,
         status: status
     }, function (err, result) {
