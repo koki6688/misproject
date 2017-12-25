@@ -31,12 +31,12 @@
 
 
                   </tr>
-                  <% if(task){%>
+                  <% if(task[0]){%>
                     
                       <tr>
-                        <td><%=task.title%></td>
-                        <td><%=task.category%></td>
-                          <td><%=task.reward%></td>
+                        <td><%=task[0].title%></td>
+                        <td><%=task[0].category%></td>
+                          <td><%=task[0].reward%></td>
 
                     <% }%>
                       </tr>
@@ -48,12 +48,12 @@
                          <th>發布者</th>
 
                     </tr>
-                        <% if(task){%>
+                        <% if(task[0]){%>
                         <tr>
-                        <td><%=task.due_date%> <%=task.due_time%></td>
-                        <td><%=task.limited_level%></td>
+                        <td><%=task[0].due_date%> <%=task.due_time%></td>
+                        <td><%=task[0].limited_level%></td>
 
-                        <td><%=task.pmID.nickname%></td>
+                        <td><%=task[0].pmID.nickname%></td>
 
                         <% }%>
                         </tr>
@@ -64,10 +64,10 @@
                         </tr>
                         <tr>
 
-                            <% if(task){%>
+                            <% if(task[0]){%>
 
                             <tr>
-                            <td><%- md.render(task.content) %></td>
+                            <td><%- md.render(task[0].content) %></td>
                             <% }%>
                         </tr>
                        </tr>
@@ -75,12 +75,12 @@
                     </table>
 
 
-    <% if(task.pmID._id == current_member._id){%>
+    <% if(task[0].pmID._id == current_member._id){%>
     <p>這是由您所發佈的任務</p>
 
     <%}else{ %>
         <form action="/request" id="requestForm" method="post">
-            <input type="hidden"  id="tID"  name="tID" value="<%=task._id%>">
+            <input type="hidden"  id="tID"  name="tID" value="<%=task[0]._id%>">
             <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
             <input type="hidden" id="status" name="status" value="request">
             <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit" value="接取任務">
