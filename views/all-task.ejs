@@ -40,9 +40,9 @@
 
             <td><%=tasks[i].category%></td>
             <td><a class="a-inside edit" href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
-            <td><a class="a-inside edit" href="../member/<%=tasks[i].pmID%>"><%=tasks[i].pmID.nickname%></a></td>
+            <td><a class="a-inside edit" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td>NT$ <%=tasks[i].reward%></td>
-            <td><%=tasks[i].due_date%><%=tasks[i].due_time%></td>
+            <td><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
 
 
 

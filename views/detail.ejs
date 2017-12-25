@@ -53,7 +53,7 @@
                         <td><%=task.due_date%> <%=task.due_time%></td>
                         <td><%=task.limited_level%></td>
 
-                        <td><%=task.pmID%></td>
+                        <td><%=task.pmID.nickname%></td>
 
                         <% }%>
                         </tr>
@@ -75,12 +75,17 @@
                     </table>
 
 
+    <% if(task.pmID._id == current_member._id){%>
+    <p>這是由您所發佈的任務</p>
+
+    <%}else{ %>
         <form action="/request" id="requestForm" method="post">
             <input type="hidden"  id="tID"  name="tID" value="<%=task._id%>">
             <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
             <input type="hidden" id="status" name="status" value="request">
             <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit" value="接取任務">
         </form>
+    <%}%>
 
 </div>
 

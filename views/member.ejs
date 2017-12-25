@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Project-任務列表</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <% include ./header %>
+
+
+
+	<table>
+        <%if(member._id !=  current_member._id ){%>
+                  <tr>
+                      <td>暱稱</td>
+                      <td><%=member.nickname%></td>
+                      <td>主修</td>
+                      <td><%=member.major%></td>
+
+                  </tr>
+                      <tr>
+                          <td>評分</td>
+                          <td><%=member.mRatings%></td>
+                          <td>等級</td>
+                          <td><%=member.mRatings%></td>
+                      </tr>
+        <%}else{ %>
+        <tr>
+            <td>暱稱</td>
+            <td><%=member.nickname%></td>
+            <td>生日</td>
+            <td><%=member.bDate%></td>
+            <td>主修</td>
+            <td><%=member.major%></td>
+        </tr>
+        <tr>
+            <td>手機</td>
+            <td><%=member.cell%></td>
+            <td>信箱</td>
+            <td><%=member.email%></td>
+            <td>評分</td>
+            <td><%=member.mRatings%></td>
+            <td>等級</td>
+            <td><%=member.mRatings%></td>
+        </tr>
+        <% } %>
+                            
+                    </table>
+
+
+</div>
+
+
+
+</body>
+</html>
