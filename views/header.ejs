@@ -1,46 +1,74 @@
-<header id="header" class="alt">
-    <a href="index.html" class="logo"><strong>project</strong> <span>LOGO</span></a>
-    <!-- Scripts -->
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io.connect();
-        socket.on('count', function(data) {
-            if(data.count!=null) {
-                $('#count').text(data.count);
-                console.log(data.count);
-                $('#bell').hide();
-            }
-            else{
-                $('#bell').show();
-            }
-        });
 
-    </script>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+
+<script>
+    var socket = io.connect();
+    socket.on('count', function(data) {
+        if(data.count!=null) {
+            $('#count').text(data.count);
+            console.log(data.count);
+            $('#bell').hide();
+        }
+        else{
+            $('#bell').show();
+        }
+    });
+
+</script>
+<header id="header" class="alt">
+    <a href="/home" class="logo"><strong>project</strong> <span>LOGO</span></a>
+    <!-- Scripts -->
+
     <nav>
+
         <% if (locals.current_member) { %>
         <font size="1">您好, <%= current_member.nickname %></font>
         <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>
-        <div id="count"></div>
-        <a href="/signout">登出</a>
+        <a href="/accept-task" id="count"></a>
+
         <% }
         else{ %>
         <META http-equiv="refresh" content="1;URL=/">
         <% }%>
-
-
     </nav>
-    <iframe id="accept-task" src=""> </iframe>
-
-
 </header>
+
+<!-- Sidebar -->
+<div id="sidebar" class="inactive">
+    <div class="inner">
+        <!-- Menu -->
+        <nav id="menu">
+            <p>Menu</p>
+
+            <ul>
+                <li><a href="/home">首頁</a></li>
+                <li><a href="/new-task">發布任務</a></li>
+                <li>
+                    <a href="/all-task">任務列表</a>
+                </li>
+                <li>
+                    <a href="/signout">登出</a>
+                </li>
+                <li><a href="#">幫助</a></li>
+            </ul>
+            <nav>
+            </nav>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+

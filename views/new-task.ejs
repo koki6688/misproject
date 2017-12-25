@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
-    <link rel="stylesheet" href="/assets/css/lobibox.min.css"/>
+
+    <script src="/markdownit/jquery-3.2.1.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -34,7 +36,7 @@
     <section class="new_task">
         <div>
 
-            <h2>發布任務1</h2>
+            <h2>發布任務</h2>
             <form action="/new-task" method="post" >
 
                 <table width="200" border="1">
@@ -49,7 +51,8 @@
                                 <option value="交通運輸">交通運輸</option>
                                 <option value="其他">其他</option>
 
-                            </select></td>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>等級限制：<select id="limited＿level" name="limited_level">
@@ -59,6 +62,7 @@
                                 <option value="4">4</option>
 
                             </select>
+                            佣金：NT$<input name="reward" type="number" id="reward" >
                         </td>
                         <td>到期時間：<input id="due_date" type="date" name="due_date" placeholder=" "/>
                             <input id="due_time" type="time" name="due_time">
@@ -73,7 +77,9 @@
                 </table>
 
 
-                <input type="submit" id="tSubmit" name="tSubmit">
+                <div class="editor-buttons">
+                    <input type="submit" class="span-primary submit_btn" value="提交">
+                </div>
 
 
             </form>
@@ -82,35 +88,31 @@
     </section>
 
 
-    <button id="popupYesNoBasic" class="btn btn-raised btn-primary">Confirm<div class="ripple-container"></div></button>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="icons">
-                <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-                <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            </ul>
 
-        </div>
-    </footer>
+
+
 
 </div>
+<link rel="stylesheet" href="/markdownit/webuploader/webuploader.css">
+<link rel='stylesheet' href='/markdownit/editor/editor.css'/>
+<script src='/markdownit/markdownit.js'></script>
+<script src='/markdownit/webuploader/webuploader.withoutimage.js'></script>
+<script src='/markdownit/editor/editor.js'></script>
+<script src='/markdownit/editor/ext.js'></script>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<!--[if lte IE 8]>
-<script src="assets/js/ie/respond.min.js"></script><![endif]-->
-<script src="assets/js/main.js"></script>
-<script src="assets/js/lobibox.min.js"></script>
+
+<!--編輯器實作-->
+<script>
+    $(function () {
+        var editor = new Editor();
+        editor.render($('.editor')[0]);
+    })
+</script>
+
+
 
 
 </body>
 </html>
+

@@ -25,8 +25,8 @@ MemberSchema.statics.getMemberByEmail = function (email, callback) {
     this.findOne({email: email}, callback);
 };
 
-MemberSchema.statics.getMemberBypmID = function (pmID, callback) {
-    this.find({_id: pmID}, callback);
+MemberSchema.statics.getMemberByID = function (ID, callback) {
+    this.findOne({_id: ID}, callback);
 };
 
 

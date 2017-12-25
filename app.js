@@ -6,6 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
+var $ = require('jquery');
+
+
+//導入編輯器外部插件
+var MarkDownIt =require('markdown-it');
+var md = new MarkDownIt();
 
 
 
@@ -33,7 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //建立session
-app.use(session({
+
+var sessionMiddleware = session({
     secret: 'asasasas',
     store: new RedisStore({
         port: 6379,
@@ -41,7 +48,8 @@ app.use(session({
     }),
     resave: true,
     saveUninitialized: true
-}));
+});
+app.use(sessionMiddleware);
 app.use(function (req, res, next) {
     app.locals.current_member = req.session.member;
     app.locals.current_requests = req.session.requests;
@@ -49,22 +57,24 @@ app.use(function (req, res, next) {
 });
 app.use(flash());
 
-app.use(function (req,res,next) {
+app.use(function (req, res, next) {
     app.locals.user = req.session.user;
     var suc = req.flash('success');
-    res.locals.r_success = suc.length ? suc:null;
+    res.locals.r_success = suc.length ? suc : null;
 
     var err = req.flash('error');
-    res.locals.r_error = err.length ? err:null;
+    res.locals.r_error = err.length ? err : null;
 
-    var s_err=req.flash('s_error');
-    res.locals.s_error=s_err.length ? s_err:null;
+    var s_err = req.flash('s_error');
+    res.locals.s_error = s_err.length ? s_err : null;
 
 
     next();
 
 
 });
+
+app.locals.md= md;
 
 
 app.use('/', webRouter);
@@ -88,4 +98,5 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
+exports.express = app;
+exports.sessionMiddleware = sessionMiddleware;

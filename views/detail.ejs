@@ -23,28 +23,11 @@
 
 
 
-    <!-- Menu -->
-    <nav id="menu">
-        <ul class="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="landing.html">Landing</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-        </ul>
-        <ul class="actions vertical">
-            <li><a href="#" class="button special fit">Get Started</a></li>
-            <li><a href="#" class="button fit">Log In</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main -->
-
-
-
 	<table>
                   <tr>
                       <th>任務名稱</th>
                       <th>任務類別</th>
+                      <th>佣金 NT$</th>
 
 
                   </tr>
@@ -53,6 +36,7 @@
                       <tr>
                         <td><%=task.title%></td>
                         <td><%=task.category%></td>
+                          <td><%=task.reward%></td>
 
                     <% }%>
                       </tr>
@@ -60,6 +44,7 @@
 
                         <th>到期時間</th>
                         <th>等級限制</th>
+
                          <th>發布者</th>
 
                     </tr>
@@ -67,7 +52,9 @@
                         <tr>
                         <td><%=task.due_date%> <%=task.due_time%></td>
                         <td><%=task.limited_level%></td>
+
                         <td><%=task.pmID%></td>
+
                         <% }%>
                         </tr>
                      <tr>
@@ -80,13 +67,9 @@
                             <% if(task){%>
 
                             <tr>
-
-                            <td><%=task.content%></td>
+                            <td><%- md.render(task.content) %></td>
                             <% }%>
                         </tr>
-
-
-
                        </tr>
                             
                     </table>
@@ -96,26 +79,12 @@
             <input type="hidden"  id="tID"  name="tID" value="<%=task._id%>">
             <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
             <input type="hidden" id="status" name="status" value="request">
-            <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit">
+            <input type="submit" id="rtSubmit" name="rtSubmit" class="rtSubmit" value="接取任務">
         </form>
 
-
-
-						  
-    </form>
 </div>
 
 
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <!--[if lte IE 8]>
-    <script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="assets/js/main.js"></script>
 
 </body>
 </html>
