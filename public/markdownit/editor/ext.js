@@ -26,7 +26,7 @@
     };
 
     var $body = $('body');
-    /*
+
     //添加連接工具
     var ToolLink = function(){
         var self = this;
@@ -57,7 +57,7 @@
                 '</div>',
             '</div>'
         ].join('')).appendTo($body);
-        */
+        
 
         this.$win.on('click', '[role=save]', function(){
             self.$win.find('form').submit();
