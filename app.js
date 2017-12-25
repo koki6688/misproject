@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
 
+
+
+
 //導入 session 外部插件
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
