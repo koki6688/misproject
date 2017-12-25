@@ -10,6 +10,8 @@ var MemberSchema = new mongoose.Schema({
     nickname: String,
     major: String,
     level: String,
+    self_intro: String,
+    image: String,
     createTime: {type:Date, default:Date.now()}
 });
 
@@ -29,5 +31,8 @@ MemberSchema.statics.getMemberByID = function (ID, callback) {
     this.findOne({_id: ID}, callback);
 };
 
+MemberSchema.statics.updateMember = function (query, update, callback) {
+    this.update(query, update, callback);
+};
 
 module.exports = mongoose.model('Member', MemberSchema);

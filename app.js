@@ -8,6 +8,9 @@ var flash = require('connect-flash');
 var io = require('socket.io');
 var $ = require('jquery');
 
+//導入busboy以處裡上傳檔案
+var busboy = require('connect-busboy');
+
 
 //導入編輯器外部插件
 var MarkDownIt =require('markdown-it');
@@ -37,7 +40,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(busboy());
 //建立session
 
 var sessionMiddleware = session({

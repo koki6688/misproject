@@ -44,7 +44,6 @@ exports.register = function (req, res) {
     }
 
 
-
     //存至DB
 
     MemberModel.getUserBySignupInfo(name, email, function (err, users) {
@@ -54,8 +53,8 @@ exports.register = function (req, res) {
             return;
         }
         if (users.length > 0) {
-            var send=req.flash('error','用戶名或信箱已被占用');
-            res.render('register',{r_error:send});
+            var send = req.flash('error', '用戶名或信箱已被占用');
+            res.render('register', {r_error: send});
 
             ep.emit('info_error', '用戶名或信箱已被占用');
             return;
@@ -67,11 +66,11 @@ exports.register = function (req, res) {
                 email: email, nickname: nickname, major: major
             }, function (err, result) {
                 if (result) {
-                    var send=req.flash('success','success register');
-                    res.render('register',{r_success:send});
+                    var send = req.flash('success', 'success register');
+                    res.render('register', {r_success: send});
                 } else {
-                    send=req.flash('error','用戶名或信箱已被占用');
-                    res.render('register',{r_error:send});
+                    send = req.flash('error', '用戶名或信箱已被占用');
+                    res.render('register', {r_error: send});
                     ep.emit('info_error', '註冊失敗！');
                 }
             })
@@ -87,5 +86,31 @@ exports.showmember = function (req, res) {
     MemberModel.getMemberByID(mID, function (err, member) {
         res.render('member', {member: member});
     });
+};
 
+exports.showEdit = function (req, res) {
+
+    var mID = req.params.mid;
+    MemberModel.getMemberByID(mID, function (err, member) {
+        res.render('edit', {member: member});
+    });
+};
+
+exports.editMember = function (req, res) {
+
+    var mID = req.params.mid;
+    var image = req.body.image;
+    var self_intro = req.body.self_intro;
+    var major = req.body.major;
+    var cell = req.body.cell;
+
+    var query = {_id: mID};
+
+    MemberModel.updateMember(query, {
+        image: image, self_intro: self_intro, major: major, cell: cell
+    }, function (err, result) {
+        if (result) {
+            res.redirect('/member/'+mID);
+        }
+    });
 };

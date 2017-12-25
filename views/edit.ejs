@@ -26,7 +26,7 @@
 	<table>
         <%if(member._id ==  current_member._id ){%>
         <form action="/edit/<%=member._id%>" method="post">
-            電子郵件：<input type="email" id="email" name="email" disable="disable" value="<%=member.email%>">
+            電子郵件：<input type="email" id="email" name="email" disabled value="<%=member.email%>">
             姓名：<input type="text" id="name" name="name" disable="disable" value="<%=member.name%>">
             暱稱：<input type="text" id="nickname" disable="disable" name="nickname" value="<%=member.nickname%>">
             主修：<select id="major" name="major" value="<%=member.major%>">

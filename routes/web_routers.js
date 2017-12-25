@@ -44,8 +44,14 @@ router.post('/request', taskController.request);
 
 router.get('/all-task/:tid',taskController.detail);
 
-/* 顯示個人資料細節 */
+/* 顯示個人資料頁面 */
 router.get('/member/:mid',signController.showmember);
+
+/* 顯示個人資料細節頁面 */
+router.get('/edit/:mid',signController.showEdit);
+
+/* 提交編輯之個人資料 */
+router.post('/edit/:mid',signController.editMember);
 
 /* user同意tasker接取任務 */
 router.post('/accept', taskController.accept);

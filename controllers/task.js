@@ -1,5 +1,7 @@
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
+var path = require('path');
+var fs = require('fs');
 
 
 var TaskModel = require('../models/task');
@@ -11,8 +13,9 @@ exports.showTask = function (req, res) {
     var query = {status: 'available'};
     var sort = {createTime: -1};
     var path_select = 'pmID';
+    var field_select = '_id nickname';
 
-    TaskModel.getTasks(query, path_select, sort, function (err, tasks) {
+    TaskModel.getTasks(query, path_select,field_select , sort, function (err, tasks) {
         if (err) {
             console.log('err')
         }
@@ -78,7 +81,14 @@ exports.request = function (req, res) {
 
 exports.detail = function (req, res) {
     var tID = req.params.tid;
-    TaskModel.getTaskDetail(tID, function (err, task) {
+    var path_select = 'pmID';
+    var field_select = '_id nickname';
+
+    TaskModel.getTaskDetail(tID, path_select,field_select, function (err, task) {
+        if (err) {
+            console.log('err')
+        }
+
         res.render('detail', {task: task});
     });
 };
@@ -127,4 +137,18 @@ exports.accept_tasks = function (req, res) {
         res.render('accept-task', {tasks: tasks});
     });
 
+};
+
+exports.upload = function (req, res) {
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename, encoding, mimietype) {
+        var newFilename = String((new Date()).getTime()) + path.extname(filename);
+        var filePath = __dirname + '/../public/upload/' + newFilename;
+        var url = '/public/upload/' + newFilename;
+
+        file.pipe(fs.createWriteStream(filePath));
+        file.on('end', function () {
+            res.json({success: true, url: url});
+        })
+    })
 };

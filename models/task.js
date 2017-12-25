@@ -9,7 +9,7 @@ var taskSchema = new mongoose.Schema({
     reward: String,
     due_date: String,
     due_time: String,
-    createTime: {type:Date, default:Date.now()},
+    createTime: {type: Date, default: Date.now()},
     requestTime: String,
     acceptTime: String,
     doneTime: String,
@@ -25,9 +25,9 @@ taskSchema.statics.addTask = function (task, callback) {
     this.create(task, callback);
 };
 
-taskSchema.statics.getTasks = function (query, path_select, sort, callback) {
+taskSchema.statics.getTasks = function (query, path_select,field_select, sort, callback) {
 
-    this.find(query).populate(path_select).sort(sort).exec(callback);
+    this.find(query).populate(path_select,field_select).sort(sort).exec(callback);
 
 };
 
@@ -35,9 +35,10 @@ taskSchema.statics.addRequest = function (query, update, callback) {
     this.update(query, update, callback);
 };
 
+taskSchema.statics.getTaskDetail = function (tID, path_select,field_select, callback) {
 
-taskSchema.statics.getTaskDetail = function (tID, callback) {
-    this.findOne({_id: tID}, callback);
+    this.find({_id: tID}).populate(path_select,field_select).exec(callback);
+
 };
 
 taskSchema.statics.addAccept = function (query, update, callback) {
