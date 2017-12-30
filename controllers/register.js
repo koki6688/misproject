@@ -110,7 +110,7 @@ exports.editMember = function (req, res) {
         image: image, self_intro: self_intro, major: major, cell: cell
     }, function (err, result) {
         if (result) {
-            res.redirect('/member/'+mID);
+            res.redirect('/member/' + mID);
         }
     });
 };
