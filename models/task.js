@@ -49,8 +49,8 @@ taskSchema.statics.declineRequest = function (query, update, callback) {
     this.update(query, update, callback);
 };
 
-taskSchema.statics.getRequestTask = function (pmID, callback) {
-    this.find({pmID: pmID, status: "request"}, callback);
+taskSchema.statics.getRequestTask = function (pmID, path_select,field_select, callback) {
+    this.find({pmID: pmID, status: "request"}).populate(path_select,field_select).exec(callback);
 };
 
 var Task = mongoose.model('task', taskSchema);

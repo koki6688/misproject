@@ -133,7 +133,10 @@ exports.decline = function (req, res) {
 
 exports.accept_tasks = function (req, res) {
 
-    TaskModel.getRequestTask(req.session.member._id, function (err, tasks) {
+    var path_select = 'rmID';
+    var field_select = '_id nickname';
+
+    TaskModel.getRequestTask(req.session.member._id, path_select,field_select,function (err, tasks) {
         res.render('accept-task', {tasks: tasks});
     });
 
