@@ -2493,6 +2493,14 @@ dl dd {
 }
 
 /* Table */
+.all-task{
+	margin-top:2em;
+	margin-left:10%;
+	margin-right:10%;
+	margin-bottom:20px;
+	width: 80%;
+	padding-top: 5em;
+}
 
 .table-wrapper {
 	-webkit-overflow-scrolling: touch;
@@ -2500,8 +2508,19 @@ dl dd {
 }
 
 table {
-	margin: 0 0 2em 0;
+	margin-top:2em;
+
 	width: 100%;
+}
+.login-td-one {
+	width:43%;
+}
+.login-td-one .inner{
+	padding-left: 5%;
+}
+.login-td-two {
+	width:57%;
+	padding-right: 5%;
 }
 
 table tbody tr {
@@ -2516,6 +2535,7 @@ table tbody tr:nth-child(2n + 1) {
 
 table td {
 	padding: 0.75em 0.75em;
+
 }
 
 table th {
@@ -2523,7 +2543,7 @@ table th {
 	font-size: 0.9em;
 	font-weight: 600;
 	padding: 0 0.75em 0.75em 0.75em;
-	text-align: left;
+	text-align: center;
 }
 
 table thead {
@@ -2603,11 +2623,124 @@ table.alt tfoot {
 
 @media screen and (max-width: 736px) {
 
+	.login-td-one h1 {
+		font-size: 0.6em;
+
+	}
+	.login-td-one p{
+		font-size: 0.2em;
+
+	}
+	.login-td-one {
+			 width:30%;
+		 }
+	.login-td-two {
+		width:70%;
+		padding-right: 0;
+	}
+	table td {
+		font-size: 0.6em;
+	}
+
+	table th {
+
+		font-size: 0.8em;
+		font-weight: 500;
+
+	}
+
 	.spotlights > table {
 		padding: 3em 1.5em 1em 1.5em ;
 	}
 
 }
+@media screen and (max-width: 468px) {
+	.login-td-one > header{
+		color:#000000;
+	}
+
+	.login-td-one h1 {
+		font-size: 0em;
+
+	}
+	.login-td-one p{
+		font-size: 0em;
+
+	}
+	.login-td-one {
+		width:0%;
+
+		min-width: 0;
+		display:none;
+	}
+	.login-td-two {
+		width:100%;
+		padding-right: 0;
+	}
+	.login-td-two  h1{
+		font-size: 4.5em;
+	}
+	table td {
+		font-size: 0.4em;
+	}
+
+	table th {
+
+		font-size: 0.6em;
+		font-weight: 400;
+
+	}
+
+	.spotlights > table {
+		padding: 2.5em 1em 0.5em 1em ;
+	}
+
+}
+@media screen and (max-width: 390px) {
+	.login-td-one .inner{
+		color:#000000;
+		width:0;
+		height:0;
+	}
+
+	.login-td-one h1 {
+		font-size: 0em;
+
+	}
+	.login-td-one p{
+		font-size: 0em;
+
+	}
+	.login-td-one {
+		width:0%;
+		max-width: 150px;
+		min-width: 0;
+		display:none;
+	}
+	.login-td-two {
+		width:100%;
+
+	}
+	.login-td-two  h1{
+		font-size: 4.5em;
+	}
+	table td {
+		font-size: 0.3em;
+	}
+
+	table th {
+
+		font-size: 0.4em;
+		font-weight: 400;
+
+	}
+
+	.spotlights > table {
+		padding: 2.5em 1em 0.5em 1em ;
+	}
+
+}
+
 
 
 /*Button_fixed*/
@@ -2881,10 +3014,15 @@ button:disabled,
 }
 
 @media screen and (max-width: 736px) {
+	.tiles{
+		height:50%;
+		padding-top: 20%;
+
+	}
 
 	.tiles article {
 		padding: 3em 1.5em 1em 1.5em ;
-		height: 16em;
+		height: 50%;
 		max-height: none;
 		min-height: 0;
 	}
@@ -2898,11 +3036,13 @@ button:disabled,
 @media screen and (max-width: 480px) {
 
 	.tiles {
+		padding-top: 20%;
+		height: 50%!important;
 		display: block;
 	}
 
 	.tiles article {
-		height: 20em;
+		height: 50%;
 		width: 100% !important;
 	}
 
@@ -3134,7 +3274,7 @@ button:disabled,
 	text-transform: uppercase;
 	top: 0;
 	width: 100%;
-	z-index: 10000;
+	z-index: 100;
 }
 
 #header .logo {
@@ -3243,7 +3383,7 @@ button:disabled,
 	line-height:30px;
 	background-color: #252A42;
 	color:#fff;
-	z-index: 500;
+	z-index: 300;
 
 }
 
@@ -3956,7 +4096,7 @@ body.is-loading #banner > .inner {
 	text-indent: 7em;
 	top: 0;
 	width: 6em;
-	z-index: 10000;
+	z-index: 500;
 }
 
 #sidebar .toggle:before {
@@ -3992,7 +4132,7 @@ body.is-loading #banner > .inner {
 		right: 0;
 		position: fixed;
 		top: 0;
-		z-index: 10000;
+		z-index: 500;
 	}
 
 	#sidebar.inactive {
@@ -4042,7 +4182,7 @@ body.is-loading #banner > .inner {
 		right: 0;
 		position: fixed;
 		top: 0;
-		z-index: 10000;
+		z-index: 500;
 	}
 
 	#sidebar.inactive {
@@ -4086,20 +4226,20 @@ body.is-loading #banner > .inner {
 @media screen and (max-width: 736px) {
 
 	#sidebar .toggle {
-		text-indent: 7.25em;
-		width: 7.25em;
+		text-indent: 6em;
+		width: 6em;
 	}
 
 	#sidebar .toggle:before {
-		color: #1e3b49;
+		color: white;
 		margin-right: -0.0625em;
-		margin-top: -0.25em;
+		margin-top: 0em;
 		font-size: 1.1rem;
 		z-index: 1;
 	}
 
 	#sidebar .toggle:after {
-		background: rgb(78, 132, 150);
+		background: transparent;
 		border-radius: 0.375em;
 		content: '';
 		height: 3.5em;
@@ -4218,4 +4358,12 @@ body.is-loading #banner > .inner {
 	border-top: 0;
 	margin-top: 0em;
 	padding-top: 0;
+}
+h2 #alltask-h2{
+	margin-left:10%;
+}
+hr.style-one {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
