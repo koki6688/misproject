@@ -32,7 +32,7 @@
     <nav>
 
         <% if (locals.current_member) { %>
-        <font size="1">您好, <%= current_member.nickname %></font>
+        <font  class='hello' size="1">您好, <%= current_member.nickname %></font>
         <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>
         <a href="/accept-task" id="count"></a>
 

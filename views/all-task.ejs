@@ -40,16 +40,16 @@
         for(var i = 0;i < tasks.length;i++) { %>
         <tr>
             <% if(tasks[i].category=='代購'){ %>
-            <td width="200" style="text-align: left;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' width="200" style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}else if(tasks[i].category=='遞送貨物'){ %>
-            <td width="200" style="text-align: left;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
-            <%}else if(tasks[i].category=='運輸'){ %>
-            <td width="200" style="text-align: left;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' width="200" style="text-align: center;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <%}else if(tasks[i].category=='交通運輸'){ %>
+            <td data-th='任務類別' width="200" style="text-align: center;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}%>
-            <td width="500" style="text-align: center;"><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
-            <td width="200" style="text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
-            <td style="text-align: center;">NT$ <%=tasks[i].reward%></td>
-            <td style="text-align: center;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
+            <td data-th='任務名稱' width="500" style="text-align: center;"><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
+            <td data-th='發布者' width="200" style="text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
+            <td data-th='佣金' style="text-align: center;">NT$ <%=tasks[i].reward%></td>
+            <td data-th='到期時間' style="text-align: center;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
 
 
 

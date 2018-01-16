@@ -58,12 +58,12 @@
             <hr class="style-one" />
             <form action="/new-task" method="post" >
 
-                <table width="200" border="1" class="new-task-table">
+                <table  border="1" class="new-task-table">
                     <tbody>
 
 
                     <tr>
-                        <td>任務名稱：<input name="title" type="text" id="title" ></td>
+                        <td class="new-task-td-left">任務名稱：<input name="title" type="text" id="title" ></td>
                         <td>任務類別：<select id="category" name="category">
                                 <option value="代購">代購</option>
                                 <option value="遞送貨物">遞送貨物</option>
@@ -74,19 +74,24 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>等級限制：<select id="limited＿level" name="limited_level">
+                        <td class="new-task-td-left">等級限制：<select id="limited＿level" name="limited_level">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
 
                             </select>
-                            佣金：NT$ <input name="reward" type="number" id="reward" >
+
                         </td>
-                        <td>到期時間：
-                            <input id="due_date" type="date" name="due_date" placeholder=" "/>
-                            <input id="due_time" type="time" name="due_time">
+                        <td>佣金：NT$ <input name="reward" type="number" id="reward" >
+
                         </td>
+                        <tr>
+                        <td>
+                            到期時間：日期
+                            <input id="due_date" type="date" name="due_date" placeholder=" "/></td>
+                        <td>時間
+                            <input id="due_time" type="time" name="due_time"></td>
                     </tr>
                     <tr>
                         <td colspan='2'>任務內容：<textarea  id="content" name="content" class="text" cols="40" rows ="20"></textarea>
