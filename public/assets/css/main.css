@@ -2784,7 +2784,7 @@ button,
 	border-radius: 50px;
 	overflow: hidden;
 }
-input[type="submit"]:hover, input[type="submit"]:active,
+input[type="submit"]:hover, input[type="submit"]:active,input[type="submit"]:visited,input[type="submit"]:focus,
 input[type="reset"]:hover,
 input[type="reset"]:active,
 input[type="button"]:hover,
