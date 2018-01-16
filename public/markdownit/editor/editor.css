@@ -36,75 +36,75 @@ you can use the generic selector below, but it's slower:
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-bold:before {
 	content: "\e000";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-italic:before {
 	content: "\e001";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-quote:before {
 	content: "\e003";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-unordered-list:before {
 	content: "\e004";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-ordered-list:before {
 	content: "\e005";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-link:before {
 	content: "\e006";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-image:before {
 	content: "\e007";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-play:before {
 	content: "\e008";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-music:before {
 	content: "\e009";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-contract:before {
 	content: "\e00a";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-fullscreen:before {
 	content: "\e00b";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-question:before {
 	content: "\e00c";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-info:before {
 	content: "\e00d";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-undo:before {
 	content: "\e00e";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-redo:before {
 	content: "\e00f";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-code:before {
 	content: "\e011";
-    color:#fff;
+    color:#FFFFFF;
 }
 .eicon-preview:before {
 	content: "\e002";
-    color:#fff;
+    color:#FFFFFF;
 }
 /* BASICS */
 
@@ -398,12 +398,12 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   margin: 0 6px;
 }
 .editor-toolbar a.eicon-fullscreen {
-    color:#fff;
+  color: #000000;
   position: absolute;
   right: 0;
 }
 .editor-statusbar {
-  border-top: 1px solid #ece9e9;
+  border-top: 1px solid #000000;
   padding: 8px 10px;
   font-size: 12px;
   color: #959694;

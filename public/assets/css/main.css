@@ -2504,6 +2504,15 @@ dl dd {
 	width: 80%;
 	padding-top: 5em;
 }
+.new-task-table{
+	margin-top:2em;
+	margin-left:10%;
+	margin-right:10%;
+	margin-bottom:20px;
+	width: 80%;
+	padding-top: 5em;
+
+}
 .detail-table{
 	margin-top:2em;
 	margin-left:10%;
@@ -4374,6 +4383,7 @@ body.is-loading #banner > .inner {
 h2 #alltask-h2{
 	margin-left:10%;
 }
+
 hr.style-one {
 	border: 0;
 	height: 1px;
