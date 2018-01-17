@@ -21,6 +21,8 @@
     "htmlspecialchars": "^1.0.5",
     "jquery": "^3.2.1",
     "markdown-it": "^8.4.0",
+    "moment": "^2.20.1",
+    "moment-timezone": "^0.5.14",
     "mongodb": "^3.0.1",
     "mongoose": "^4.12.4",
     "morgan": "^1.9.0",

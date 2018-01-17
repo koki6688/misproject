@@ -100,7 +100,7 @@ var c = null;
 function counting(member) {
     TaskModel.count({pmID: member.member._id, status: "request"}, function (err, count) {
         c = count;
-        //console.log(c);
+        //console.log(member.member._id);
     });
 
     //console.log(c);

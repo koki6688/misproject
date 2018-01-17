@@ -2,6 +2,9 @@ var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 var path = require('path');
 var fs = require('fs');
+var moment = require('moment');
+
+
 
 
 var TaskModel = require('../models/task');
@@ -15,7 +18,7 @@ exports.showTask = function (req, res) {
     var path_select = 'pmID';
     var field_select = '_id nickname';
 
-    TaskModel.getTasks(query, path_select,field_select , sort, function (err, tasks) {
+    TaskModel.getTasks(query, path_select, field_select, sort, function (err, tasks) {
         if (err) {
             console.log('err')
         }
@@ -65,13 +68,13 @@ exports.request = function (req, res) {
     var rmID = req.body.rmID;
     var tID = req.body.tID;
     var status = req.body.status;
-    var date = new Date().toLocaleString();
+    var date = moment().format();
 
     var query = {_id: tID};
 
     TaskModel.addRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
         if (result) {
-            res.render('home');
+            res.redirect('/home');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
@@ -84,7 +87,7 @@ exports.detail = function (req, res) {
     var path_select = 'pmID';
     var field_select = '_id nickname';
 
-    TaskModel.getTaskDetail(tID, path_select,field_select, function (err, task) {
+    TaskModel.getTaskDetail(tID, path_select, field_select, function (err, task) {
         if (err) {
             console.log('err')
         }
@@ -97,14 +100,14 @@ exports.accept = function (req, res) {
 
     var tID = req.body.tID;
     var status = req.body.status;
-    var date = new Date().toLocaleString();
+    var date = moment().format();
 
     var query = {_id: tID};
 
     TaskModel.addAccept(query, {status: status, acceptTime: date}, function (err, result) {
         if (result) {
 
-            res.render('home');
+            res.redirect('/home');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
@@ -123,7 +126,7 @@ exports.decline = function (req, res) {
 
     TaskModel.declineRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
         if (result) {
-            res.render('home');
+            res.redirect('/home');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
@@ -136,7 +139,7 @@ exports.accept_tasks = function (req, res) {
     var path_select = 'rmID';
     var field_select = '_id nickname';
 
-    TaskModel.getRequestTask(req.session.member._id, path_select,field_select,function (err, tasks) {
+    TaskModel.getRequestTask(req.session.member._id, path_select, field_select, function (err, tasks) {
         res.render('accept-task', {tasks: tasks});
     });
 
