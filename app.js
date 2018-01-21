@@ -43,11 +43,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(busboy());
 //建立session
 
+var redisHost = '127.0.0.1';
+var redisPort = 6379;
+
+if(process.env.OPENSHIFT_REDIS_HOST){
+
+    redisHost = process.env.OPENSHIFT_REDIS_HOST;
+    redisPort = process.env.OPENSHIFT_REDIS_PORT;
+}
+
 var sessionMiddleware = session({
     secret: 'asasasas',
     store: new RedisStore({
-        port: 6379,
-        host: '127.0.0.1'
+        port: redisPort,
+        host: redisHost
     }),
     resave: true,
     saveUninitialized: true
