@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
-var url ='mongodb://127.0.0.1:27017/misproject';
-if(process.env.OPENSHIFT_MONGODB_DB_URL){
-    url = process.env.OPENSHIFT_MONGODB_DB_URL + 'mongodb';
-}
+var url ='mongodb://mis104project:12QWASZX@ds147544.mlab.com:47544/mis104project';
+
 mongoose.Promise = global.Promise;
 mongoose.connect(url , {useMongoClient: true});
 

@@ -43,14 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(busboy());
 //建立session
 
-var redisHost = 'redis://redistogo:2002a2bffc0c644f8c449b329b52ed39@soldierfish.redistogo.com';
-var redisPort = 10394;
-
-if(process.env.OPENSHIFT_REDIS_HOST){
-
-    redisHost = process.env.OPENSHIFT_REDIS_HOST;
-    redisPort = process.env.OPENSHIFT_REDIS_PORT;
-}
+var redisHost = 'redis-17940.c1.ap-southeast-1-1.ec2.cloud.redislabs.com';
+var redisPort = 17940;
 
 var sessionMiddleware = session({
     secret: 'asasasas',
@@ -62,6 +56,7 @@ var sessionMiddleware = session({
     saveUninitialized: true
 });
 app.use(sessionMiddleware);
+
 app.use(function (req, res, next) {
     app.locals.current_member = req.session.member;
     app.locals.current_requests = req.session.requests;
