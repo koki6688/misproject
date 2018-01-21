@@ -43,8 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(busboy());
 //建立session
 
-var redisHost = '127.0.0.1';
-var redisPort = 6379;
+var redisHost = 'redis://redistogo:2002a2bffc0c644f8c449b329b52ed39@soldierfish.redistogo.com';
+var redisPort = 10394;
 
 if(process.env.OPENSHIFT_REDIS_HOST){
 
