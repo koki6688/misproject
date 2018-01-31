@@ -2581,6 +2581,14 @@ dl dd {
 	 padding-top: 5em;
 
  }
+.memberForm{
+	margin-top:2em;
+	margin-left:8%;
+	margin-right:10%;
+	margin-bottom:20px;
+	width: 80%;
+	padding-top: 5em;
+}
 .detail-table{
 	margin-top:5em;
 	margin-left:10%;
@@ -2789,6 +2797,9 @@ table.alt tfoot {
 
 }
 @media screen and (max-width: 468px) {
+	.memberForm{
+		width:100%;
+	}
 	.accept-task-table {
 		width:100%;
 		margin-left:0;
@@ -2897,6 +2908,10 @@ table.alt tfoot {
 
 }
 @media screen and (max-width: 390px) {
+	.memberForm{
+		width:100%;
+		margin-left: 0%;
+	}
 	.accept-task-table {
 		width:100%;
 		margin-left:0;
@@ -2999,9 +3014,76 @@ table.alt tfoot {
 
 }
 
+/*tab*/
+.abgne_tab {
+
+}
+
+ul.tabs #tab-btn{
+	border-radius: 0px;
+	float: left;
+	height: 31px;
+	line-height: 31px;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: -1px;	/* 讓 li 往下移來遮住 ul 的部份 border-bottom */
+	border: 0px solid #999;
+
+	background: transparent;
+
+}
+ul.tabs li {
+	font-size: 32px;
+	border-radius: 0px;
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: -1px;
+	color:#FFFFFF;
+	list-style-type: none;
+	border: 2px solid #fff
+
+}
+ul.tabs li a {
+	display: block;
+	padding: 2px 25px ;
+	color: #fff;
+	border: 0px solid #fff;
+	text-decoration: none;
+}
+ul.tabs li a:hover {
+	background: #fff;
+	color:#000;
+}
+ul.tabs li.active  {
+	background: transparent;
+	color:#000;
+	border-bottom: 1px solid yellow;
+}
+ul.tabs li.active a:hover {
+	background: #fff;
+	color:#000;
+}
+div.tab_container {
+	clear: left;
+	width: 100%;
+	border: 0px solid #999;
+	border-top: none;
+	background: transparent;
+}
+div.tab_container .tab_content {
+	padding: 25px;
+}
+div.tab_container .tab_content h2 {
+	margin: 0 0 20px;
+}
+
 
 
 /*Button_fixed*/
+
 
 input[type="submit"],
 input[type="button"],
@@ -4661,4 +4743,8 @@ hr.style-one {
 	border: 0;
 	height: 1px;
 	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+#memberForm{
+	margin-left: 0%;
+
 }
