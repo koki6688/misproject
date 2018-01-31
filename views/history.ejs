@@ -67,7 +67,7 @@
                     <tr><td>test line:as user</td></tr>
                     <% if(tasks){
                     for(var i = 0;i < tasks.length;i++) {
-                    if(tasks[i].pmID==current_member._id && tasks[i].status=='request'){%>
+                    if(tasks[i].pmID._id==current_member._id && tasks[i].status=='request'){%>
                     <tr>
                         <td colspan='6' align="left">
                             <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
@@ -134,11 +134,11 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].pmID==current_member._id && tasks[i].status=='processing'){%>%>
+                        if(tasks[i].pmID._id==current_member._id && tasks[i].status=='processing'){%>%>
                         <tr>
                             <td colspan='6' align="left">
                                 <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
-                                    <strong><%= tasks[i].rmID%></strong></a>
+                                    <strong><%= tasks[i].rmID.nickname%></strong></a>
                                 <strong>正在執行任務</strong>
                             </td>
                         </tr>
@@ -190,7 +190,7 @@
                         <tr><td>test line:as user</td></tr>
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].pmID==current_member._id &&tasks[i].status=='completed'){%>
+                        if(tasks[i].pmID._id==current_member._id &&tasks[i].status=='completed'){%>
                         <tr>
                             <th>任務名稱</th>
                             <th>任務類別</th>
@@ -248,11 +248,11 @@
 
                     <% if(tasks){
                     for(var i = 0;i < tasks.length;i++) {
-                    if(tasks[i].rmID==current_member._id && tasks[i].status=='request'){%>%>
+                    if(tasks[i].rmID._id==current_member._id && tasks[i].status=='request'){%>%>
                     <tr>
                         <td colspan='6' align="left">
-                            <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
-                                <strong><%= tasks[i].pmID%></strong></a>
+                            <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].pmID._id %>">
+                                <strong><%= tasks[i].pmID.nickname%></strong></a>
                             <strong>&nbsp;已接受您的申請，請開始執行任務</strong>
                             </td>
                     </tr>
@@ -311,11 +311,11 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].rmID==current_member._id && tasks[i].status=='processing'){%>%>
+                        if(tasks[i].rmID._id==current_member._id && tasks[i].status=='processing'){%>%>
                         <tr>
                             <td colspan='6' align="left">
-                                <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
-                                    <strong><%= tasks[i].pmID%></strong></a>
+                                <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].pmID._id %>">
+                                    <strong><%= tasks[i].pmID.nickname%></strong></a>
                                 <strong>&nbsp;已接受您的申請，請開始執行任務</strong>
                             </td>
                         </tr>
@@ -373,7 +373,7 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].rmID==current_member._id && tasks[i].status=='completed'){%>
+                        if(tasks[i].rmID._id==current_member._id  && tasks[i].status=='completed'){%>
                         <tr>
                             <th>任務名稱</th>
                             <th>任務類別</th>
