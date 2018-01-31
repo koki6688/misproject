@@ -80,7 +80,7 @@ exports.register = function (req, res) {
 
 };
 
-exports.showmember = function (req, res) {
+exports.showMember = function (req, res) {
 
     var mID = req.params.mid;
     MemberModel.getMemberByID(mID, function (err, member) {
@@ -105,10 +105,9 @@ exports.editMember = function (req, res) {
     var cell = req.body.cell;
 
     var query = {_id: mID};
+    var update = {image: image, self_intro: self_intro, major: major, cell: cell};
 
-    MemberModel.updateMember(query, {
-        image: image, self_intro: self_intro, major: major, cell: cell
-    }, function (err, result) {
+    MemberModel.updateMember(query, update, function (err, result) {
         if (result) {
             res.redirect('/member/' + mID);
         }

@@ -37,6 +37,9 @@ router.get('/new-task', taskController.showAddTask);
 /* 提交task內容 */
 router.post('/new-task', taskController.task);
 
+/* 刪除任務 */
+router.post('/delete/:tid', taskController.delete);
+
 /* tasker接取任務 */
 router.post('/request', taskController.request);
 
@@ -45,7 +48,7 @@ router.post('/request', taskController.request);
 router.get('/all-task/:tid',taskController.detail);
 
 /* 顯示個人資料頁面 */
-router.get('/member/:mid',signController.showmember);
+router.get('/member/:mid',signController.showMember);
 
 /* 顯示個人資料細節頁面 */
 router.get('/edit/:mid',signController.showEdit);
@@ -60,7 +63,7 @@ router.post('/accept', taskController.accept);
 router.post('/decline', taskController.decline);
 
 /* 顯示已被tasker接取任務 */
-router.get('/accept-task',taskController.accept_tasks);
+router.get('/history',taskController.history);
 
 
 

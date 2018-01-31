@@ -5,28 +5,24 @@ var fs = require('fs');
 var moment = require('moment');
 
 
-
-
 var TaskModel = require('../models/task');
-var MemberModel = require('../models/members');
 
 
 exports.showTask = function (req, res) {
 
     var query = {status: 'available'};
+    var field = {category: 1, title: 1, reward: 1, due_date: 1};
     var sort = {createTime: -1};
     var path_select = 'pmID';
     var field_select = '_id nickname';
 
-    TaskModel.getTasks(query, path_select, field_select, sort, function (err, tasks) {
+    TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
         if (err) {
             console.log('err')
         }
         //console.log(tasks[0].pmID.nickname);
         res.render('all-task', {tasks: tasks});
     });
-
-
 };
 
 exports.showAddTask = function (req, res) {
@@ -45,34 +41,48 @@ exports.task = function (req, res) {
     var due_time = req.body.due_time;
     var content = req.body.content;
     var limited_level = req.body.limited_level;
-    var status = req.body.status;
+
+
+    var query = {
+        pmID: pmID, title: title, category: category, content: content, reward: reward,
+        limited_level: limited_level, due_date: due_date, due_time: due_time
+    };
 
 
 //存至DB
 
-    TaskModel.addTask({
-        pmID: pmID, title: title, category: category, content: content, reward: reward,
-        limited_level: limited_level, due_date: due_date, due_time: due_time,
-        status: status
-    }, function (err, result) {
+    TaskModel.addTask(query, function (err, result) {
         if (err) {
-            ep.emit('info_error', 'error')
+            ep.emit('info_error', 'error');
         } else
-            res.render('home')
+            res.redirect('/home');
     });
 
+};
+
+exports.delete = function (req, res) {
+
+    var tID = req.params.tid;
+    var query = {_id: tID};
+    TaskModel.removeTask(query, function (err, result) {
+        if (err) {
+            ep.emit('info_error', 'error');
+        } else
+            res.redirect('/home');
+    });
+    res.redirect('/home')
 };
 
 exports.request = function (req, res) {
 
     var rmID = req.body.rmID;
     var tID = req.body.tID;
-    var status = req.body.status;
+    var status = 'request';
     var date = moment().format();
 
     var query = {_id: tID};
 
-    TaskModel.addRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+    TaskModel.updateTask(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
         if (result) {
             res.redirect('/home');
         } else {
@@ -84,10 +94,13 @@ exports.request = function (req, res) {
 
 exports.detail = function (req, res) {
     var tID = req.params.tid;
+    var query = {_id: tID};
+    var field = {category: 1, title: 1, reward: 1, due_date: 1, limited_level: 1, content: 1};
     var path_select = 'pmID';
     var field_select = '_id nickname';
+    var sort = {createTime: 1};
 
-    TaskModel.getTaskDetail(tID, path_select, field_select, function (err, task) {
+    TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, task) {
         if (err) {
             console.log('err')
         }
@@ -99,12 +112,12 @@ exports.detail = function (req, res) {
 exports.accept = function (req, res) {
 
     var tID = req.body.tID;
-    var status = req.body.status;
+    var status = 'progressing';
     var date = moment().format();
 
     var query = {_id: tID};
 
-    TaskModel.addAccept(query, {status: status, acceptTime: date}, function (err, result) {
+    TaskModel.updateTask(query, {status: status, acceptTime: date}, function (err, result) {
         if (result) {
 
             res.redirect('/home');
@@ -119,12 +132,12 @@ exports.decline = function (req, res) {
 
     var rmID = null;
     var tID = req.body.tID;
-    var status = req.body.status;
+    var status = 'available';
     var date = null;
 
     var query = {_id: tID};
 
-    TaskModel.declineRequest(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+    TaskModel.updateTask(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
         if (result) {
             res.redirect('/home');
         } else {
@@ -134,13 +147,17 @@ exports.decline = function (req, res) {
 
 };
 
-exports.accept_tasks = function (req, res) {
+exports.history = function (req, res) {
 
+    var query = {$or: [{pmID: req.session.member._id}, {rmID: req.session.member._id}]};
+    var field={};
     var path_select = 'rmID';
     var field_select = '_id nickname';
+    var sort = {requestTime: 1};
 
-    TaskModel.getRequestTask(req.session.member._id, path_select, field_select, function (err, tasks) {
-        res.render('accept-task', {tasks: tasks});
+    TaskModel.getTasks(query,field, path_select, field_select, sort, function (err, tasks) {
+        console.log(tasks);
+        res.render('history', {tasks: tasks});
     });
 
 };

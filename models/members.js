@@ -6,10 +6,10 @@ var MemberSchema = new mongoose.Schema({
     bDate: String,
     cell: String,
     email: String,
-    mRatings: String,
+    mRatings: {type:Number, default:0},
     nickname: String,
     major: String,
-    level: String,
+    level: {type:Number, default:0},
     self_intro: String,
     image: String,
     createTime: {type:Date, default:Date.now()}
@@ -24,7 +24,7 @@ MemberSchema.statics.addMember = function (member, callback) {
 };
 
 MemberSchema.statics.getMemberByEmail = function (email, callback) {
-    this.findOne({email: email}, callback);
+    this.findOne({email: email}).exec(callback);
 };
 
 MemberSchema.statics.getMemberByID = function (ID, callback) {
