@@ -23,6 +23,7 @@
 
 
 
+
 	<table class="detail-table" >
                   <tr>
                       <th>任務名稱</th>
@@ -67,7 +68,7 @@
                             <% if(task[0]){%>
 
                             <tr>
-                            <td colspan='3' style="text-align: center;"><%- md.render(task[0].content) %></td>
+                            <td colspan='3' style="text-align: center;"><%-task[0].content%></td>
                             <% }%>
                         </tr>
                        </tr>
