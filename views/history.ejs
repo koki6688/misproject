@@ -15,77 +15,287 @@
 </head>
 <body>
 
+
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Header -->
     <% include ./header %>
 
+
+    <script>
+        $(function(){
+            // 預設顯示第一個 Tab
+            var _showTab = 0;
+            var $defaultLi = $('ul.tabs li').eq(_showTab).addClass('active');
+            $($defaultLi.find('a').attr('href')).siblings().hide();
+
+            // 當 li 頁籤被點擊時...
+            // 若要改成滑鼠移到 li 頁籤就切換時, 把 click 改成 mouseover
+            $('ul.tabs li').click(function() {
+                // 找出 li 中的超連結 href(#id)
+                var $this = $(this),
+                    _clickTab = $this.find('a').attr('href');
+                // 把目前點擊到的 li 頁籤加上 .active
+                // 並把兄弟元素中有 .active 的都移除 class
+                $this.addClass('active').siblings('.active').removeClass('active');
+                // 淡入相對應的內容並隱藏兄弟元素
+                $(_clickTab).stop(false, true).fadeIn().siblings().hide();
+
+                return false;
+            }).find('a').focus(function(){
+                this.blur();
+            });
+        });
+    </script>
+
     <!-- Menu -->
 
 
-    <section class="new_task">
-        <table class="accept-task-table">
-            <% if(tasks){
-            for(var i = 0;i < tasks.length;i++) { %>
-            <tr>
-                <td colspan='6' align="left">
-                    <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
-                        <strong><%= tasks[i].rmID.nickname %></strong></a>
-                    <strong>&nbsp;已於&nbsp;</strong><%= tasks[i].requestTime.toLocaleString() %>
-                    <strong>請求執行此任務</strong></td>
-            </tr>
-            <tr>
-                <th>任務名稱</th>
-                <th>任務類別</th>
-                <th class="accept-creatime">發布時間</th>
-                <th>到期時間</th>
-                <th></th>
-            </tr>
 
-            <tr>
-                <td data-th='任務名稱' align="center" width="400"><a
-                            href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
-                <% if(tasks[i].category == '代購'){ %>
-                <td data-th='任務類別' style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
-                </td>
-                <% }else if(tasks[i].category == '遞送貨物'){ %>
-                <td data-th='任務類別' style="text-align: center;"><i class="fa fa-gift"
-                                                                  aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
-                </td>
-                <% }else if(tasks[i].category == '交通運輸'){ %>
-                <td data-th='任務類別' style="text-align: center;"><i class="fa fa-taxi"
-                                                                  aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
-                </td>
-                <% } %>
-                <td data-th='發布時間' align="center"
-                    class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
-                <td data-th=''>
-                    <form action="/accept" method="post" style="display:inline;">
+    <div class="abgne_tab">
+        <ul class="tabs">
+            <li><a href="#tab1">As User</a></li></button>
+            <li><a href="#tab2">As Tasker</a></li></button>
+        </ul>
 
-                        <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
-                        <input type="hidden" id="status" name="status" value="progressing" style="display:none;">
-                        <ul class="action">
-                            <li><input type="submit" id="aSubmit" name="aSubmit" value="接受"></li>
-                    </form>
+        <div class="tab_container">
+            <div id="tab1" class="tab_content">
+                <div class="Processing">
+                    <h1>Processing</h1>
+                <table>
+                    <tr><td>test line:as user</td></tr>
+                    <% if(tasks){
+                    for(var i = 0;i < tasks.length;i++) { %>
+                    <tr>
+                        <td colspan='6' align="left">
+                            <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
+                                <strong><%= tasks[i].rmID.nickname %></strong></a>
+                            <strong>&nbsp;已於&nbsp;</strong><%= tasks[i].requestTime.toLocaleString() %>
+                            <strong>請求執行此任務</strong></td>
+                    </tr>
+                    <tr>
+                        <th>任務名稱</th>
+                        <th>任務類別</th>
+                        <th class="accept-creatime">發布時間</th>
+                        <th>到期時間</th>
+                        <th></th>
+                    </tr>
 
-                    <form action="/decline" method="post" style="display:inline;">
-                        <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
-                        <input type="hidden" id="status" name="status" value="available" style="display:none;">
-                        <li><input type="submit" id="dSubmit" name="dSubmit" value="取消"></li>
-                        </ul>
-                    </form>
-                </td>
+                    <tr>
+                        <td data-th='任務名稱' align="center" width="400"><a
+                                    href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
+                        <% if(tasks[i].category == '代購'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% }else if(tasks[i].category == '遞送貨物'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-gift"
+                                                                          aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% }else if(tasks[i].category == '交通運輸'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-taxi"
+                                                                          aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% } %>
+                        <td data-th='發布時間' align="center"
+                            class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
+                        <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                        <td data-th=''>
+                            <form action="/accept" method="post" style="display:inline;">
 
-            </tr>
-            <tr>
-                <td colspan='6'>
-                <td>
-            </tr>
-            <% }} %>
-        </table>
-    </section>
+                                <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
+                                <input type="hidden" id="status" name="status" value="progressing" style="display:none;">
+                                <ul class="action">
+                                    <li><input type="submit" id="aSubmit" name="aSubmit" value="接受"></li>
+                            </form>
+
+                            <form action="/decline" method="post" style="display:inline;">
+                                <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
+                                <input type="hidden" id="status" name="status" value="available" style="display:none;">
+                                <li><input type="submit" id="dSubmit" name="dSubmit" value="取消"></li>
+                                </ul>
+                            </form>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan='6'>
+                        <td>
+                    </tr>
+                    <% }} %>
+                </table>
+                </div>
+                <div class="Completed">
+                    <h1>Completed</h1>
+                    <table>
+                        <tr><td>test line:as user</td></tr>
+                        <% if(tasks){
+                        for(var i = 0;i < tasks.length;i++) {
+                        if(tasks[i].status=='completed'){%>
+                        <tr>
+                            <th>任務名稱</th>
+                            <th>任務類別</th>
+                            <th class="accept-creatime">發布時間</th>
+                            <th>到期時間</th>
+                            <th>狀態</th>
+                        </tr>
+
+                        <tr>
+                            <td data-th='任務名稱' align="center" width="400"><a
+                                        href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
+                            <% if(tasks[i].category == '代購'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% }else if(tasks[i].category == '遞送貨物'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-gift"
+                                                                              aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% }else if(tasks[i].category == '交通運輸'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-taxi"
+                                                                              aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% } %>
+                            <td data-th='發布時間' align="center"
+                                class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='狀態'>
+                                <% if(tasks[i].status == 'completed'){ %>
+                                <td><%= tasks[i].rmID.nickname %>完成此任務</td>
+                                <% }else if(tasks[i].category == 'cancel'){ %>
+                                <td>此任務因效期而取消</td>
+                            <% } %>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan='6'>
+                            <td>
+                        </tr>
+                        <% }}} %>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div id="tab2" class="tab_content">
+                <div class="t_Processing">
+                    <h1>進行中任務</h1>
+
+                <table>
+                    <tr><td>test line:as task</td></tr>
+
+                    <% if(tasks){
+                    for(var i = 0;i < tasks.length;i++) { %>
+                    <tr>
+                        <td colspan='6' align="left">
+                            <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].rmID._id %>">
+                                <strong><%= tasks[i].pmID%></strong></a>
+                            <strong>&nbsp;已接受您的申請，請開始執行任務</strong>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th>任務名稱</th>
+                        <th>任務類別</th>
+                        <th class="accept-creatime">發布時間</th>
+                        <th>到期時間</th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+                        <td data-th='任務名稱' align="center" width="400"><a
+                                    href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
+                        <% if(tasks[i].category == '代購'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% }else if(tasks[i].category == '遞送貨物'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-gift"
+                                                                          aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% }else if(tasks[i].category == '交通運輸'){ %>
+                        <td data-th='任務類別' style="text-align: center;"><i class="fa fa-taxi"
+                                                                          aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                        </td>
+                        <% } %>
+                        <td data-th='發布時間' align="center"
+                            class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
+                        <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                        <td data-th=''>
+                            <ul class="action">
+                            <form action="/completed" method="post" style="display:inline;">
+
+                                <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
+                                <input type="hidden" id="status" name="status" value="completed" style="display:none;">
+                                    <li><input type="submit" id="aSubmit" name="aSubmit" value="回報完成"></li>
+                            </form>
+                                <li><button>聊天室</button></li>
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan='6'>
+                        <td>
+                    </tr>
+                    <% }} %>
+                </table>
+                </div>
+                <div class="t_Completed">
+                    <h1>已完成任務</h1>
+                    <table>
+                        <tr><td>test line:as task</td></tr>
+
+                        <% if(tasks){
+                        for(var i = 0;i < tasks.length;i++) {
+                        if(tasks[i].status=='completed'){%>
+                        <tr>
+                            <th>任務名稱</th>
+                            <th>任務類別</th>
+                            <th class="accept-creatime">發布時間</th>
+                            <th>到期時間</th>
+                            <th></th>
+                        </tr>
+
+                        <tr>
+                            <td data-th='任務名稱' align="center" width="400"><a
+                                        href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
+                            <% if(tasks[i].category == '代購'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% }else if(tasks[i].category == '遞送貨物'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-gift"
+                                                                              aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% }else if(tasks[i].category == '交通運輸'){ %>
+                            <td data-th='任務類別' style="text-align: center;"><i class="fa fa-taxi"
+                                                                              aria-hidden="true"></i>&nbsp;&nbsp;<%= tasks[i].category %>
+                            </td>
+                            <% } %>
+                            <td data-th='發布時間' align="center"
+                                class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th=''>
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan='6'>
+                            <td>
+                        </tr>
+                        <%} }} %>
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
 
 
 </div>
@@ -93,3 +303,4 @@
 
 </body>
 </html>
+
