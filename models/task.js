@@ -30,10 +30,16 @@ taskSchema.statics.removeTask = function (task, callback) {
     this.deleteOne(task, callback);
 };
 
-taskSchema.statics.getTasks = function (query,field, path_select, field_select, sort, callback) {
+taskSchema.statics.getTasks = function (query, field, path_select, field_select, sort, callback) {
 
-    this.find(query,field).populate(path_select, field_select).sort(sort).exec(callback);
+    this.find(query, field).populate(path_select, field_select).sort(sort).exec(callback);
+};
 
+taskSchema.statics.getHistory = function (query, field, path_select1, field_select1, path_select2,
+                                          field_select2, sort, callback) {
+
+    this.find(query, field).populate(path_select1, field_select1).populate(path_select2,
+        field_select2).sort(sort).exec(callback);
 };
 
 taskSchema.statics.updateTask = function (query, update, callback) {

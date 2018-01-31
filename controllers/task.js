@@ -150,15 +150,18 @@ exports.decline = function (req, res) {
 exports.history = function (req, res) {
 
     var query = {$or: [{pmID: req.session.member._id}, {rmID: req.session.member._id}]};
-    var field={};
-    var path_select = 'rmID';
-    var field_select = '_id nickname';
-    var sort = {requestTime: 1};
+    var field = {};
+    var path_select1 = 'pmID';
+    var field_select1 = '_id nickname';
+    var path_select2 = 'rmID';
+    var field_select2 = '_id nickname';
+    var sort = {requestTime: -1};
 
-    TaskModel.getTasks(query,field, path_select, field_select, sort, function (err, tasks) {
-        console.log(tasks);
-        res.render('history', {tasks: tasks});
-    });
+    TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
+        sort, function (err, tasks) {
+            console.log(tasks);
+            res.render('history', {tasks: tasks});
+        });
 
 };
 
