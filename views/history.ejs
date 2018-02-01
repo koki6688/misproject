@@ -295,8 +295,7 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].rmID._id!=null){
-                            if(tasks[i].rmID._id==current_member._id && tasks[i].status=='request'){%>%>
+                            if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='request'){%>%>
                         <tr>
                             <td colspan='6' align="left">
                                 <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].pmID._id %>">
@@ -338,7 +337,7 @@
                             <td>
                         </tr>
                         <% }
-                        }}} %>
+                        }} %>
                     </table>
                 </div>
                 <div class="t_Progressing">
@@ -349,7 +348,7 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].rmID._id==current_member._id && tasks[i].status=='progressing'){%>%>
+                        if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='Progressing'){%>%>
                         <tr>
                             <td colspan='6' align="left">
                                 <a class="a-inside edit" id="icon fa-car" href="../member/<%= tasks[i].pmID._id %>">
@@ -411,7 +410,7 @@
 
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
-                        if(tasks[i].rmID._id==current_member._id  && tasks[i].status=='completed'){%>
+                        if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='completed'){%>
                         <tr>
                             <th>任務名稱</th>
                             <th>任務類別</th>
