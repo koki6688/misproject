@@ -28,6 +28,21 @@
     <!-- Header End -->
 
 <div id="wrapper">
+    <div class="notification">
+        <% if (locals.t_success!=null) { %>
+        <div class="suc_not">
+            <i class="fa fa-check-circle" aria-hidden="true">&nbsp;&nbsp;
+                <strong>任務發布成功，可至歷史任務或任務列表頁面查看。</strong>
+            </i>
+
+        </div>
+        <script>
+            $("#suc_not").hide(1000);
+        </script>
+
+        <% }%>
+    </div>
+
 
     <!-- Main -->
     <div id="main">

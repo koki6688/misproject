@@ -54,8 +54,11 @@ exports.task = function (req, res) {
     TaskModel.addTask(query, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error');
+
         } else
-            res.redirect('/home');
+            var send = req.flash('success', '任務發布成功');
+            res.render('home', {t_success: send});
+            //res.redirect('/home');
     });
 
 };
