@@ -23,88 +23,116 @@
 
 
 
-	<table class="memberPage">
-        <%if(member._id !=  current_member._id ){%>
-                  <tr>
-                      <td>暱稱</td>
-                      <td><%=member.nickname%></td>
-                      <td>主修</td>
-                      <td><%=member.major%></td>
-                      <td>性別</td>
-                      <td><%=member.gender%></td>
 
-                  </tr>
-                      <tr>
-                          <td>評分</td>
-                          <td><%=member.mRatings%></td>
-                          <td>等級</td>
-                          <td><%=member.mRatings%></td>
-                      </tr>
-        <%}else{ %>
-        <table>
-            <%if(member._id ==  current_member._id ){%>
-            <form action="/edit/<%=member._id%>" method="post" id="form">
-                <tr>
-                    <td>暱稱</td>
-                    <td><%=member.nickname%></td>
-                    <td>生日</td>
-                    <td><%=member.bDate%></td>
-                    <% if(member.image !=null ){%>
-                    <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
+    <%if(member._id !=  current_member._id ){%>
+    <h2 align="center"><%=member.nickname%>的個人首頁</h2>
+    <table class="memberPage">
+        <tr>
+            <td>暱稱</td>
+            <td><%=member.nickname%></td>
+            <td>主修</td>
+            <td><%=member.major%></td>
+            <td>性別</td>
+            <td><%=member.gender%></td>
+            <% if(member.image !=null ){%>
+            <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
-                    <% }else{%>
-                    <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
-                    <%}%>
+            <% }else{%>
+            <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
+            <%}%>
 
+        </tr>
+        <tr>
+            <td>As User評分</td>
+            <td><%=member.mRatings%></td>
+            <td>As Tasker評分</td>
+            <td><%=member.mRatings%></td>
+            <td>等級</td>
+            <td><%=member.mRatings%></td>
+        </tr>
+        <tr>
+            <td>個人簡介</td>
+            <td colspan="5"><%=member.profile%></td>
+        </tr>
+    </table>
+    <%}else{ %>
+    <h2 align="center">關於我</h2>
+    <table class="memberPage">
+        <%if(member._id ==  current_member._id ){%>
 
-                </tr>
-                <tr>
-                    <td>手機</td>
-                    <td><input type="text" id="cell" name="cell"  value="<%=member.cell%>"></td>
-                    <td>信箱</td>
-                    <td><%=member.email%></td>
+        <form action="/edit/<%=member._id%>" method="post" id="form">
+            <tr>
+                <td>暱稱</td>
+                <td><%=member.nickname%></td>
+                <td>生日</td>
+                <td><%=member.bDate%></td>
+                <td>性別</td>
+                <td><%=member.gender%></td>
+                <% if(member.image !=null ){%>
+                <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
-                </tr>
-                <tr>
-                    <td>主修</td>
-                    <td><%=member.major%></td>
-                    <td>性別</td>
-                    <td><%=member.gender%></td>
-                </tr>
-                <tr>
-                    <td>評分</td>
-                    <td><%=member.mRatings%></td>
-                    <td>等級</td>
-                    <td><%=member.mRatings%></td>
-                    <form method="post" action="/public/upload">
-                        <td align="center">
-                            <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093; 上傳圖片">
-                        </td>
-
-                    </form>
+                <% }else{%>
+                <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
+                <%}%>
 
 
-                </tr>
-                <tr>
-                    <td>個人簡介</td>
-                    <td colspan="5"><input type="text" id="profile" name="profile"  value="<%=member.profile%>"></td>
-                </tr>
+            </tr>
+            <tr><td>信箱</td>
+                <td><%=member.email%></td>
+                <td>手機</td>
+                <td><input type="text" id="cell" name="cell"  value="<%=member.cell%>"></td>
+                <td>主修</td>
+                <script>
+                    $(".major option[value=<%=member.major%>]").attr("selected",true);
+
+                </script>
+                <td><select id="major" name="major" value="<%=member.major%>">
+                        <option value="communication">傳播學系</option>　
+                        <option value="mis">資訊管理學系</option>
+                        　
+                    </select></td>
+
+            </tr>
+            <tr>
 
 
-                <tr>
-                    <td colspan="5" align="center"><input type="submit" id="rSubmit" name="rSubmit" class="rSubmit" value="儲存變更" ></td>
-                </tr>
-            </form>
-            <% } %>
+            </tr>
+            <tr>
+                <td>As User評分</td>
+                <td><%=member.mRatings%></td>
+                <td>As Tasker評分</td>
+                <td><%=member.mRatings%></td>
+                <td>等級</td>
+                <td><%=member.mRatings%></td>
+                <form method="post" action="/public/upload">
+                    <td align="center">
+                        <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093; 上傳圖片">
+                    </td>
 
-        </table>
+                </form>
 
 
+            </tr>
+            <tr>
+                <td>個人簡介</td>
+                <td colspan="5"><input type="text" id="profile" name="profile"  value="<%=member.profile%>"></td>
+            </tr>
 
 
+            <tr>
+                <td colspan="5" align="center"><input type="submit" id="rSubmit" name="rSubmit" class="rSubmit" value="儲存變更" ></td>
+            </tr>
+        </form>
         <% } %>
-                            
-                    </table>
+
+    </table>
+
+
+
+
+    <% } %>
+
+    </table>
 
 
 </div>
