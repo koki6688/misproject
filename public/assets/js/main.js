@@ -94,6 +94,7 @@
 
 		var	$window = $(window),
 			$body = $('body'),
+            $head = $('head'),
 			$wrapper = $('#wrapper'),
 			$header = $('#header'),
 			$banner = $('#banner');
