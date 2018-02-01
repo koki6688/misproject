@@ -6,17 +6,17 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
 
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-        <!--[if lte IE 8]>
-        <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-        <link rel="stylesheet" href="/assets/css/main.css"/>
-        <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
-        <!--[if lte IE 8]>
-        <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
-        <!--日期時間選擇器css-->
-        <link rel="stylesheet" type="text/css" href="/assets/css/jquery.datetimepicker.min.css"/ >
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+    <!--日期時間選擇器css-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.datetimepicker.min.css"/ >
 
 </head>
 <body>
@@ -37,10 +37,14 @@
         var dateToday = new Date();
         var timeToday=dateToday.getTime();
         $(document).ready(function(){
+
             $( "#due_date" ).datetimepicker({
+
                 minDate: dateToday,
                 step:15
+
             });
+
 
         } );
         <!-- 日期時間選擇器（disable past time） end-->
@@ -83,8 +87,8 @@
 
 
                     <tr>
-                        <td class="new-task-td-left">任務名稱：<input name="title" type="text" id="title" ></td>
-                        <td>任務類別：<select id="category" name="category">
+                        <td class="new-task-td-left">任務名稱：<input name="title" type="text" id="title" required></td>
+                        <td>任務類別：<select id="category" name="category" required>
                                 <option value="代購">代購</option>
                                 <option value="遞送貨物">遞送貨物</option>
                                 <option value="交通運輸">交通運輸</option>
@@ -94,7 +98,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="new-task-td-left">等級限制：<select id="limited＿level" name="limited_level">
+                        <td class="new-task-td-left">等級限制：<select id="limited＿level" name="limited_level" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -103,18 +107,18 @@
                             </select>
 
                         </td>
-                        <td>佣金：NT$ <input name="reward" type="number" id="reward" min="0">
+                        <td>佣金：NT$ <input name="reward" type="number" id="reward" min='0' required>
 
                         </td>
-                        <tr>
+                    <tr>
                         <td>
                             到期時間：日期
-                            <input id="due_date" type="text" name="due_date" placeholder=" " /></td>
+                            <input id="due_date" type="text" name="due_date" placeholder=" "  required/></td>
                         <!--<td>時間
                             <input id="due_time" type="time" name="due_time"></td>-->
                     </tr>
                     <tr>
-                        <td colspan='2'>任務內容：<textarea id="content" name="content" cols="16"></textarea>
+                        <td colspan='2'>任務內容：<textarea id="content" name="content" cols="16"> required</textarea>
                         <td><input type="hidden"  id="pmID"  name="pmID" value="<%= current_member._id %>"></td>
                     </tr>
                     <td colspan='2' align="center"><input align="center" type="submit" value="提交"></td>
@@ -129,10 +133,10 @@
 
 
 
-             </form>
+            </form>
 
-         </div>
-     </section>
+        </div>
+    </section>
 
 
 
