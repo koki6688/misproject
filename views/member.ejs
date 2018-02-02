@@ -109,12 +109,20 @@
                 <td><%=member.mRatings%></td>
                 <td >等級</td>
                 <td><%=member.level%></td>
-                <td>餘額</td>
-                <td><%=member.asset%></td>
-
 
 
             </tr>
+            <tr>
+                <td>餘額</td>
+                <td><%=member.asset%></td>
+                <form method="post" action="/deposit">
+                    <input type="hidden" id="mid" name="mid" value="<%= current_member._id %>" style="display:none;">
+                    <td>儲值金額:</td><td><input type="number" name="asset" min="0" max="1000000"></td>
+                    <td><input type="submit" id="aSubmit" name="aSubmit" value="儲值"></td>
+                </form>
+
+            </tr>
+
             <tr>
                 <td>個人簡介</td>
                 <td colspan="5"><input type="text" id="self_intro" name="self_intro"  value="<%=member.self_intro%>"></td>
