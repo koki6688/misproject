@@ -151,12 +151,13 @@ exports.decline = function (req, res) {
 exports.rate = function (req, res) {
 
     var rater = req.body.rater;
+    var rate = req.body.rate;
     var tID = req.body.tID;
 
     var query = {_id: tID};
     var update = {};
 
-    update[rater] = rater;
+    update[rater] = rate;
 
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
