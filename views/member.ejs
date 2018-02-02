@@ -24,6 +24,7 @@
 
 
 
+
     <%if(member._id !=  current_member._id ){%>
     <h2 align="center"><%=member.nickname%>的個人首頁</h2>
     <table class="memberPage">
@@ -72,7 +73,14 @@
                 <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
                 <% }else{%>
-                <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
+                <td rowspan="3" colspan="2" valign="middle" align="center"><img src="/images/profilepic.png" width="190" height="190" style="float: left"><br>
+                    <form method="post" action="/public/upload" enctype="multipart/form-data">
+                        <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
+                    <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093;上傳圖片">
+
+
+        </form></td>
+
                 <%}%>
 
 
@@ -82,11 +90,8 @@
                 <td>手機</td>
                 <td><input type="text" id="cell" name="cell"  value="<%=member.cell%>"></td>
                 <td>主修</td>
-                <script>
-                    $(".major option[value=<%=member.major%>]").attr("selected",true);
 
-                </script>
-                <td><select id="major" name="major" value="<%=member.major%>">
+                <td><select id="major" name="major" >
                         <option value="communication">傳播學系</option>　
                         <option value="mis">資訊管理學系</option>
                         　
@@ -102,20 +107,17 @@
                 <td><%=member.mRatings%></td>
                 <td>As Tasker評分</td>
                 <td><%=member.mRatings%></td>
-                <td>等級</td>
-                <td><%=member.mRatings%></td>
-                <form method="post" action="/public/upload">
-                    <td align="center">
-                        <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093; 上傳圖片">
-                    </td>
+                <td >等級</td>
+                <td><%=member.level%></td>
+                <td>餘額</td>
+                <td><%=member.asset%></td>
 
-                </form>
 
 
             </tr>
             <tr>
                 <td>個人簡介</td>
-                <td colspan="5"><input type="text" id="profile" name="profile"  value="<%=member.profile%>"></td>
+                <td colspan="5"><input type="text" id="self_intro" name="self_intro"  value="<%=member.self_intro%>"></td>
             </tr>
 
 
@@ -136,6 +138,11 @@
 
 
 </div>
+<script>
+    $("#major option[value=<%=member.major%>]").attr("selected",true);
+
+</script>
+
 
 
 
