@@ -231,7 +231,7 @@
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
-                            <td align="center"><a class="a-inside delete" href="/delete/<%=tasks[i]._id%>">刪除</a></td>
+                            <td align="center"><a class="a-inside delete" href="../delete/<%=tasks[i]._id%>">刪除</a></td>
                         </tr>
 
                         <% }}} %>
@@ -287,11 +287,12 @@
                         <tr>
                             <% if(tasks[i].rRating== null){ %>
                             <form method="post" action="/rate">
-                                <td colspan='4'>請為<%=tasks[i].rmID.nickname%>評分：
-                                    <input id="push" name="rRatings" type="radio" value="push" />
+                                <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分：
+                                    <input id="push" name="rRating" type="radio" value="sel" />
                                     <label for="push"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="down" name="rRatings"type="radio"value="down"/>
-                                    <label for="question2"><i class="fa fa-thumbs-down"></i></label>
+                                    <input id="down" name="rRating" type="radio" value="sel"/>
+                                    <label for="down"><i class="fa fa-thumbs-down"></i></label>
+                                    <input type="submit" name="submit" value="評分">
 
                                 </td>
                             </form>
@@ -469,10 +470,11 @@
                             <% if(tasks[i].pRating== null){ %>
                             <form method="post" action="/rate">
                                 <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分：
-                                    <input id="push" name="pRating" type="radio" value="push" />
+                                    <input id="push" name="pRating" type="radio" value="sel" />
                                     <label for="push"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="down" name="pRating"type="radio"value="down"/>
-                                    <label for="question2"><i class="fa fa-thumbs-down"></i></label>
+                                    <input id="down" name="pRating" type="radio" value="sel"/>
+                                    <label for="down"><i class="fa fa-thumbs-down"></i></label>
+                                    <input type="submit" name="submit" value="評分">
 
                                 </td>
                             </form>
