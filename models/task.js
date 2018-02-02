@@ -47,6 +47,10 @@ taskSchema.statics.updateTask = function (query, update, callback) {
     this.update(query, update, callback);
 };
 
+taskSchema.statics.Complete = function (tid, callback) {
+    this.update(tid, {status:'completed'}, callback);
+};
+
 var Task = mongoose.model('task', taskSchema);
 
 

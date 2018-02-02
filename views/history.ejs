@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>register</title>
+    <title>history</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!--[if lte IE 8]>
@@ -415,7 +415,7 @@
                                     <ul class="action">
                                         <form action="/check" method="post" style="display:inline;">
                                             <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
-                                            <input type="hidden" id="rCheck" name="rCheck" value="rCheck" style="display:none;">
+                                            <input type="hidden" id="rCheck" name="checker" value="rCheck" style="display:none;">
                                             <li><input type="submit" id="cSubmit" name="cSubmit" value="回報完成"></li>
                                         </form>
                                     <% } %>

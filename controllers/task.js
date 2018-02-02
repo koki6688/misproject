@@ -57,10 +57,9 @@ exports.task = function (req, res) {
 
         } else
             var send = req.flash('success', '任務發布成功');
-            res.render('home', {t_success: send});
-            //res.redirect('/home');
+        res.render('home', {t_success: send});
+        //res.redirect('/home');
     });
-
 };
 
 exports.delete = function (req, res) {
@@ -71,9 +70,8 @@ exports.delete = function (req, res) {
         if (err) {
             ep.emit('info_error', 'error');
         } else
-            res.redirect('/home');
+            res.redirect('/history');
     });
-
 };
 
 exports.request = function (req, res) {
@@ -84,15 +82,15 @@ exports.request = function (req, res) {
     var date = moment().format();
 
     var query = {_id: tID};
+    var update = {rmID: rmID, status: status, requestTime: date};
 
-    TaskModel.updateTask(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+    TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
-            res.redirect('/home');
+            res.redirect('/history');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
-    })
-
+    });
 };
 
 exports.detail = function (req, res) {
@@ -119,16 +117,16 @@ exports.accept = function (req, res) {
     var date = moment().format();
 
     var query = {_id: tID};
+    var update = {status: status, acceptTime: date};
 
-    TaskModel.updateTask(query, {status: status, acceptTime: date}, function (err, result) {
+    TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
 
-            res.redirect('/home');
+            res.redirect('/history');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
-    })
-
+    });
 };
 
 exports.decline = function (req, res) {
@@ -139,15 +137,76 @@ exports.decline = function (req, res) {
     var date = null;
 
     var query = {_id: tID};
+    var update = {rmID: rmID, status: status, requestTime: date};
 
-    TaskModel.updateTask(query, {rmID: rmID, status: status, requestTime: date}, function (err, result) {
+    TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
-            res.redirect('/home');
+            res.redirect('/history');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
-    })
+    });
+};
 
+exports.rate = function (req, res) {
+
+    var rater = req.body.rater;
+    var tID = req.body.tID;
+
+    var query = {_id: tID};
+    var update = {};
+
+    update[rater] = rater;
+
+    TaskModel.updateTask(query, update, function (err, result) {
+        if (result) {
+            res.redirect('/history');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    });
+};
+
+exports.check = function (req, res) {
+
+    var checker = req.body.checker;
+    var tID = req.body.tID;
+
+    var query = {_id: tID};
+    var field = {rCheck: 1, pCheck: 1};
+    var path_select = '';
+    var field_select = '';
+    var sort = {};
+
+    var update = {};
+
+
+    update[checker] = true;
+
+    TaskModel.updateTask(query, update, function (err, result) {
+        if (result) {
+            res.redirect('/history');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    });
+
+    TaskModel.getTask(query, field, path_select, field_select, sort,  function (err, result) {
+        if (result) {
+            if(result.pCheck===true&&result.rCheck===true){
+                TaskModel.Complete(tID,function (err, complete) {
+                    if(complete){
+                        res.redirect('/history');
+                    }else{
+                        ep.emit('info_error', '接收失敗！');
+                    }
+                });
+            }
+            res.redirect('/history');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    });
 };
 
 exports.history = function (req, res) {
@@ -162,10 +221,9 @@ exports.history = function (req, res) {
 
     TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
         sort, function (err, tasks) {
-            console.log(tasks);
+
             res.render('history', {tasks: tasks});
         });
-
 };
 
 exports.upload = function (req, res) {

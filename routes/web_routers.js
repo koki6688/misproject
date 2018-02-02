@@ -68,8 +68,14 @@ router.post('/accept', taskController.accept);
 /* user不同意tasker接取任務 */
 router.post('/decline', taskController.decline);
 
-/* 顯示已被tasker接取任務 */
+/* 顯示history頁面 */
 router.get('/history',taskController.history);
+
+/* 雙方評分 */
+router.post('/rate', taskController.rate);
+
+/* 雙方確認任務結束 */
+router.post('/check', taskController.check);
 
 
 
