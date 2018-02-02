@@ -73,7 +73,7 @@ exports.delete = function (req, res) {
         } else
             res.redirect('/home');
     });
-    res.redirect('/home')
+
 };
 
 exports.request = function (req, res) {

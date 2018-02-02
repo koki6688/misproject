@@ -9,17 +9,18 @@ var taskSchema = new mongoose.Schema({
     title: String,
     reward: Number,
     due_date: String,
-    due_time: String,
     createTime: {type: Date, default: Date.now()},
     requestTime: Date,
     acceptTime: Date,
     doneTime: Date,
     content: String,
     chat: String,
-    tRatings: Number,
+    pRating: Number,
+    rRating: Number,
     status: {type: String, default: 'available'},
-    limited_level: Number
-
+    limited_level: Number,
+    pCheck: {type: Boolean, default: false},
+    rCheck: {type: Boolean, default: false}
 });
 
 taskSchema.statics.addTask = function (task, callback) {

@@ -113,3 +113,22 @@ exports.editMember = function (req, res) {
         }
     });
 };
+
+exports.showDeposit = function (req, res) {
+    res.render('deposit');
+};
+
+exports.deposit = function (req, res) {
+
+    var mID = req.body.mid;
+    var asset = req.body.asset;
+
+    var query = {_id: mID};
+    var update = {asset: asset};
+
+    MemberModel.updateMember(query, update, function (err, result) {
+        if (result) {
+            res.redirect('/member/' + mID);
+        }
+    });
+};

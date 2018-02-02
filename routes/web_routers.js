@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var signController = require('../controllers/register');
-var signinController = require('../controllers/signin');
+var memberController = require('../controllers/member');
+var SignInController = require('../controllers/signin');
 var taskController = require('../controllers/task');
 
 
@@ -17,16 +17,22 @@ router.get('/home', function (req, res) {
 });
 
 /* 提交登入內容 */
-router.post('/', signinController.signin);
+router.post('/', SignInController.signin);
 
 /* 登出 */
-router.get('/signout', signinController.signout);
+router.get('/signout', SignInController.signout);
 
 /* 顯示註冊頁面 */
-router.get('/register', signController.showRegister);
+router.get('/register', memberController.showRegister);
 
 /* 提交註冊內容 */
-router.post('/register', signController.register);
+router.post('/register', memberController.register);
+
+/* 顯示deposit頁面 */
+router.get('/deposit', memberController.showDeposit);
+
+/*  */
+router.post('/deposit', memberController.deposit);
 
 /* 顯示task頁面 */
 router.get('/all-task', taskController.showTask);
@@ -38,7 +44,7 @@ router.get('/new-task', taskController.showAddTask);
 router.post('/new-task', taskController.task);
 
 /* 刪除任務 */
-router.post('/delete/:tid', taskController.delete);
+router.get('/delete/:tid', taskController.delete);
 
 /* tasker接取任務 */
 router.post('/request', taskController.request);
@@ -48,13 +54,13 @@ router.post('/request', taskController.request);
 router.get('/all-task/:tid',taskController.detail);
 
 /* 顯示個人資料頁面 */
-router.get('/member/:mid',signController.showMember);
+router.get('/member/:mid',memberController.showMember);
 
 /* 顯示個人資料細節頁面 */
-router.get('/edit/:mid',signController.showEdit);
+router.get('/edit/:mid',memberController.showEdit);
 
 /* 提交編輯之個人資料 */
-router.post('/edit/:mid',signController.editMember);
+router.post('/edit/:mid',memberController.editMember);
 
 /* user同意tasker接取任務 */
 router.post('/accept', taskController.accept);
