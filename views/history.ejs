@@ -170,7 +170,7 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck == 'true'){ %>
+                                <% if(tasks[i].rCheck == true){ %>
                                 <ul class="action">
                                     <form action="/check" method="post" style="display:inline;">
                                         <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
@@ -408,7 +408,7 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck == 'true'){ %>
+                                <% if(tasks[i].rCheck == true){ %>
                                 等待對方確認
 
                                     <% }else{ %>
