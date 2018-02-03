@@ -134,7 +134,7 @@
                         <tr><td>test line:as user</td></tr>
 
                         <% if(tasks){
-                        for(var i = 0;i < tasks.length;i++) {
+                        for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id && tasks[i].status=='progressing'){%>%>
                         <tr>
                             <td colspan='6' align="left">
@@ -174,7 +174,7 @@
                                 <ul class="action">
                                     <form action="/check" method="post" style="display:inline;">
                                         <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
-                                        <input type="hidden" id="pCheck" name="checker" value="pCheck" style="display:none;">
+                                        <input type="hidden" id="pCheck" name="pCheck" value="pCheck" style="display:none;">
                                         <li><input type="submit" id="cSubmit" name="cSubmit" value="確認完成"></li>
                                     </form>
                                     <li><button>聊天室</button></li>
@@ -209,7 +209,7 @@
                             <th>到期時間</th>
                             <th></th>
                         </tr>
-                        <%for(var i = 0;i < tasks.length;i++) {
+                        <%for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id && tasks[i].status=='available'){%>%>
 
 
@@ -252,7 +252,7 @@
                             <th>確認完成時間</th>
                         </tr>
 
-                        <%for(var i = 0;i < tasks.length;i++) {
+                        <%for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id &&tasks[i].status=='completed'){%>
 
 
@@ -287,10 +287,10 @@
                         <tr>
                             <% if(tasks[i].rRating== null){ %>
                             <form method="post" action="/rate">
-                                <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分：
-                                    <input id="push" name="rRating" type="radio" value="sel" />
+                                <td colspan='4'>請為<%=tasks[i].rmID.nickname%>評分：
+                                    <input id="push" name="rater" type="radio" value="push" />
                                     <label for="push"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="down" name="rRating" type="radio" value="sel"/>
+                                    <input id="down" name="rater" type="radio" value="down"/>
                                     <label for="down"><i class="fa fa-thumbs-down"></i></label>
                                     <input type="submit" name="submit" value="評分">
 
@@ -318,7 +318,7 @@
                         <tr><td>test line:as task</td></tr>
 
                         <% if(tasks){
-                        for(var i = 0;i < tasks.length;i++) {
+                        for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='request'){%>%>
                         <tr>
                             <td colspan='6' align="left">
@@ -372,7 +372,7 @@
                         <tr><td>test line:as task</td></tr>
 
                         <% if(tasks){
-                        for(var i = 0;i < tasks.length;i++) {
+                        for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='progressing'){%>%>
                         <tr>
                             <td colspan='6' align="left">
@@ -415,7 +415,7 @@
                                     <ul class="action">
                                         <form action="/check" method="post" style="display:inline;">
                                             <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
-                                            <input type="hidden" id="rCheck" name="checker" value="rCheck" style="display:none;">
+                                            <input type="hidden" id="checker" name="checker" value="rCheck" style="display:none;">
                                             <li><input type="submit" id="cSubmit" name="cSubmit" value="回報完成"></li>
                                         </form>
                                     <% } %>
@@ -445,7 +445,7 @@
                             <th>確認完成時間</th>
                             <th></th>
                         </tr>
-                        <%for(var i = 0;i < tasks.length;i++) {
+                        <%for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id==current_member._id){}else if(tasks[i].status=='completed' && tasks[i].tRatings!=null){%>
                         <tr>
                             <td data-th='任務名稱' style="text-align: center;" ><a
@@ -470,9 +470,9 @@
                             <% if(tasks[i].pRating== null){ %>
                             <form method="post" action="/rate">
                                 <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分：
-                                    <input id="push" name="pRating" type="radio" value="sel" />
+                                    <input id="push" name="rater" type="radio" value="push" />
                                     <label for="push"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="down" name="pRating" type="radio" value="sel"/>
+                                    <input id="down" name="rater" type="radio" value="down"/>
                                     <label for="down"><i class="fa fa-thumbs-down"></i></label>
                                     <input type="submit" name="submit" value="評分">
 
