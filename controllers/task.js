@@ -186,18 +186,20 @@ exports.check = function (req, res) {
 
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
-            res.redirect('/history');
+            ep.emit('update_ok', '上傳成功！');
         } else {
             ep.emit('info_error', '接收失敗！');
         }
     });
 
-    TaskModel.getTask(query, field, path_select, field_select, sort,  function (err, result) {
+    TaskModel.getTasks(query, field, path_select, field_select, sort,  function (err, result) {
         if (result) {
-            if(result.pCheck===true&&result.rCheck===true){
-                TaskModel.Complete(tID,function (err, complete) {
+
+            if(result[0].pCheck===true&&result[0].rCheck===true){
+
+                TaskModel.Complete(query,function (err, complete) {
                     if(complete){
-                        res.redirect('/history');
+                        ep.emit('completed!', '任務完成！');
                     }else{
                         ep.emit('info_error', '接收失敗！');
                     }
