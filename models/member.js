@@ -8,7 +8,8 @@ var MemberSchema = new mongoose.Schema({
     cell: String,
     email: String,
     asset:{type:Number, default:0},
-    mRatings: {type:Number, default:0},
+    greatRatings: {type:Number, default:0},
+    badRatings: {type:Number, default:0},
     nickname: String,
     major: String,
     level: {type:Number, default:0},
@@ -25,12 +26,8 @@ MemberSchema.statics.addMember = function (member, callback) {
     this.create(member, callback);
 };
 
-MemberSchema.statics.getMemberByEmail = function (email, callback) {
-    this.findOne({email: email}).exec(callback);
-};
-
-MemberSchema.statics.getMemberByID = function (ID, callback) {
-    this.findOne({_id: ID}, callback);
+MemberSchema.statics.getMember = function (query, callback) {
+    this.findOne(query).exec(callback);
 };
 
 MemberSchema.statics.updateMember = function (query, update, callback) {

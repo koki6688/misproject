@@ -4,18 +4,20 @@ var ep = new eventproxy();
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var MemberModel = require('../models/members');
+var MemberModel = require('../models/member');
 var TaskModel = require('../models/task');
 
 exports.signin = function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
 
+    var query = {email:email};
+
     if (!email || !password) {
         res.status(422);
         return res.render('index', {s_error: '您輸入的資料不完整', success: false});
     }
-    MemberModel.getMemberByEmail(email, function (err, member) {
+    MemberModel.getMember(query, function (err, member) {
         if (member) {
 
             if (bcrypt.compareSync(password, member.password)) {

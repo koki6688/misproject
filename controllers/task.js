@@ -6,6 +6,7 @@ var moment = require('moment');
 
 
 var TaskModel = require('../models/task');
+var MemberModel = require('../models/member');
 
 
 exports.showTask = function (req, res) {
@@ -55,10 +56,22 @@ exports.task = function (req, res) {
         if (err) {
             ep.emit('info_error', 'error');
 
-        } else
+        } else{
+            MemberModel.updateMember({_id: pmID}, {$inc: {asset: -reward}}, function (err, result) {
+                if (result) {
+                    MemberModel.getMember({_id: pmID},function (err, member) {
+                        if(member){
+                            req.session.member = member;
+                        }
+                    });
+                    ep.emit('charge', '扣款成功！任務金額之資產暫時凍結！');
+                }
+            });
+
             var send = req.flash('success', '任務發布成功');
-        res.render('home', {t_success: send});
-        //res.redirect('/home');
+            res.render('home', {t_success: send});
+            //res.redirect('/home');
+        }
     });
 };
 
@@ -69,8 +82,9 @@ exports.delete = function (req, res) {
     TaskModel.removeTask(query, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error');
-        } else
+        } else{
             res.redirect('/history');
+        }
     });
 };
 
@@ -204,6 +218,8 @@ exports.check = function (req, res) {
                         ep.emit('info_error', '接收失敗！');
                     }
                 });
+
+
             }
             res.redirect('/history');
         } else {

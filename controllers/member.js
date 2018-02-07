@@ -2,7 +2,7 @@ var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 var flash = require('connect-flash');
 
-var MemberModel = require('../models/members');
+var MemberModel = require('../models/member');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -83,7 +83,8 @@ exports.register = function (req, res) {
 exports.showMember = function (req, res) {
 
     var mID = req.params.mid;
-    MemberModel.getMemberByID(mID, function (err, member) {
+    var query = {_id: mID};
+    MemberModel.getMember(query, function (err, member) {
         res.render('member', {member: member});
     });
 };
@@ -91,7 +92,8 @@ exports.showMember = function (req, res) {
 exports.showEdit = function (req, res) {
 
     var mID = req.params.mid;
-    MemberModel.getMemberByID(mID, function (err, member) {
+    var query = {_id: mID};
+    MemberModel.getMember(query, function (err, member) {
         res.render('edit', {member: member});
     });
 };
@@ -124,10 +126,15 @@ exports.deposit = function (req, res) {
     var asset = req.body.asset;
 
     var query = {_id: mID};
-    var update = {asset: asset};
+    var update = {$inc: {asset: asset}};
 
     MemberModel.updateMember(query, update, function (err, result) {
         if (result) {
+            MemberModel.getMember(query, function (err, member) {
+                if (member) {
+                    req.session.member = member;
+                }
+            });
             res.redirect('/member/' + mID);
         }
     });
