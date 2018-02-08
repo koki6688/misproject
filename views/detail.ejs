@@ -79,7 +79,11 @@
     <% if(task[0].pmID._id == current_member._id){%>
     <p align="center" style="background-color:#1d3e81;">這是由您所發佈的任務</p>
 
+    <%}else if(task[0].limited_level > current_member.level){ %>
+    <p align="center" style="background-color:#1d3e81;">您的等級不夠接取此任務</p>
+
     <%}else{ %>
+
         <form action="/request" id="requestForm" method="post" align="center">
             <input type="hidden"  id="tID"  name="tID" value="<%=task[0]._id%>">
             <input type="hidden"  id="rmID"  name="rmID" value="<%= current_member._id %>">
