@@ -69,17 +69,15 @@
                 <td><%=member.bDate%></td>
                 <td>性別</td>
                 <td><%=member.gender%></td>
-                <% if(member.image !=null ){%>
-                <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
-                <% }else{%>
                 <td rowspan="3" colspan="2" valign="middle" align="center"><img src="/images/profilepic.png" width="190" height="190" style="float: left"><br>
                     <form method="post" action="/public/upload" enctype="multipart/form-data">
                         <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
                     <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093;上傳圖片">
 
 
-        </form></td>
+        </form>
+                </td>
 
                 <%}%>
 
