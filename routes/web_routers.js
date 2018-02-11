@@ -77,7 +77,8 @@ router.post('/rate', taskController.rate);
 /* 雙方確認任務結束 */
 router.post('/check', taskController.check);
 
-
+/* 用戶上傳圖片 */
+router.post('/upload/:mid', memberController.upload);
 
 
 module.exports = router;

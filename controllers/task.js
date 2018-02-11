@@ -56,12 +56,13 @@ exports.task = function (req, res) {
         if (err) {
             ep.emit('info_error', 'error');
 
-        } else{
+        } else {
             MemberModel.updateMember({_id: pmID}, {$inc: {asset: -reward}}, function (err, result) {
                 if (result) {
-                    MemberModel.getMember({_id: pmID},function (err, member) {
-                        if(member){
+                    MemberModel.getMember({_id: pmID}, function (err, member) {
+                        if (member) {
                             req.session.member = member;
+                            req.session.save();
                         }
                     });
                     ep.emit('charge', '扣款成功！任務金額之資產暫時凍結！');
@@ -82,7 +83,7 @@ exports.delete = function (req, res) {
     TaskModel.removeTask(query, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error');
-        } else{
+        } else {
             res.redirect('/history');
         }
     });
@@ -119,7 +120,6 @@ exports.detail = function (req, res) {
         if (err) {
             console.log('err')
         }
-
         res.render('detail', {task: task});
     });
 };
@@ -206,20 +206,18 @@ exports.check = function (req, res) {
         }
     });
 
-    TaskModel.getTasks(query, field, path_select, field_select, sort,  function (err, result) {
+    TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, result) {
         if (result) {
 
-            if(result[0].pCheck===true&&result[0].rCheck===true){
+            if (result[0].pCheck === true && result[0].rCheck === true) {
 
-                TaskModel.Complete(query,function (err, complete) {
-                    if(complete){
+                TaskModel.Complete(query, function (err, complete) {
+                    if (complete) {
                         ep.emit('completed!', '任務完成！');
-                    }else{
+                    } else {
                         ep.emit('info_error', '接收失敗！');
                     }
                 });
-
-
             }
             res.redirect('/history');
         } else {
@@ -240,21 +238,6 @@ exports.history = function (req, res) {
 
     TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
         sort, function (err, tasks) {
-
             res.render('history', {tasks: tasks});
         });
-};
-
-exports.upload = function (req, res) {
-    req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename, encoding, mimietype) {
-        var newFilename = String((new Date()).getTime()) + path.extname(filename);
-        var filePath = __dirname + '/../public/upload/' + newFilename;
-        var url = '/public/upload/' + newFilename;
-
-        file.pipe(fs.createWriteStream(filePath));
-        file.on('end', function () {
-            res.json({success: true, url: url});
-        })
-    })
 };

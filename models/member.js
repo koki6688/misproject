@@ -4,18 +4,18 @@ var MemberSchema = new mongoose.Schema({
     name: String,
     password: String,
     bDate: String,
-    gender:String,
+    gender: String,
     cell: String,
     email: String,
-    asset:{type:Number, default:0},
-    greatRatings: {type:Number, default:0},
-    badRatings: {type:Number, default:0},
+    asset: {type: Number, default: 0},
+    greatRatings: {type: Number, default: 0},
+    badRatings: {type: Number, default: 0},
     nickname: String,
     major: String,
-    level: {type:Number, default:0},
+    level: {type: Number, default: 0},
     self_intro: String,
     image: String,
-    createTime: {type:Date, default:Date.now()}
+    createTime: {type: Date, default: Date.now()}
 });
 
 MemberSchema.statics.getUserBySignupInfo = function (user, email, callback) {

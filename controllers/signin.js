@@ -11,7 +11,7 @@ exports.signin = function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
 
-    var query = {email:email};
+    var query = {email: email};
 
     if (!email || !password) {
         res.status(422);
@@ -26,12 +26,12 @@ exports.signin = function (req, res) {
                 res.redirect('home');
             } else {
                 res.status(422);
-                var send=req.flash('s_error','帳號或密碼錯誤');
+                var send = req.flash('s_error', '帳號或密碼錯誤');
                 res.render('index', {s_error: send, success: false});
             }
 
         } else {
-            send=req.flash('s_error','帳號或密碼錯誤');
+            send = req.flash('s_error', '帳號或密碼錯誤');
             res.status(422);
             res.render('index', {s_error: send, success: false});
         }

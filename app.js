@@ -12,13 +12,6 @@ var $ = require('jquery');
 var busboy = require('connect-busboy');
 
 
-//導入編輯器外部插件
-var MarkDownIt =require('markdown-it');
-var md = new MarkDownIt();
-
-
-
-
 //導入 session 外部插件
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -79,11 +72,8 @@ app.use(function (req, res, next) {
 
 
     next();
-
-
 });
 
-app.locals.md= md;
 
 
 app.use('/', webRouter);

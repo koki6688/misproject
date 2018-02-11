@@ -1,6 +1,10 @@
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 var flash = require('connect-flash');
+var formidable = require('formidable');
+var fs = require('fs');
+var moment = require('moment');
+var path = require('path');
 
 var MemberModel = require('../models/member');
 
@@ -101,13 +105,12 @@ exports.showEdit = function (req, res) {
 exports.editMember = function (req, res) {
 
     var mID = req.params.mid;
-    var image = req.body.image;
     var self_intro = req.body.self_intro;
     var major = req.body.major;
     var cell = req.body.cell;
 
     var query = {_id: mID};
-    var update = {image: image, self_intro: self_intro, major: major, cell: cell};
+    var update = {self_intro: self_intro, major: major, cell: cell};
 
     MemberModel.updateMember(query, update, function (err, result) {
         if (result) {
@@ -133,9 +136,69 @@ exports.deposit = function (req, res) {
             MemberModel.getMember(query, function (err, member) {
                 if (member) {
                     req.session.member = member;
+                    req.session.save();
                 }
             });
             res.redirect('/member/' + mID);
+        }
+    });
+};
+
+exports.upload = function (req, res) {
+
+    var mID = req.params.mid;
+    var query = {_id: mID};
+
+    var form = new formidable.IncomingForm();
+    //文件保存目錄為當前項目下之tmp folder
+    form.uploadDir = path.join('/Users/joe/workspace/misproject/public', 'tmp');
+    //限制大小為1MB
+    form.maxFieldsSize = 1024 * 1024;
+    //使用文件的原擴展名
+    form.keepExtensions = true;
+    form.parse(req, function (err, fields, file) {
+        var filePath = '';
+        /*如果提交文件的form中將上傳文件的input名設置為tmpFile，就從tmpFile中取上傳文件。
+          否則取for in循環第一個上傳的文件。*/
+        if (file.tmpFile) {
+            filePath = file.tmpFile.path;
+        }
+
+        else {
+            for (var key in file) {
+                if (file[key].path && filePath === '') {
+                    filePath = file[key].path;
+                    break;
+                }
+            }
+        }
+        //文件移動的目錄文件夾，不存在時創建目標文件夾
+        var targetDir = path.join('/Users/joe/workspace/misproject/public', 'upload');
+        if (!fs.existsSync(targetDir)) {
+            fs.mkdir(targetDir);
+        }
+        var fileExt = filePath.substring(filePath.lastIndexOf('.'));
+        //判斷文件類型是否允許上傳
+        if (('.jpg.jpeg.png.gif').indexOf(fileExt.toLowerCase()) === -1) {
+            ep.emit('error', '此類型文件不允許上傳！');
+        } else {
+            //以time stamp rename files
+            var fileName = new Date().getTime() + fileExt;
+            var targetFile = path.join(targetDir, fileName);
+
+            //移動文件
+            fs.rename(filePath, targetFile, function (err) {
+                if (err) {
+
+                    ep.emit('error', '移動失敗！');
+                } else {
+                    MemberModel.updateMember(query, {image: 'upload/' + fileName}, function (err, result) {
+                        if (result) {
+                            res.redirect('/member/' + mID);
+                        }
+                    });
+                }
+            });
         }
     });
 };
