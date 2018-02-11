@@ -151,10 +151,10 @@ exports.upload = function (req, res) {
 
     var form = new formidable.IncomingForm();
     //文件保存目錄為當前項目下之tmp folder
-    form.uploadDir = path.join('/Users/joe/workspace/misproject/public', 'tmp');
+    form.uploadDir = path.join(process.cwd(), 'public', 'tmp');
     //限制大小為1MB
     form.maxFieldsSize = 1024 * 1024;
-    //使用文件的原擴展名
+    //使用文件的原擴展
     form.keepExtensions = true;
     form.parse(req, function (err, fields, file) {
         var filePath = '';
@@ -173,7 +173,7 @@ exports.upload = function (req, res) {
             }
         }
         //文件移動的目錄文件夾，不存在時創建目標文件夾
-        var targetDir = path.join('/Users/joe/workspace/misproject/public', 'upload');
+        var targetDir = path.join(process.cwd(), 'public', 'upload');
         if (!fs.existsSync(targetDir)) {
             fs.mkdir(targetDir);
         }

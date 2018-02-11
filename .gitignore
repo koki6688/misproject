@@ -64,3 +64,5 @@ typings/
 *.iml
 
 
+/public/tmp/
+/public/upload/
