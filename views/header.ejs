@@ -32,7 +32,7 @@
     <nav>
 
         <% if (locals.current_member) { %>
-        <font  class='hello' size="1">您好, <%= current_member.nickname %> <i class="fa fa-usd" aria-hidden="true">:<%= current_member.asset %></i> </font>
+        <font  class='hello' size="1">您好, <%= current_member.nickname %> <i class="fa fa-usd" ></i>:<%=current_member.asset%> </font>
         <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>
         <a href="/history" id="count"></a>
 

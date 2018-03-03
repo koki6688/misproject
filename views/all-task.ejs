@@ -5,6 +5,7 @@
     <title>Project-任務列表</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link href="/assets/css/tabulator.min.css" rel="stylesheet">
     <!--[if lte IE 8]>
     <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="/assets/css/main.css"/>
@@ -20,12 +21,18 @@
 
     <!-- Header -->
     <% include ./header %>
+    <script type="text/javascript" src="/assets/js/tabulator.min.js"></script>
 
    <br>
     <h2 class="alltask-h2" align="center"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;任務列表</h2>
     <hr class="style-one" />
 
+    <script>
+
+
+    </script>
     <!-- Main -->
+
 
     <table class="all-task" >
         <tr>
@@ -52,7 +59,12 @@
             <td data-th='發布者' width="200" style="text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' style="text-align: center;">NT$ <%=tasks[i].reward%></td>
             <td data-th='到期時間' style="text-align: center;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
-            <td><a class="a-inside delete" href="/delete/<%=tasks[i]._id%>">刪除</a></td>
+            <td>
+                <form method="post" action="/delete/<%=tasks[i]._id%>">
+                    <input type="hidden"  id="reward"  name="reward" value="<%= tasks.reward %>">
+                    <input align="center" type="submit" value="刪除">
+                </form>
+            </td>
             <%}else{ %>
             <tr>
             <% if(tasks[i].category=='代購'){ %>
