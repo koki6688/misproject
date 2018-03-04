@@ -4687,6 +4687,10 @@ hr.style-one {
 	width: 80%;
     margin-left:10%;
 }
+.photoPage{
+	width: 60%;
+	margin-left:20%;
+}
 /*tab and history*/
 .abgne_tab {
 
@@ -4880,7 +4884,7 @@ input[type='radio'] {
 	display: none;
 }
 label {
-	color: #666;
+	color: #FFFFFF;
 	font-weight: normal;
 }
 /* Option 1 */

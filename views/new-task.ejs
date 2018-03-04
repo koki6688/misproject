@@ -87,8 +87,8 @@
 
 
                     <tr>
-                        <td class="new-task-td-left"><input name="title" type="text" id="title" required title="任務名稱："></td>
-                        <td><select id="category" name="category" required title="任務類別：">
+                        <td class="new-task-td-left"><label for="title">任務名稱：</label><input name="title" type="text" id="title" required label="任務名稱："></td>
+                        <td><label for="category">任務類別：</label><select id="category" name="category" required title="任務類別：">
                                 <option value="代購">代購</option>
                                 <option value="遞送貨物">遞送貨物</option>
                                 <option value="交通運輸">交通運輸</option>
@@ -98,7 +98,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="new-task-td-left"><select id="limited＿level" name="limited_level" required title="等級限制：">
+                        <td class="new-task-td-left"><label for="limited＿level">等級限制：</label><select id="limited＿level" name="limited_level" required title="等級限制：">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -107,18 +107,18 @@
                             </select>
 
                         </td>
-                        <td><input name="reward" type="number" id="reward" min='0' max="<%= current_member.asset %>" required title="佣金：NT$ ">
+                        <td><label for="reward">佣金：NT$</label><input name="reward" type="number" id="reward" min='0' max="<%= current_member.asset %>" required title="佣金：NT$ ">
 
                         </td>
                     <tr>
                         <td>
 
-                            <input id="due_date" type="text" name="due_date" placeholder=" "  required title=" 到期時間：日期"/></td>
+                            <label for="due_date">到期時間：</label><input id="due_date" type="text" name="due_date" placeholder=" "  required title=" 到期時間：日期"/></td>
                         <!--<td>時間
                             <input id="due_time" type="time" name="due_time"></td>-->
                     </tr>
                     <tr>
-                        <td colspan='2'><textarea id="content" name="content" cols="16" required title="任務內容："></textarea>
+                        <td colspan='2'><label for="content">任務內容：</label><textarea id="content" name="content" cols="16" required title="任務內容："></textarea>
                         <td><input type="hidden"  id="pmID"  name="pmID" value="<%= current_member._id %>"></td>
                     </tr>
                     <td colspan='2' align="center"><input align="center" type="submit" value="提交"></td>
