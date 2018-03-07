@@ -13,6 +13,7 @@ var MemberSchema = new mongoose.Schema({
     nickname: String,
     major: String,
     level: {type: Number, default: 0},
+    char: {type: String, default: "初心者"},
     self_intro: String,
     image: String,
     createTime: {type: Date, default: Date.now()}

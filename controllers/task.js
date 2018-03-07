@@ -7,6 +7,8 @@ var moment = require('moment');
 
 var TaskModel = require('../models/task');
 var MemberModel = require('../models/member');
+var level = require('../models/member_level').level;
+var getLevel = require('../models/member_level').getLevel;
 
 
 exports.showTask = function (req, res) {
@@ -80,6 +82,29 @@ exports.delete = function (req, res) {
 
     var tID = req.params.tid;
     var query = {_id: tID};
+    var field = {reward: 1};
+
+    TaskModel.getTasks(query, field, '', '', {}, function (err, reward) {
+        if (reward) {
+
+            console.log(reward);
+            MemberModel.updateMember({_id: req.session.member._id}, {$inc: {asset: reward.reward}}, function (err, result) {
+                if (result) {
+
+                    MemberModel.getMember({_id: req.session.member._id}, function (err, member) {
+                        if (member) {
+                            req.session.member = member;
+                            req.session.save();
+                        }
+                    });
+                    ep.emit('charge', '扣款成功！任務金額之資產暫時凍結！');
+                }
+            });
+        } else {
+            ep.emit('info_error', 'error');
+        }
+    });
+
     TaskModel.removeTask(query, function (err, result) {
         if (err) {
             ep.emit('info_error', 'error');
@@ -182,7 +207,28 @@ exports.rate = function (req, res) {
     });
 };
 
-exports.check = function (req, res) {
+exports.check_and_rate = function (req, res) {
+
+    if(req.body.rater){
+        var rater = req.body.rater;
+        var rate = req.body.rate;
+        var tID = req.body.tID;
+
+        var query = {_id: tID};
+        var update = {};
+
+        update[rater] = rate;
+
+        TaskModel.updateTask(query, update, function (err, result) {
+            if (result) {
+                res.redirect('/history');
+            } else {
+                ep.emit('info_error', '接收失敗！');
+            }
+        });
+    }
+
+    if(req.body.checker){
 
     var checker = req.body.checker;
     var tID = req.body.tID;
@@ -198,6 +244,8 @@ exports.check = function (req, res) {
 
     update[checker] = true;
 
+    //更新確認狀態
+
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
             ep.emit('update_ok', '上傳成功！');
@@ -206,6 +254,8 @@ exports.check = function (req, res) {
         }
     });
 
+    //兩方皆確認則任務完成
+
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, result) {
         if (result) {
 
@@ -213,9 +263,27 @@ exports.check = function (req, res) {
 
                 TaskModel.Complete(query, function (err, complete) {
                     if (complete) {
+
+                        TaskModel.count({rmID: req.session.member._id, status: "completed"}, function (err, count) {
+                            if (count) {
+                                var member_level_and_char = getLevel(count);
+
+                                var update_member = {level: member_level_and_char[0], char: member_level_and_char[1]};
+
+                                MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
+                                    if (suc) {
+                                        ep.emit('success', '成功！');
+                                    } else {
+                                        ep.emit('info_error', '更新會員失敗！');
+                                    }
+                                });
+                            } else {
+                                ep.emit('info_error', '計算完成數量失敗！');
+                            }
+                        });
                         ep.emit('completed!', '任務完成！');
                     } else {
-                        ep.emit('info_error', '接收失敗！');
+                        ep.emit('info_error', '任務完成提交失敗！');
                     }
                 });
             }
@@ -224,6 +292,7 @@ exports.check = function (req, res) {
             ep.emit('info_error', '接收失敗！');
         }
     });
+    }
 };
 
 exports.history = function (req, res) {
