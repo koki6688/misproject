@@ -296,7 +296,7 @@
                         </tr>
                         <tr>
                             <% if(tasks[i].rRating== null){ %>
-                            <form method="post" action="/rate">
+                            <form method="post" action="/check_and_rate">
                                 <td colspan='4'>請為<%=tasks[i].rmID.nickname%>評分：
                                     <input id="true" name="rater" type="radio" value="true" />
                                     <label for="true"><i class="fa fa-thumbs-up"></i></label>
