@@ -9,25 +9,12 @@ exports.chat = function (req, res){
     res.render('chat')
 };
 
-//set the template engine ejs
-app.set('view engine', 'ejs')
-app.set('port', process.env.PORT || 8080);
-
-
-//middlewares
-app.use(express.static('public'))
-
-
-//routes
-app.get('', (req, res) => {
-    res.render('chat')
-})
-
-
 //Listen on port 5000
 server = app.listen(4000)
 
-mongoose.connect('mongodb://localhost/misproject', function(err) {
+
+mongoose.connect('mongodb://localhost/misproject', {
+    useMongoClient: true }, function(err) {
     if (err) {
         console.log(err);
     } else {
@@ -40,8 +27,9 @@ var chatSchema = mongoose.Schema({
     message: String,
     created: {type: Date, default: Date.now}
 });
-
 var misproject = mongoose.model('chats', chatSchema);
+
+
 
 var io = require("socket.io")(server);
 //listen on every connection
