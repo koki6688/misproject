@@ -125,26 +125,7 @@
                     </select></td>
 
             </tr>
-            <tr>
-                <% if(member.image){%>
-                <td rowspan="3" colspan="2" valign="middle" align="center"><img src="/<%=member.images%>" width="190" height="190" style="float: left"><br>
 
-                    <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
-
-                </td>
-
-                <% }else{%>
-                <td rowspan="3" colspan="2" valign="middle" align="center"><img src="/images/profilepic.png" width="190" height="190" style="float: left"><br>
-                    <form method="post" action="/upload" enctype="multipart/form-data">
-                        <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
-
-                    </form>
-                </td>
-
-                <%}%>
-
-
-            </tr>
             <tr>
                 <td>As User評分</td>
                 <td><%=member.mRatings%></td>
@@ -155,12 +136,7 @@
 
 
             </tr>
-            <tr>
-                <td>餘額</td>
-                <td><%=member.asset%></td>
 
-
-            </tr>
 
             <tr>
                 <td>個人簡介</td>
