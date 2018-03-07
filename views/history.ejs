@@ -171,25 +171,17 @@
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
                                 <% if(tasks[i].rCheck == true){ %>
-
-                                <form method="post" action="/rate">
-                            <td colspan='4'>請為<%=tasks[i].rmID.nickname%>評分，以匯出報酬：
-                                <input id="true" name="rater" type="radio" value='true' />
-                                <label for="true"><i class="fa fa-thumbs-up"></i></label>
-                                <input id="false" name="rater" type="radio" value="false"/>
-                                <label for="false"><i class="fa fa-thumbs-down"></i></label>
-                                <input type="submit" name="submit" value="評分">
-
-
-                            </form>
-
-                                    <li><button>聊天室</button></li>
-                            </td>
+                                <ul class="action">
+                                    <form action="/check" method="post" style="display:inline;">
+                                        <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>" style="display:none;">
+                                        <input type="hidden" id="pCheck" name="pCheck" value="pCheck" style="display:none;">
+                                        <li><input type="submit" id="cSubmit" name="cSubmit" value="確認完成"></li>
+                                    </form>
+                                    <li><button onclick="location.href = 'chat';" id="myButton" class="float-left submit-button" >聊天室</button></li>
                                     <% }else{ %>
-                                    <li><button>聊天室</button></li>
-                            </td>
-                                    <% } %>
+                                    <li><button onclick="location.href = 'chat';" id="myButton" class="float-left submit-button" >聊天室</button></li>
 
+                                    <% } %>
 
 
 
@@ -240,11 +232,7 @@
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
-                            <td align="center">
-                                <form method="post" action="/delete/<%=tasks[i]._id%>">
-                                    <input type="hidden"  id="reward"  name="reward" value="<%= tasks.reward %>">
-                                    <input align="center" type="submit" value="刪除">
-                                </form></td>
+                            <td align="center"><a class="a-inside delete" href="../delete/<%=tasks[i]._id%>">刪除</a></td>
                         </tr>
 
                         <% }}} %>
@@ -301,10 +289,10 @@
                             <% if(tasks[i].rRating== null){ %>
                             <form method="post" action="/rate">
                                 <td colspan='4'>請為<%=tasks[i].rmID.nickname%>評分：
-                                    <input id="true" name="rater" type="radio" value="true" />
-                                    <label for="true"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="false" name="rater" type="radio" value="false"/>
-                                    <label for="false"><i class="fa fa-thumbs-down"></i></label>
+                                    <input id="push" name="rater" type="radio" value="push" />
+                                    <label for="push"><i class="fa fa-thumbs-up"></i></label>
+                                    <input id="down" name="rater" type="radio" value="down"/>
+                                    <label for="down"><i class="fa fa-thumbs-down"></i></label>
                                     <input type="submit" name="submit" value="評分">
 
                                 </td>
@@ -421,19 +409,8 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck == true && tasks[i].rRating==null){ %>
+                                <% if(tasks[i].rCheck == true){ %>
                                 等待對方確認
-                                <% }else if(tasks[i].rCheck == true && tasks[i].rRating){ %>
-                                <form method="post" action="/rate">
-                            <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分，以取得報酬入帳：
-                                <input id="true" name="rater" type="radio" value="true" />
-                                <label for="true"><i class="fa fa-thumbs-up"></i></label>
-                                <input id="false" name="rater" type="radio" value="false"/>
-                                <label for="false"><i class="fa fa-thumbs-down"></i></label>
-                                <input type="submit" name="submit" value="評分">
-
-                            </td>
-                            </form>
 
                                     <% }else{ %>
                                     <ul class="action">
@@ -443,8 +420,8 @@
                                             <li><input type="submit" id="cSubmit" name="cSubmit" value="回報完成"></li>
                                         </form>
                                     <% } %>
-                                    <li><button>聊天室</button></li>
-                                    </ul>
+                                    <li><button onclick="location.href = 'chat';" id="myButton" class="float-left submit-button" >聊天室</button></li>
+
 
                             </td>
 
@@ -491,13 +468,13 @@
                             <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime %></td>
                         </tr>
                         <tr>
-                            <% if(tasks[i].rRating!=null && tasks[i].pRating== null){ %>
+                            <% if(tasks[i].pRating== null){ %>
                             <form method="post" action="/rate">
-                                <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分，以取得報酬入帳：
-                                    <input id="true" name="rater" type="radio" value="true" />
-                                    <label for="true"><i class="fa fa-thumbs-up"></i></label>
-                                    <input id="false" name="rater" type="radio" value="false"/>
-                                    <label for="false"><i class="fa fa-thumbs-down"></i></label>
+                                <td colspan='4'>請為<%=tasks[i].pmID.nickname%>評分：
+                                    <input id="push" name="rater" type="radio" value="push" />
+                                    <label for="push"><i class="fa fa-thumbs-up"></i></label>
+                                    <input id="down" name="rater" type="radio" value="down"/>
+                                    <label for="down"><i class="fa fa-thumbs-down"></i></label>
                                     <input type="submit" name="submit" value="評分">
 
                                 </td>

@@ -1,63 +1,78 @@
+var express = require('express');
+var app = express();
 var mongo = require('mongodb').MongoClient;
-var client = require('socket.io').listen(5000).sockets;
+var mongoose = require('mongoose');
 
 
-mongo.connect('mongodb://127.0.0.1/chat', function(err,db){
-   if (err){
-       throw err;
-   }
 
-   console.log('MongoDB connected...');
+//set the template engine ejs
+app.set('view engine', 'ejs')
+app.set('port', process.env.PORT || 8080);
 
-   //connect to socket.io
-    client.on('connection', function(socket){
-       let chat = db.collection('chats');
 
-       //create function to send status
-        sendStatus =function(s){
-            socket.emit('status', s);
-        }
+//middlewares
+app.use(express.static('public'))
 
-        //get chat from mongo collection
-        chat.find().limit(100).sort({_id:1}).toArray(function (err, res) {
-            if(err){
-                throw err;
-            }
 
-            //emit the messages
-            socket.emit('output', res);
-        });
+//routes
+app.get('', (req, res) => {
+    res.render('chat')
+})
 
-        //handle input events
-        socket.on('input', function(data){
-            let name = data.name;
-            let message = data.message;
 
-            //check for name and message
-            if(name == '' || message == ''){
-                //send error status
-                sendStatus('Please enter a name and message');
-            }else{
-                //insert message
-                chat.insert({name: name, message: message}, function(){
-                    client.emit('output',[data] );
+//Listen on port 5000
+server = app.listen(3000)
 
-                    //send status object
-                    sendStatus({
-                       message: 'Message sent',
-                       clear: true
-                    });
-                });
-            }
-        });
-
-        //handle clear
-        socket.on('clear', function(){
-            //remove all chats from collection
-            chat.remove({}, function(){
-                //emit cleared
-                socket.emit('cleared');
-            });
-        });
-    });
+mongoose.connect('mongodb://localhost/misproject', function(err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('mongoDB Connected...');
+    }
 });
+
+var chatSchema = mongoose.Schema({
+    username: String,
+    message: String,
+    created: {type: Date, default: Date.now}
+    });
+
+var misproject = mongoose.model('chats', chatSchema);
+
+var io = require("socket.io")(server);
+//listen on every connection
+io.on('connection', (socket) => {
+    var query = misproject.find({});
+    query.sort('-created').limit(5).exec(function(err , docs){
+       if(err) throw err;
+       socket.emit("load old msgs", docs);
+    });
+    console.log('New user connected');
+
+
+    //default username
+    socket.username = "Anonymous"
+
+    //listen on change_username
+    socket.on('change_username', (data) => {
+        socket.username = data.username
+    })
+
+
+
+    //listen on new_message
+    socket.on('new_message', (data) => {
+        var newMsg = new misproject({message: data.message, username: socket.username})
+        newMsg.save(function (err) {
+        if(err) throw err;
+
+            //broadcast the new message
+            io.sockets.emit('new_message', {message: data.message, username: socket.username});
+        })
+
+    });
+    //listen on typing
+    socket.on('typing', (data) => {
+        socket.broadcast.emit('typing', {username : socket.username})
+    })
+})
