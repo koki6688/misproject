@@ -60,10 +60,7 @@
             <td data-th='佣金' style="text-align: center;">NT$ <%=tasks[i].reward%></td>
             <td data-th='到期時間' style="text-align: center;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
             <td>
-                <form method="post" action="/delete/<%=tasks[i]._id%>">
-                    <input type="hidden"  id="reward"  name="reward" value="<%= tasks.reward %>">
-                    <input align="center" type="submit" value="刪除">
-                </form>
+                <a class="a-inside delete" href="/delete/<%=tasks[i]._id%>">刪除</a>
             </td>
             <%}else{ %>
             <tr>
