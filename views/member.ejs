@@ -25,10 +25,16 @@
     <h2 align="center"><%=member.nickname%>的個人首頁</h2>
     <table class="memberPage">
         <tr>
-            <td colspan="6" align="center">
-                <img src="/<%=member.image%>" width="200" height="200" align="center" style="align-content: center">
-            </td>
+            <% if(member.image !=null ){%>
+            <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>" width="250" height="250" align="center"></td>
+
+            <% }else{%>
+            <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png" width="250" height="250" align="center"></td>
+            <%}%>
+
         </tr>
+    </table>
+    <table class="memberPage">
         <tr>
             <td>暱稱</td>
             <td><%=member.nickname%></td>
@@ -36,12 +42,7 @@
             <td><%=member.major%></td>
             <td>性別</td>
             <td><%=member.gender%></td>
-            <% if(member.image !=null ){%>
-            <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
-            <% }else{%>
-            <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
-            <%}%>
 
         </tr>
         <tr>
