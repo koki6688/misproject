@@ -2755,6 +2755,7 @@ table.alt tfoot {
 		display: none;
 	}
 	.all-task td {
+		width:100%;
 		display: block;
 		border: none;
 	}
@@ -2818,6 +2819,7 @@ table.alt tfoot {
 		float: left;
 		font-weight: bold;
 	}
+
 	.all-task {
 		width:100%;
 		margin-left:0;
@@ -2827,6 +2829,7 @@ table.alt tfoot {
 		display: none;
 	}
 	.all-task td {
+		width:100%;
 		display: block;
 		border: none;
 	}
@@ -4887,17 +4890,17 @@ label {
 	color: #FFFFFF;
 	font-weight: normal;
 }
-/* Option 1 */
+/*
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio] + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio] + label span.sg-icon-target:before
 {
-	/* Angry */
+	/* Angry
 	content: "\f164";
 }
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio]:checked + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio]:checked + label span.sg-icon-target:before
 {
-	/* Angry Selected */
+	/* Angry Selected
 	content: "\f164";
 	color: #D84A65;
 }
@@ -4905,13 +4908,13 @@ label {
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label span.sg-icon-target:before
 {
-	/* Sad */
+	/* Sad
 	content: "\f165";
 }
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label span.sg-icon-target:before
 {
-	/* Sad Selected */
+	/* Sad Selected
 	content: "\f165";
 	color: #F3849E;
-}
+}Option 1 */
