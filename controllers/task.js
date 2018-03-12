@@ -81,38 +81,36 @@ exports.task = function (req, res) {
 exports.delete = function (req, res) {
 
     var tID = req.params.tid;
+    console.log(tID);
     var query = {_id: tID};
     var field = {reward: 1};
 
     TaskModel.getTasks(query, field, '', '', {}, function (err, reward) {
-
         if (reward) {
-
-            MemberModel.updateMember({_id: req.session.member._id}, {$inc: {asset: reward[0].reward}}, function (err, result) {
-
+            console.log('yes');
+            console.log(reward.reward);
+            MemberModel.updateMember({_id: req.session.member._id}, {$inc: {asset: reward.reward}}, function (err, result) {
                 if (result) {
-
-                    TaskModel.removeTask(query, function (err, result) {
-                        if (result) {
-                            ep.emit('success', '刪除任務成功！');
-                        } else {
-                            ep.emit('info_error', 'error');
-                        }
-                    });
-
                     MemberModel.getMember({_id: req.session.member._id}, function (err, member) {
                         if (member) {
                             req.session.member = member;
                             req.session.save();
-                            res.redirect('/history');
                         }
                     });
-
                     ep.emit('charge', '扣款成功！任務金額之資產暫時凍結！');
                 }
             });
         } else {
+            c
             ep.emit('info_error', 'error');
+        }
+    });
+
+    TaskModel.removeTask(query, function (err, result) {
+        if (err) {
+            ep.emit('info_error', 'error');
+        } else {
+            res.redirect('/history');
         }
     });
 };
@@ -212,22 +210,19 @@ exports.rate = function (req, res) {
 
 exports.check_and_rate = function (req, res) {
 
-    var tID = req.body.tID;
-
-    var query = {_id: tID};
-    var update = {};
-
     if(req.body.rater){
         var rater = req.body.rater;
+        var rate = req.body.rate;
+        var tID = req.body.tID;
 
-        update[rater] = req.body.rate;
+        var query = {_id: tID};
+        var update = {};
+
+        update[rater] = rate;
 
         TaskModel.updateTask(query, update, function (err, result) {
             if (result) {
-                ep.emit('success', '評分成功！');
-                if(!req.body.checker){
-                    res.redirect('/history');
-                }
+                res.redirect('/history');
             } else {
                 ep.emit('info_error', '接收失敗！');
             }
@@ -237,11 +232,15 @@ exports.check_and_rate = function (req, res) {
     if(req.body.checker){
 
     var checker = req.body.checker;
+    var tID = req.body.tID;
 
+    var query = {_id: tID};
     var field = {rCheck: 1, pCheck: 1};
     var path_select = '';
     var field_select = '';
     var sort = {};
+
+    var update = {};
 
 
     update[checker] = true;
@@ -251,50 +250,49 @@ exports.check_and_rate = function (req, res) {
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
             ep.emit('update_ok', '上傳成功！');
-
-            //兩方皆確認則任務完成
-            TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, result) {
-                if (result) {
-                    console.log(result,query,tID);
-
-                    if (result[0].pCheck === true && result[0].rCheck === true) {
-
-                        TaskModel.Complete(query, function (err, complete) {
-                            if (complete) {
-
-                                TaskModel.count({rmID: req.session.member._id, status: "completed"}, function (err, count) {
-                                    if (count) {
-                                        var member_level_and_char = getLevel(count);
-
-                                        var update_member = {level: member_level_and_char[0], char: member_level_and_char[1]};
-
-                                        MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
-                                            if (suc) {
-                                                ep.emit('success', '成功！');
-                                            } else {
-                                                ep.emit('info_error', '更新會員失敗！');
-                                            }
-                                        });
-                                    } else {
-                                        ep.emit('info_error', '計算完成數量失敗！');
-                                    }
-                                });
-                                ep.emit('completed!', '任務完成！');
-                            } else {
-                                ep.emit('info_error', '任務完成提交失敗！');
-                            }
-                        });
-                    }
-                    res.redirect('/history');
-                } else {
-                    ep.emit('info_error', '接收失敗！');
-                }
-            });
         } else {
             ep.emit('info_error', '接收失敗！');
         }
     });
 
+    //兩方皆確認則任務完成
+
+    TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, result) {
+        if (result) {
+
+            if (result[0].pCheck === true && result[0].rCheck === true) {
+
+                TaskModel.Complete(query, function (err, complete) {
+                    if (complete) {
+
+                        TaskModel.count({rmID: req.session.member._id, status: "completed"}, function (err, count) {
+                            if (count) {
+                                var member_level_and_char = getLevel(count);
+
+                                var update_member = {level: member_level_and_char[0], char: member_level_and_char[1]};
+
+                                MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
+                                    if (suc) {
+                                        ep.emit('success', '成功！');
+                                    } else {
+                                        ep.emit('info_error', '更新會員失敗！');
+                                    }
+                                });
+                            } else {
+                                ep.emit('info_error', '計算完成數量失敗！');
+                            }
+                        });
+                        ep.emit('completed!', '任務完成！');
+                    } else {
+                        ep.emit('info_error', '任務完成提交失敗！');
+                    }
+                });
+            }
+            res.redirect('/history');
+        } else {
+            ep.emit('info_error', '接收失敗！');
+        }
+    });
     }
 };
 

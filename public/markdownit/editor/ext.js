@@ -57,7 +57,7 @@
                 '</div>',
             '</div>'
         ].join('')).appendTo($body);
-        
+
 
         this.$win.on('click', '[role=save]', function(){
             self.$win.find('form').submit();

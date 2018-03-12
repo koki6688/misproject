@@ -25,16 +25,17 @@
 
 	<table>
         <%if(member._id ==  current_member._id ){%>
-        <form action="/edit/<%=member._id%>" method="post">
+        <form action="/edit/<%=member._id%>" method="post" id="form">
             電子郵件：<input type="email" id="email" name="email" disabled value="<%=member.email%>">
-            姓名：<input type="text" id="name" name="name" disable="disable" value="<%=member.name%>">
-            暱稱：<input type="text" id="nickname" disable="disable" name="nickname" value="<%=member.nickname%>">
+            姓名：<input type="text" id="name" name="name" disabled value="<%=member.name%>">
+            暱稱：<input type="text" id="nickname" disabled name="nickname" value="<%=member.nickname%>" id="selectoption">
             主修：<select id="major" name="major" value="<%=member.major%>">
-                　	<option value="mis">資訊管理學系</option>
-                　	<option value="communication">傳播學系</option>
+                <option value="communication">傳播學系</option>　
+                <option value="mis">資訊管理學系</option>
+                　
             </select>
 
-            生日：<input type="date" id="bDate" name="bDate" disable="disable" value="<%=member.bDate%>">
+            生日：<input type="date" id="bDate" name="bDate" disabled value="<%=member.bDate%>">
 
             手機：<input type="text" id="cell" name="cell"  value="<%=member.cell%>">
 
@@ -46,7 +47,11 @@
                             
     </table>
 </div>
+<script>
+    //$("#selectoption").val(<%=member.major%>);
+    $('#selectoption option[value=<%=member.major%>]').prop('selected', true);
 
+</script>
 
 
 </body>

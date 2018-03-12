@@ -4,7 +4,7 @@ var router = express.Router();
 var memberController = require('../controllers/member');
 var SignInController = require('../controllers/signin');
 var taskController = require('../controllers/task');
-
+//var chatController = require('../controllers/server')
 
 
 /* 顯示登入頁面 */
@@ -76,11 +76,14 @@ router.get('/history',taskController.history);
 router.post('/rate', taskController.rate);
 
 /* 雙方確認任務結束並評分 */
-router.post('/check_and_rate', taskController.check_and_rate);
+router.post('/check', taskController.check_and_rate);
 
 /* 用戶上傳圖片 */
 router.post('/upload/:mid', memberController.upload);
 
+/*router.get('/chat', chatController.chat);
+
+router.post('/chat', chatController.chat);*/
 
 
 

@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
+
 var $ = require('jquery');
+
 
 //導入busboy以處裡上傳檔案
 var busboy = require('connect-busboy');
