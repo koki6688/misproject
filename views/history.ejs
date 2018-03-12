@@ -195,11 +195,11 @@
                                 </button>-->
 
                                 <form method="post" action="/check_and_rate">
-                                    <select  id="rater" name="rate" required >
+                                    <select  id="rate" name="rate" required >
                                         　	<option value="true">正評</option>
                                         　	<option value="false">負評</option>
                                     </select>
-                                    <input type="hidden" id="rRating" name="rater" value="rRating"
+                                    <input type="hidden" id="rater" name="rater" value="rRating"
                                            style="display:none;">
 
                                     <input type="hidden" id="checker" name="checker" value="pCheck"
@@ -450,11 +450,11 @@
                             <td colspan='4'>請為<%= tasks[i].pmID.nickname %>評分，以取得報酬入帳：
 
                                 <form method="post" action="/check_and_rate">
-                                    <select  id="rater" name="rate" required >
+                                    <select  id="rate" name="rate" required >
                                         　	<option value="true">正評</option>
                                         　	<option value="false">負評</option>
                                     </select>
-                                    <input type="hidden" id="pRating" name="rater" value="pRating"
+                                    <input type="hidden" id="rater" name="rater" value="pRating"
                                            style="display:none;">
 
                                     <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>"
