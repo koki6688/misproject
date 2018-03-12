@@ -7,15 +7,19 @@ var level = [{"0": [{"exp": 0}, {"char": "初心者"}]}, {"1": [{"exp": 1}, {"ch
 
 function getLevel(exp) {
     var memberLevel;
-    for (var i = 0; i < level.length; i++) {
-        if (level[i][i].exp <= exp < level[i + 1][i + 1].exp) {
+    var char;
+    for (var i = 0; i < level.length - 1; i++) {
+
+        if (level[i][i][0].exp <= exp && exp < level[i + 1][i + 1][0].exp) {
+
             memberLevel = i;
+            char = level[memberLevel][memberLevel][1].char;
+
             break;
         }
     }
-    var char = level[memberLevel][memberLevel].char;
 
-    return [memberLevel,char];
+    return [memberLevel, char];
 }
 
 module.exports.level = level;
