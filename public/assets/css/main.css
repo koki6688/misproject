@@ -1895,6 +1895,10 @@ body.is-ie header.major > h1:after {
 form {
 	margin: 0 0 2em 0;
 }
+.mForm{
+    width:100%;
+    margin:0 0 0 0;
+}
 
 form .field {
 	margin: 0 0 2em 0;
@@ -2685,6 +2689,10 @@ table.alt thead {
 table.alt tfoot {
 	border-top: 0;
 }
+.chat{
+    width:70%;
+
+}
 
 @media screen and (max-width: 1680px) {
 
@@ -2755,6 +2763,7 @@ table.alt tfoot {
 		display: none;
 	}
 	.all-task td {
+		width:100%;
 		display: block;
 		border: none;
 	}
@@ -2799,7 +2808,17 @@ table.alt tfoot {
 @media screen and (max-width: 468px) {
 	.memberForm{
 		width:100%;
+        margin:0%;
 	}
+    .memberPage{
+        width:100%;
+        margin:0%;
+
+    }
+    .PhotoPage{
+        width:100%;
+        margin:0%;
+    }
 	.accept-task-table {
 		width:100%;
 		margin-left:0;
@@ -2818,6 +2837,7 @@ table.alt tfoot {
 		float: left;
 		font-weight: bold;
 	}
+
 	.all-task {
 		width:100%;
 		margin-left:0;
@@ -2827,6 +2847,7 @@ table.alt tfoot {
 		display: none;
 	}
 	.all-task td {
+		width:100%;
 		display: block;
 		border: none;
 	}
@@ -4680,7 +4701,7 @@ hr.style-one {
 	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
 #memberForm{
-	margin-left: 0%;
+	margin-left: 0;
 
 }
 .memberPage{
@@ -4826,6 +4847,9 @@ div.tab_container .tab_content h2 {
 		float: left;
 		font-weight: bold;
 	}
+    #member{
+        width:100%;
+    }
 
 
 }
@@ -4854,6 +4878,24 @@ div.tab_container .tab_content h2 {
 		float: left;
 		font-weight: bold;
 	}
+    .memberPage{
+        width: 100%;
+        margin-left:0%;
+    }
+    .photoPage{
+        width: 100%;
+        margin-left:0%;
+    }
+    #member{
+        width:100%;
+    }
+
+    #memberForm{
+        margin-left: 0px;
+        width:200%
+
+    }
+
 
 }
 @media screen and (max-width: 390px) {
@@ -4878,26 +4920,38 @@ div.tab_container .tab_content h2 {
 		float: left;
 		font-weight: bold;
 	}
+    .memberPage{
+        width: 100%;
+        margin-left:0%;
+    }
+    .photoPage{
+        width: 100%;
+        margin-left:0%;
+    }
 
 }
 input[type='radio'] {
 	display: none;
 }
+input[type='file'] {
+    background-color: #252A42;
+    color: #FFFFFF;
+}
 label {
 	color: #FFFFFF;
 	font-weight: normal;
 }
-/* Option 1 */
+/*
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio] + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio] + label span.sg-icon-target:before
 {
-	/* Angry */
+	/* Angry
 	content: "\f164";
 }
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio]:checked + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-1 input[type=radio]:checked + label span.sg-icon-target:before
 {
-	/* Angry Selected */
+	/* Angry Selected
 	content: "\f164";
 	color: #D84A65;
 }
@@ -4905,13 +4959,13 @@ label {
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label span.sg-icon-target:before
 {
-	/* Sad */
+	/* Sad
 	content: "\f165";
 }
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label span.sg-icon-target:before
 {
-	/* Sad Selected */
+	/* Sad Selected
 	content: "\f165";
 	color: #F3849E;
-}
+}Option 1 */

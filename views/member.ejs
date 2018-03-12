@@ -16,17 +16,24 @@
 <body>
 
 <!-- Wrapper -->
-<div id="wrapper">
+<div id="rapper">
 
     <!-- Header -->
     <% include ./header %>
 
-
-
-
-
     <%if(member._id !=  current_member._id ){%>
     <h2 align="center"><%=member.nickname%>的個人首頁</h2>
+    <table class="memberPage">
+        <tr>
+            <% if(member.image !=null ){%>
+            <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>" width="250" height="250" align="center"></td>
+
+            <% }else{%>
+            <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png" width="250" height="250" align="center"></td>
+            <%}%>
+
+        </tr>
+    </table>
     <table class="memberPage">
         <tr>
             <td>暱稱</td>
@@ -35,12 +42,7 @@
             <td><%=member.major%></td>
             <td>性別</td>
             <td><%=member.gender%></td>
-            <% if(member.image !=null ){%>
-            <td rowspan="3" valign="middle" align="center"><img src="<%=member.image%>"></td>
 
-            <% }else{%>
-            <td rowspan="3" valign="middle" align="center"><img src="/images/profilepic.png"></td>
-            <%}%>
 
         </tr>
         <tr>
@@ -49,28 +51,37 @@
             <td>As Tasker評分</td>
             <td><%=member.mRatings%></td>
             <td>等級</td>
-            <td><%=member.mRatings%></td>
+            <td>
+            <p><%=member.level%></p> <p><%=member.level.char%></p></td>
         </tr>
         <tr>
             <td>個人簡介</td>
             <td colspan="5"><%=member.profile%></td>
         </tr>
     </table>
+
     <%}else{ %>
+
     <h2 align="center">關於我</h2>
     <table class="photoPage">
+        <% if(member.image){%>
         <tr>
             <td colspan="5" align="center">
-                <% if(member.image){%>
-                <img src="/<%=member.image%>" width="190" height="190" align="center" style="align-content: center"><br>
+
+                <img src="/<%=member.image%>" width="250" height="250" align="center" style="align-content: center">
                 <form method="post" action="/upload/<%= current_member._id %>" enctype="multipart/form-data">
-                    <br> <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
+                    <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
                     <br><input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093;上傳圖片">
                 </form>
+            </td>
+        </tr>
 
 
                 <% }else{%>
-                <br><img src="/images/profilepic.png" width="200" height="200" align="center">
+        <tr>
+            <td colspan="5" align="center">
+
+                <br><img src="/images/profilepic.png" width="250" height="250" align="center">
                 <form method="post" action="/upload/<%= current_member._id %>" enctype="multipart/form-data">
                     <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
                     <br>   <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="&#xf093;上傳圖片">
@@ -80,30 +91,36 @@
     </table>
 
         <%}%>
-    <form method="post" action="/deposit">
+
+
         <table class="photoPage">
 
             <tr><td align="center">帳戶餘額</td>
             <td align="center"><%=member.asset%></td>
             <td align="center">
 
-                    <input type="hidden" id="mid" name="mid" value="<%= current_member._id %>" style="display:none;">
+
                     儲值金額:
             </td>
-                    <td><input type="number" name="asset" min="0" max="1000000"  placeholder=""></td>
-                    <td width="120"><input type="submit" id="aSubmit" name="aSubmit" value="儲值">
+                    <td>
+                        <form method="post" action="/deposit">
+                            <input type="hidden" id="mid" name="mid" value="<%= current_member._id %>" style="display:none;">
+                        <input type="number" name="asset" min="0" max="1000000"  placeholder="">
+                        </form>
+                    </td>
+
+                <td width="120"><input type="submit" id="aSubmit" name="aSubmit" value="儲值">
 
                     </td>
         </tr>
+        </table>
 
-    </table>
-    </form>
+
+
     <%if(member._id ==  current_member._id ){%>
-    <form action="/edit/<%=member._id%>" method="post">
-    <table class="memberPage">
 
-
-
+    <form action="/edit/<%=member._id%>" method="post" class="mForm">
+        <table class="memberPage">
             <tr>
                 <td>暱稱</td>
                 <td><%=member.nickname%></td>
@@ -132,7 +149,7 @@
                 <td>As Tasker評分</td>
                 <td><%=member.mRatings%></td>
                 <td>等級</td>
-                <td><%=member.level%></td>
+                <td><p><%=member.level%></p> <p><%=member.level.char%></p></td>
 
 
             </tr>
@@ -140,24 +157,23 @@
 
             <tr>
                 <td>個人簡介</td>
-                <td colspan="5"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>"></td>
+                <td colspan="6"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>"></td>
             </tr>
 
 
             <tr>
-                <td colspan="5" align="center"><input type="submit" id="rSubmit" name="rSubmit" class="rSubmit" value="儲存變更" ></td>
+                <td colspan="6" align="center"><input type="submit" id="rSubmit" name="rSubmit" class="rSubmit" value="儲存變更" ></td>
             </tr>
 
         <% } %>
 
-    </table>
-    </form>
 
 
+        </table>
+        </form>
 
 
     <% } %>
-
 
 
 
