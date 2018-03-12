@@ -513,7 +513,7 @@
                         </tr>
                         <% for(i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id == current_member._id){
-                        }else if(tasks[i].status == 'completed' && tasks[i].tRatings != null){ %>
+                        }else if(tasks[i].status == 'completed'){ %>
                         <tr>
                             <td data-th='任務名稱' style="text-align: center;"><a
                                         href="../all-task/<%= tasks[i]._id %>"><%= tasks[i].title %></a></td>
