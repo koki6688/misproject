@@ -175,7 +175,7 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck == true){ %>
+                                <% if(tasks[i].rCheck == true && tasks[i].pCheck==false){ %>
                             <td colspan='4'>請為<%= tasks[i].rmID.nickname %>評分，以匯出報酬：
                               <!--  <form method="post" action="/check_and_rate">
 
@@ -214,6 +214,12 @@
                                 </button>
 
 
+                            </td>
+                            <% }else if(tasks[i].pCheck==true){ %>
+                            <td colspan='4'>
+                                <button onclick="location.href = 'chat';" id="myButton"
+                                        class="float-left submit-button">聊天室
+                                </button>
                             </td>
 
                             <% }else{ %>
