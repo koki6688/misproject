@@ -4954,12 +4954,12 @@ label {
 	content: "\f164";
 	color: #D84A65;
 }
-/* Option 2 */
+/* Option 2
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio] + label span.sg-icon-target:before
-{
+*/
 	/* Sad
-	content: "\f165";
+{	content: "\f165";
 }
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label:before,
 .sg-replace-icons .sg-rating-scale .sg-cell-2 input[type=radio]:checked + label span.sg-icon-target:before
@@ -4968,3 +4968,24 @@ label {
 	content: "\f165";
 	color: #F3849E;
 }Option 1 */
+#level-radius{
+	background-color: #8c8c8c;
+	border-radius: 50%;
+	width:15%;
+
+
+}
+#DataTables_Table_0_filter{
+	width:30%;
+	margin-left:10%
+}
+#DataTables_Table_0_length{
+	display: none;
+}
+#DataTables_Table_0_info{
+	display:none;
+}
+#DataTables_Table_0_paginate{
+	align-items: center;
+text-align: center;
+}
