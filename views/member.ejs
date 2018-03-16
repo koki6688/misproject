@@ -47,12 +47,12 @@
         </tr>
         <tr>
             <td>As User評分</td>
-            <td><%=member.mRatings%></td>
+            <td><i class="fa fa-thumbs-up"></i> <%=member.user_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.user_badRatings%></td>
             <td>As Tasker評分</td>
-            <td><%=member.mRatings%></td>
+            <td><i class="fa fa-thumbs-up"></i> <%=member.tasker_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.tasker_badRatings%></td>
             <td>等級</td>
             <td>
-            <p style="background-color: #33aaff; border-radius: 25%; width:5%;"><%=member.level%></p> <p><%=member.char%></p></td>
+            <p id="level-radius"><%=member.level%></p> <p><%=member.char%></p></td>
         </tr>
         <tr>
             <td>個人簡介</td>
@@ -92,7 +92,7 @@
 
         <%}%>
 
-
+    <form method="post" action="/deposit">
         <table class="photoPage">
 
             <tr><td align="center">帳戶餘額</td>
@@ -102,19 +102,22 @@
 
                     儲值金額:
             </td>
+
                     <td>
-                        <form method="post" action="/deposit">
+
                             <input type="hidden" id="mid" name="mid" value="<%= current_member._id %>" style="display:none;">
                         <input type="number" name="asset" min="0" max="1000000"  placeholder="">
-                        </form>
+
                     </td>
 
                 <td width="120"><input type="submit" id="aSubmit" name="aSubmit" value="儲值">
 
                     </td>
-        </tr>
-        </table>
 
+        </tr>
+
+        </table>
+    </form>
 
 
     <%if(member._id ==  current_member._id ){%>
@@ -145,11 +148,11 @@
 
             <tr>
                 <td>As User評分</td>
-                <td><%=member.mRatings%></td>
+                <td><i class="fa fa-thumbs-up"></i> <%=member.user_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.user_badRatings%></td>
                 <td>As Tasker評分</td>
-                <td><%=member.mRatings%></td>
+                <td><i class="fa fa-thumbs-up"></i> <%=member.tasker_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.tasker_badRatings%></td>
                 <td>等級</td>
-                <td><p><%=member.level%></p> <p><%=member.char%></p></td>
+                <td><p id="level-radius">&nbsp;&nbsp;<%=member.level%></p> <p><%=member.char%></p></td>
 
 
             </tr>
