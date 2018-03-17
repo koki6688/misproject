@@ -140,7 +140,7 @@ exports.request = function (req, res) {
 exports.detail = function (req, res) {
     var tID = req.params.tid;
     var query = {_id: tID};
-    var field = {category: 1, title: 1, reward: 1, due_date: 1, limited_level: 1, content: 1};
+    var field = {status: 1, category: 1, title: 1, reward: 1, due_date: 1, limited_level: 1, content: 1};
     var path_select = 'pmID';
     var field_select = '_id nickname';
     var sort = {createTime: 1};
@@ -247,36 +247,38 @@ exports.check_and_rate = function (req, res) {
                                     //計算任務完成數以升級
 
                                     TaskModel.count({
-                                        rmID: req.session.member._id,
-                                        status: "completed"
-                                    }, function (err, count) {
-                                        if (count) {
+                                            rmID: req.session.member._id,
+                                            status: "completed"
+                                        }, function (err, count) {
+                                            if (count) {
 
-                                            var member_level_and_char = getLevel(count);
+                                                var member_level_and_char = getLevel(count);
 
-                                            var update_member = [
-                                                {level: member_level_and_char[0]},
-                                                {char: member_level_and_char[1]},
-                                                {$inc: {asset: reward}}
-                                            ];
+                                                var update_member = {
+                                                    level: member_level_and_char[0],
+                                                    char: member_level_and_char[1],
+                                                    $inc: {asset: reward}
+                                                };
 
-                                            MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
-                                                if (suc) {
-                                                    MemberModel.getMember({_id: req.session.member._id}, function (err, member) {
-                                                        if (member) {
-                                                            req.session.member = member;
-                                                            req.session.save();
-                                                        }
-                                                    });
-                                                    ep.emit('success', '成功！');
-                                                } else {
-                                                    ep.emit('info_error', '更新會員失敗！');
-                                                }
-                                            });
-                                        } else {
-                                            ep.emit('info_error', '計算完成數量失敗！');
+                                                MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
+                                                    if (suc) {
+                                                        MemberModel.getMember({_id: req.session.member._id}, function (err, member) {
+                                                            if (member) {
+                                                                req.session.member = member;
+                                                                req.session.save();
+                                                            }
+                                                        });
+                                                        ep.emit('success', '成功！');
+                                                    } else {
+                                                        console.log(err);
+                                                        ep.emit('info_error', '更新會員失敗！');
+                                                    }
+                                                });
+                                            } else {
+                                                ep.emit('info_error', '計算完成數量失敗！');
+                                            }
                                         }
-                                    });
+                                    );
                                     ep.emit('completed!', '任務完成！');
                                 } else {
                                     ep.emit('info_error', '任務完成提交失敗！');
@@ -297,18 +299,34 @@ exports.check_and_rate = function (req, res) {
 };
 
 exports.filter = function (req, res) {
+
     var category = req.body.category;
     var reward = req.body.reward;
     var level = req.body.level;
     var due_date = req.body.due_date;
+    var reward_minusfifty = reward - 50;
 
-    var query = [{status: 'available'}, {category: category},
-                 {limited_level: {$lt: level}}];
+    var query = {status: 'available'};
+
+
+    if (category) {
+        query.category = category;
+    }
+    if (reward) {
+        query.reward = {$lt: reward, $gte: reward_minusfifty};
+    }
+    if (level) {
+        query.limited_level = {$lte: level};
+    }
+    if (due_date) {
+        query.due_date = due_date;
+    }
+
+
     var field = {category: 1, title: 1, reward: 1, due_date: 1};
     var sort = {createTime: -1};
     var path_select = 'pmID';
     var field_select = '_id nickname';
-    console.log(query);
 
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
         if (err) {
