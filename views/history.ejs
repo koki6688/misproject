@@ -175,7 +175,7 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck != null && tasks[i].pCheck==null){ %>
+                                <% if(tasks[i].rCheck == true && tasks[i].pCheck==false){ %>
                             <td colspan='4'>請為<%= tasks[i].rmID.nickname %>評分，以匯出報酬：
                               <!--  <form method="post" action="/check_and_rate">
 
@@ -215,7 +215,7 @@
 
 
                             </td>
-                            <% }else if(tasks[i].pCheck!=null){ %>
+                            <% }else if(tasks[i].pCheck==true){ %>
                             <td colspan='4'>
                                 <p>等待對方評分</p>
                                 <button onclick="location.href = 'chat';" id="myButton"
@@ -451,9 +451,9 @@
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
-                                <% if(tasks[i].rCheck != null && tasks[i].rRating == null){ %>
+                                <% if(tasks[i].rCheck == true && tasks[i].pCheck == false){ %>
                                 等待對方確認
-                                <% }else if(tasks[i].rCheck != true && tasks[i].rRating!=null){ %>
+                                <% }else if(tasks[i].rCheck == true && tasks[i].pCheck==true){ %>
                             <td colspan='4'>請為<%= tasks[i].pmID.nickname %>評分，以取得報酬入帳：
 
                                 <form method="post" action="/check_and_rate">
@@ -473,7 +473,7 @@
                                         class="float-left submit-button">聊天室
                                 </button>
                             </td>
-                            <% }else{ %>
+                            <% }else if(tasks[i].rCheck == false && tasks[i].pCheck == false){ %>
                             <td colspan='4'>
                                 <form action="/check_and_rate" method="post" style="display:inline;">
                                     <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>"
@@ -482,11 +482,11 @@
                                            style="display:none;">
                                     <input type="submit" id="cSubmit" name="cSubmit" value="回報完成">
                                 </form>
-                                <% } %>
+
                                 <button onclick="location.href = 'chat';" id="myButton"
                                         class="float-left submit-button">聊天室
                                 </button>
-
+                                <% } %>
 
                             </td>
 
