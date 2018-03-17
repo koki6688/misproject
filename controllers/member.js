@@ -7,9 +7,10 @@ var moment = require('moment');
 var path = require('path');
 
 var MemberModel = require('../models/member');
+var TaskModel = require('../models/task');
 
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
+var saltRounds = 10;
 
 
 exports.showRegister = function (req, res) {
@@ -88,8 +89,45 @@ exports.showMember = function (req, res) {
 
     var mID = req.params.mid;
     var query = {_id: mID};
-    MemberModel.getMember(query, function (err, member) {
-        res.render('member', {member: member});
+
+
+    var tasker_great = 0;
+    var tasker_bad = 0;
+    var user_great = 0;
+    var user_bad = 0;
+
+    var count_query1 = {rmID: mID, status: "completed", rRating: true};
+    var count_query2 = {rmID: mID, status: "completed", rRating: false};
+    var count_query3 = {pmID: mID, status: "completed", pRating: true};
+    var count_query4 = {pmID: mID, status: "completed", pRating: false};
+
+
+    TaskModel.count(count_query1, function (err, result) {
+        tasker_great = result;
+        TaskModel.count(count_query2, function (err, result) {
+            tasker_bad = result;
+            TaskModel.count(count_query3, function (err, result) {
+                user_great = result;
+                TaskModel.count(count_query4, function (err, result) {
+                    user_bad = result;
+                    var update = {
+                        tasker_greatRatings: tasker_great,
+                        tasker_badRatings: tasker_bad,
+                        user_greatRatings: user_great,
+                        user_badRatings: user_bad
+                    };
+
+                    MemberModel.updateMember(query, update,function (err, result) {
+                        if (result) {
+                            MemberModel.getMember(query, function (err, member) {
+
+                                res.render('member', {member: member});
+                            });
+                        }
+                    });
+                });
+            });
+        });
     });
 };
 

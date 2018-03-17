@@ -75,6 +75,9 @@ router.get('/history',taskController.history);
 /* 雙方確認任務結束並評分 */
 router.post('/check_and_rate', taskController.check_and_rate);
 
+/* 用戶提交filter */
+router.post('/all-task/filter', taskController.filter);
+
 /* 用戶上傳圖片 */
 router.post('/upload/:mid', memberController.upload);
 

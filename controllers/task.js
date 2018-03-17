@@ -83,12 +83,13 @@ exports.delete = function (req, res) {
     var tID = req.params.tid;
     var query = {_id: tID};
     var field = {reward: 1};
+    var update = {$inc: {asset: reward[0].reward}};
 
     TaskModel.getTasks(query, field, '', '', {}, function (err, reward) {
 
         if (reward) {
 
-            MemberModel.updateMember({_id: req.session.member._id}, {$inc: {asset: reward[0].reward}}, function (err, result) {
+            MemberModel.updateMember({_id: req.session.member._id}, update, function (err, result) {
 
                 if (result) {
 
@@ -220,10 +221,11 @@ exports.check_and_rate = function (req, res) {
     if (req.body.rater) {
         var rater = req.body.rater;
 
-        var field = {rCheck: 1, pCheck: 1, pRating: 1, rRating: 1};
+        var field = {rCheck: 1, pCheck: 1, pRating: 1, rRating: 1, reward: 1};
         var path_select = '';
         var field_select = '';
         var sort = {};
+        var reward = 0;
 
         update[rater] = req.body.rate;
 
@@ -237,8 +239,12 @@ exports.check_and_rate = function (req, res) {
 
                         if (result[0].pCheck === true && result[0].rCheck === true && typeof result[0].pRating !== "undefined" && typeof result[0].rRating !== "undefined") {
 
+                            reward = result[0].reward;
+
                             TaskModel.Complete(query, function (err, complete) {
                                 if (complete) {
+
+                                    //計算任務完成數以升級
 
                                     TaskModel.count({
                                         rmID: req.session.member._id,
@@ -248,13 +254,20 @@ exports.check_and_rate = function (req, res) {
 
                                             var member_level_and_char = getLevel(count);
 
-                                            var update_member = {
-                                                level: member_level_and_char[0],
-                                                char: member_level_and_char[1]
-                                            };
+                                            var update_member = [
+                                                {level: member_level_and_char[0]},
+                                                {char: member_level_and_char[1]},
+                                                {$inc: {asset: reward}}
+                                            ];
 
                                             MemberModel.updateMember({_id: req.session.member._id}, update_member, function (err, suc) {
                                                 if (suc) {
+                                                    MemberModel.getMember({_id: req.session.member._id}, function (err, member) {
+                                                        if (member) {
+                                                            req.session.member = member;
+                                                            req.session.save();
+                                                        }
+                                                    });
                                                     ep.emit('success', '成功！');
                                                 } else {
                                                     ep.emit('info_error', '更新會員失敗！');
@@ -281,6 +294,29 @@ exports.check_and_rate = function (req, res) {
         });
     }
 
+};
+
+exports.filter = function (req, res) {
+    var category = req.body.category;
+    var reward = req.body.reward;
+    var level = req.body.level;
+    var due_date = req.body.due_date;
+
+    var query = [{status: 'available'}, {category: category},
+                 {limited_level: {$lt: level}}];
+    var field = {category: 1, title: 1, reward: 1, due_date: 1};
+    var sort = {createTime: -1};
+    var path_select = 'pmID';
+    var field_select = '_id nickname';
+    console.log(query);
+
+    TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
+        if (err) {
+            console.log(err)
+        }
+        //console.log(tasks[0].pmID.nickname);
+        res.render('all-task', {tasks: tasks});
+    });
 };
 
 exports.history = function (req, res) {
