@@ -23,7 +23,7 @@
     <!-- Header -->
     <% include ./header %>
     <script type="text/javascript" src="/assets/js/tabulator.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
    <br>
     <h2 class="alltask-h2" align="center"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;任務列表</h2>
@@ -31,36 +31,79 @@
 
 
     <script>
+
         $(function(){
             $(".flip").click(function(){
                 $(".panel").slideToggle("slow");
                 $(".xs1").toggle();
                 $(".xs2").toggle();
             });});
-        $(document).ready( function () {
-            $('.all-task').DataTable({
-                "columns": [
-                    { "data": "category" },
-                    { "data": "title" },
-                    { "data": "publisher" },
-                    { "data": "reward" },
-                    { "data": "due_date" }
+        $(function(){
+            $(".cancel").click(function(){
+                window.location.replace("/all-task");
+            });
 
-                ]
+        });
+
+        var category_sel=[];
+        var reward_sel=[];
+        var level_sel=[];
+        var due_date_sel=[];
+        var Msg;
+        function check(formObj) {
+            var category=formObj.category;
+
+            var reward=formObj.reward;
+
+            var level=formObj.level;
+
+            var due_date=formObj.due_date;
+
+
+            for (var i=0; i<category.length; i++) {
+                if (category[i].checked) {
+                    category_sel.push(category[i].value);
+                }
+            }
+            for (var i=0; i<reward.length; i++) {
+                if (reward[i].checked) {
+                    reward_sel.push(reward[i].value);
+                }
+            }
+            for (var i=0; i<level.length; i++) {
+                if (level[i].checked) {
+                    level_sel.push(level[i].value);
+                }
+            }
+            for (var i=0; i<due_date.length; i++) {
+                if (due_date[i].checked) {
+                    due_date_sel.push(due_date[i].value);
+                }
+            }
+            Msg='--篩選條件--'+"\n任務類別："+category_sel.join()+"\n佣金："+reward_sel.join()+"\n等級限制："+level_sel.join()+"\n到期日期："+due_date_sel.join();
+            alert("任務類別:"+ Msg);
+
+
+        }
+        $(document).ready( function () {
+            if(Msg!=undefined) {
+                document.getElementById("msg").innerHTML = Msg;
+            }
+            $('.all-task').DataTable({
+
+
             });
         } );
 
-        $(function(){
-            $(".cancel").click(function(){
-                window.location.reload();
-            });});
-
-
-
     </script>
     <!-- Main -->
-    <div class="flip" style="text-align: center;background-color: #1d3e81;width: 10%;border-radius: 5%; margin-left: 10%;"><span class="1">篩選器</span></div>
-    <div class="cancel" style="text-align: center;background-color: #1d3e81;width: 10%;border-radius: 5%; margin-right: 0%;"><span class="1">取消篩選</span></div>
+
+    <span class="flip" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-left: 10%;">篩選器</span>&nbsp;&nbsp;&nbsp;<span class="cancel" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-right: 0%;">取消篩選</span>
+    <div id="msg">
+
+
+
+    </div>
     <div class="panel" style="display:none; margin-left: 10%">
 
 
@@ -109,14 +152,14 @@
 
         </div>
 
-        <button type="submit">篩選</button>
+        <button type="submit" onclick="check(this.form)">篩選</button>
 
 
     </form>
     </div>
 
 
-    <table class="all-task" >
+    <table class="all-task">
         <thead>
         <tr>
             <th>任務類別</th>
@@ -124,8 +167,7 @@
             <th>發布者</th>
             <th>佣金</th>
             <th>到期時間</th>
-            <th></th>
-
+            <th>&nbsp;&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -164,9 +206,7 @@
             <td data-th='發布者' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' valign="middle" style="text-align: center; vertical-align:middle;">NT$ <%=tasks[i].reward%></td>
             <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
-
-
-
+                <td>&nbsp;&nbsp;&nbsp;</td>
 
         </tr>
 
