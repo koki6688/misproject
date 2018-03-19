@@ -349,6 +349,6 @@ exports.history = function (req, res) {
 
     TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
         sort, function (err, tasks) {
-            res.render('history', {tasks: tasks});
+            res.render('history', {tasks: tasks, filter: query});
         });
 };
