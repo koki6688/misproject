@@ -23,7 +23,7 @@
     <!-- Header -->
     <% include ./header %>
     <script type="text/javascript" src="/assets/js/tabulator.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/jquery.dataTables.js"></script>
 
    <br>
     <h2 class="alltask-h2" align="center"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;任務列表</h2>
@@ -99,10 +99,22 @@
     <!-- Main -->
 
     <span class="flip" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-left: 10%;">篩選器</span>&nbsp;&nbsp;&nbsp;<span class="cancel" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-right: 0%;">取消篩選</span>
-    <div id="msg">
-
-
-
+    <div id="msg" style="margin-left: 10%;">
+        <% if(filter){%>
+        <p>--篩選條件--</p>
+            <% if(filter.category!=null){%>
+            <p>任務類別：<%=filter.category%></p>
+            <%}%>
+            <% if(filter.reward!=null){%>
+            <p>佣金：<%=filter.reward.$gte%>~<%=filter.reward.$lt%></p>
+            <%}%>
+            <% if(filter.limited_level.$lte!=null){%>
+            <p>最高等級限制：<%=filter.limited_level.$lte%></p>
+            <%}%>
+            <% if(filter.due_date!=null){%>
+            <p>到期日期：<%=filter.due_date%><p>
+            <%}%>
+    <%}%>
     </div>
     <div class="panel" style="display:none; margin-left: 10%">
 
