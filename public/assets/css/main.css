@@ -4728,6 +4728,8 @@ hr.style-one {
 /*tab and history*/
 .abgne_tab {
 
+    margin-left: 0%;
+
 }
 
 
@@ -4825,7 +4827,7 @@ div.tab_container .tab_content h2 {
 		line-height: 26px;
 	}
 	div.tab_container {
-		margib-left:0%;
+		margin-left:0%;
 		width: 100%;
 	}
 
@@ -4839,9 +4841,14 @@ div.tab_container .tab_content h2 {
 		height: 26px;
 		line-height: 26px;
 	}
+    .abgne_tab {
+
+        margin-left: 0%;
+
+    }
 
 	div.tab_container {
-		margib-left:0%;
+		margin-left:0%;
 		width: 100%;
 	}
 	.t_Progressing,.t_Completed,.t_request,.Available,.Completed,.Progressing,.Request{
@@ -4873,9 +4880,14 @@ div.tab_container .tab_content h2 {
 		line-height: 24px;
 	}
 	div.tab_container {
-		margib-left:0%;
+		margin-left:0%;
 		width: 100%;
 	}
+    .abgne_tab {
+
+        margin-left: 0%;
+
+    }
 	.t_Progressing,.t_Completed,.t_request,.Available,.Completed,.Progressing,.Request{
 		padding:2%;
 	}
@@ -4918,9 +4930,14 @@ div.tab_container .tab_content h2 {
 		line-height: 24px;
 	}
 	div.tab_container {
-		margib-left:0%;
+		margin-left:0%;
 		width: 100%;
 	}
+    .abgne_tab {
+
+        margin-left: 0%;
+
+    }
 	.t_Progressing table th,.t_Completed table th,.t_request table th,.Available table th,.Completed table th,.Progressing table th,.Request table th{
 		display: none;
 	}
