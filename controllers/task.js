@@ -24,7 +24,7 @@ exports.showTask = function (req, res) {
             console.log('err')
         }
         //console.log(tasks[0].pmID.nickname);
-        res.render('all-task', {tasks: tasks});
+        res.render('all-task', {tasks: tasks, filter: null});
     });
 };
 
@@ -83,11 +83,13 @@ exports.delete = function (req, res) {
     var tID = req.params.tid;
     var query = {_id: tID};
     var field = {reward: 1};
-    var update = {$inc: {asset: reward[0].reward}};
+
 
     TaskModel.getTasks(query, field, '', '', {}, function (err, reward) {
 
         if (reward) {
+
+            var update = {$inc: {asset: reward[0].reward}};
 
             MemberModel.updateMember({_id: req.session.member._id}, update, function (err, result) {
 
@@ -333,7 +335,7 @@ exports.filter = function (req, res) {
             console.log(err)
         }
         //console.log(tasks[0].pmID.nickname);
-        res.render('all-task', {tasks: tasks});
+        res.render('all-task', {tasks: tasks, filter: query});
     });
 };
 
@@ -349,6 +351,6 @@ exports.history = function (req, res) {
 
     TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
         sort, function (err, tasks) {
-            res.render('history', {tasks: tasks, filter: query});
+            res.render('history', {tasks: tasks});
         });
 };
