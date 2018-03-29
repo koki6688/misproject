@@ -306,7 +306,7 @@ exports.filter = function (req, res) {
     var reward = req.body.reward;
     var level = req.body.level;
     var due_date = req.body.due_date;
-    var reward_minusfifty = reward - 50;
+    var reward_minusFifty = reward - 50;
 
     var query = {status: 'available'};
 
@@ -315,7 +315,7 @@ exports.filter = function (req, res) {
         query.category = category;
     }
     if (reward) {
-        query.reward = {$lt: reward, $gte: reward_minusfifty};
+        query.reward = {$lt: reward, $gte: reward_minusFifty};
     }
     if (level) {
         query.limited_level = {$lte: level};
@@ -334,7 +334,6 @@ exports.filter = function (req, res) {
         if (err) {
             console.log(err)
         }
-        //console.log(tasks[0].pmID.nickname);
         res.render('all-task', {tasks: tasks, filter: query});
     });
 };
