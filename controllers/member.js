@@ -120,10 +120,6 @@ exports.showMember = function (req, res) {
                     MemberModel.updateMember(query, update,function (err, result) {
                         if (result) {
                             MemberModel.getMember(query, function (err, member) {
-                                if (member) {
-                                    req.session.member = member;
-                                    req.session.save();
-                                }
 
                                 res.render('member', {member: member});
                             });
