@@ -108,7 +108,7 @@
             <% if(filter.reward!=null){%>
             <p>佣金：<%=filter.reward.$gte%>~<%=filter.reward.$lt%></p>
             <%}%>
-            <% if(filter.limited_level.$lte!=null){%>
+            <% if(filter.limited_level!=null){%>
             <p>最高等級限制：<%=filter.limited_level.$lte%></p>
             <%}%>
             <% if(filter.due_date!=null){%>
@@ -155,12 +155,12 @@
             <label for="<%=current_member.level%>">我的等級</label>
         </div>
         <div><p>到期日期：</p>
-            <input type="checkbox" id="today" name="due_date" value="today">
-            <label for="today">今天</label>
-            <input type="checkbox" id="three-day" name="due_date" value="three-day">
-            <label for="three-day">三日之內</label>
-            <input type="checkbox" id="one-week" name="due_date" value="one-week">
-            <label for="one-week">一週之內</label>
+            <input type="checkbox" id="today" name="due_date" value="1">
+            <label for="today">1小時內</label>
+            <input type="checkbox" id="three-day" name="due_date" value="2">
+            <label for="three-day">2小時內</label>
+            <input type="checkbox" id="one-week" name="due_date" value="4">
+            <label for="one-week">4小時內</label>
 
         </div>
 
@@ -198,7 +198,7 @@
             <td data-th='任務名稱' width="500" valign="middle" style="text-align: center; vertical-align:middle;" ><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
             <td data-th='發布者' width="200" valign="middle" style="text-align: center; vertical-align:middle;" class="publisher"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' valign="middle" style="text-align: center; vertical-align:middle;">NT$ <%=tasks[i].reward%></td>
-            <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
+            <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date.toLocaleString()%></td>
             <td valign="middle" style="text-align: center; vertical-align:middle;">
                 <a class="a-inside delete" href="/delete/<%=tasks[i]._id%>">刪除</a>
             </td>
@@ -217,7 +217,7 @@
             <td data-th='任務名稱' valign="middle" width="500" style="text-align: center; vertical-align:middle;"><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
             <td data-th='發布者' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' valign="middle" style="text-align: center; vertical-align:middle;">NT$ <%=tasks[i].reward%></td>
-            <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date%> <%=tasks[i].due_time%></td>
+            <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date.toLocaleString()%></td>
                 <td>&nbsp;&nbsp;&nbsp;</td>
 
         </tr>

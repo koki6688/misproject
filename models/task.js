@@ -8,7 +8,7 @@ var taskSchema = new mongoose.Schema({
     category: String,
     title: String,
     reward: Number,
-    due_date: String,
+    due_date: Date,
     createTime: {type: Date, default: Date.now()},
     requestTime: Date,
     acceptTime: Date,

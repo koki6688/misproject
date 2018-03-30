@@ -40,15 +40,14 @@ exports.task = function (req, res) {
     var title = req.body.title;
     var reward = req.body.reward;
     var category = req.body.category;
-    var due_date = req.body.due_date;
-    var due_time = req.body.due_time;
+    var due_date = new Date(req.body.due_date);
     var content = req.body.content;
     var limited_level = req.body.limited_level;
 
 
     var query = {
         pmID: pmID, title: title, category: category, content: content, reward: reward,
-        limited_level: limited_level, due_date: due_date, due_time: due_time
+        limited_level: limited_level, due_date: due_date
     };
 
 
@@ -307,6 +306,8 @@ exports.filter = function (req, res) {
     var level = req.body.level;
     var due_date = req.body.due_date;
     var reward_minusFifty = reward - 50;
+    var m = moment().format();
+    var m_plus_hr = moment(m).add(due_date, 'hours');
 
     var query = {status: 'available'};
 
@@ -321,7 +322,7 @@ exports.filter = function (req, res) {
         query.limited_level = {$lte: level};
     }
     if (due_date) {
-        query.due_date = due_date;
+        query.due_date = {$lte: m_plus_hr, $gt: m};
     }
 
 
@@ -332,8 +333,9 @@ exports.filter = function (req, res) {
 
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
         if (err) {
-            console.log(err)
+            console.log(err, query);
         }
+        console.log(query);
         res.render('all-task', {tasks: tasks, filter: query});
     });
 };
