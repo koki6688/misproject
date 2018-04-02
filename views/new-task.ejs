@@ -33,13 +33,22 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/assets/js/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
     <script>
+
         var dateToday = new Date();
         var timeToday=dateToday.getTime();
         $(document).ready(function(){
 
             $( "#due_date" ).datetimepicker({
+                onSelectDate:function(ct,$i){
 
+                    alert(ct.dateFormat('Y/m/d'));
+                },
                 minDate: dateToday,
                 step:15
 
@@ -122,7 +131,7 @@
                         <td colspan='2'><label for="content">任務內容：</label><textarea id="content" name="content" cols="16" required title="任務內容："></textarea>
                         <td><input type="hidden"  id="pmID"  name="pmID" value="<%= current_member._id %>"></td>
                     </tr>
-                    <td colspan='2' align="center"><input align="center" type="submit" value="提交"></td>
+                    <td colspan='2' align="center"><input align="center" id="submit" type="submit" value="提交"></td>
                     <tr>
 
                     </tr>
@@ -144,6 +153,28 @@
 
 
 </div>
+<script>
+
+    $( "#submit" ).click(function() {
+        //var date1=dateToday.getFullYear()+ "/" + (dateToday.getUTCMonth() + 1)+ "/" +  dateToday.getDate();
+        var date = dateToday.toISOString().slice(0,10).replace(/-/g,"/");
+        var h = dateToday.getHours();
+        var m = dateToday.getMinutes();
+        var time=h + ":" + m;
+        //var date=dateToday.toLocaleString('en-us',options);
+        if(document.getElementById("due_date").value.substr(0,10)==date){
+            if(document.getElementById("due_date").value.substr(11,18)<time){
+                alert("您無法選取過去的時間作為到期時間");
+        }
+
+        $( "#due_date" ).change(function() {
+
+        });
+    });
+
+
+
+</script>
 
 
 
