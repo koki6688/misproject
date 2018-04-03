@@ -90,7 +90,7 @@
                 document.getElementById("msg").innerHTML = Msg;
             }
             $('.all-task').DataTable({
-
+                "order": [[ 4, "desc" ]]
 
             });
         } );
@@ -98,29 +98,30 @@
     </script>
     <!-- Main -->
 
-    <span class="flip" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-left: 10%;">篩選器</span>&nbsp;&nbsp;&nbsp;<span class="cancel" style="text-align: center;background-color: #1d3e81;width: 20%;border-radius: 5%; margin-right: 0%;">取消篩選</span>
-    <div id="msg" style="margin-left: 10%;">
+    <button class="flip" >篩選器</button>&nbsp;&nbsp;&nbsp;<button class="cancel"  >取消篩選</button>
+    <div id="msg" style="width:80%;margin-left: 10%;background-color:#efefef;padding-top: 1%;padding-bottom: 1%;">
         <% if(filter){%>
-        <p>--篩選條件--</p>
+        <p style="font-size: 10px;line-height: 3%; text-align: center">--篩選條件--</p>
             <% if(filter.category!=null){%>
-            <p>任務類別：<%=filter.category%></p>
+            <p style="font-size: 10px;line-height: 1%; text-align: center">任務類別：<%=filter.category%></p>
             <%}%>
             <% if(filter.reward!=null){%>
-            <p>佣金：<%=filter.reward.$gte%>~<%=filter.reward.$lt%></p>
+            <p style="font-size: 10px;line-height: 1%; text-align: center">佣金：<%=filter.reward.$gte%>~<%=filter.reward.$lt%>
             <%}%>
             <% if(filter.limited_level!=null){%>
-            <p>最高等級限制：<%=filter.limited_level.$lte%></p>
+            <p style="font-size: 10px;line-height: 1%; text-align: center">最高等級限制：<%=filter.limited_level.$lte%></p>
             <%}%>
             <% if(filter.due_date!=null){%>
-            <p>到期日期：<%=filter.due_date%><p>
+            <p style="font-size: 10px;line-height: 1%; text-align: center">到期日期：<%=filter.due_date.$lte%><p>
             <%}%>
     <%}%>
     </div>
-    <div class="panel" style="display:none; margin-left: 10%">
+    <div class="panel" >
 
 
     <form method="post" action="/all-task/filter">
-        <div><p>任務類別：</p>
+        <div class="filter_div">
+            <p>任務類別：</p>
         <input type="checkbox" id="purchase" name="category" value="代購">
         <label for="purchase">代購</label>
             <input type="checkbox" id="deliver" name="category" value="遞送貨物">
@@ -130,7 +131,7 @@
             <input type="checkbox" id="other" name="category" value="其他">
             <label for="other">其他</label>
     </div>
-        <div><p>佣金範圍：</p>
+        <div class="filter_div" ><p>佣金範圍：</p>
             <input type="checkbox" id="50" name="reward" value="50">
             <label for="50">50元以下</label>
             <input type="checkbox" id="100" name="reward" value="100">
@@ -142,7 +143,7 @@
             <input type="checkbox" id="300" name="reward" value="300">
             <label for="300">200元以上</label>
         </div>
-        <div><p>最高等級限制：</p>
+        <div class="filter_div" ><p>最高等級限制：</p>
             <input type="checkbox" id="0" name="level" value="0">
             <label for="0">0</label>
             <input type="checkbox" id="1" name="level" value="1">
@@ -154,18 +155,24 @@
             <input type="checkbox" id="<%=current_member.level%>" name="level" value="<%=current_member.level%>">
             <label for="<%=current_member.level%>">我的等級</label>
         </div>
-        <div><p>到期日期：</p>
+        <div class="filter_div" ><p>到期日期：</p>
             <input type="checkbox" id="today" name="due_date" value="1">
             <label for="today">1小時內</label>
             <input type="checkbox" id="three-day" name="due_date" value="2">
             <label for="three-day">2小時內</label>
             <input type="checkbox" id="one-week" name="due_date" value="4">
             <label for="one-week">4小時內</label>
+            <input type="checkbox" id="one-week" name="due_date" value="8">
+            <label for="one-week">8小時內</label>
+            <input type="checkbox" id="one-week" name="due_date" value="12">
+            <label for="one-week">12小時內</label>
+            <input type="checkbox" id="one-week" name="due_date" value="24">
+            <label for="one-week">24小時內</label>
 
         </div>
-
-        <button type="submit" onclick="check(this.form)">篩選</button>
-
+        <br>
+        <button type="submit" onclick="check(this.form)" style="margin-left: 45%;margin-right:auto;color: white;border-color: white;">篩選</button>
+        <br>
 
     </form>
     </div>
@@ -189,14 +196,14 @@
 
         <tr>
             <% if(tasks[i].category=='代購'){ %>
-            <td data-th='任務類別' width="200" valign="middle" style="text-align: center; vertical-align:middle;" ><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別'  valign="middle" style="text-align: center; vertical-align:middle;" ><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}else if(tasks[i].category=='遞送貨物'){ %>
-            <td data-th='任務類別' width="200" valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別'  valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}else if(tasks[i].category=='交通運輸'){ %>
-            <td data-th='任務類別' width="200" valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}%>
-            <td data-th='任務名稱' width="500" valign="middle" style="text-align: center; vertical-align:middle;" ><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
-            <td data-th='發布者' width="200" valign="middle" style="text-align: center; vertical-align:middle;" class="publisher"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
+            <td data-th='任務名稱' width="auto" valign="middle" style="text-align: center; vertical-align:middle;" ><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
+            <td data-th='發布者'  valign="middle" style="text-align: center; vertical-align:middle;" class="publisher"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' valign="middle" style="text-align: center; vertical-align:middle;">NT$ <%=tasks[i].reward%></td>
             <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date.toLocaleString()%></td>
             <td valign="middle" style="text-align: center; vertical-align:middle;">
@@ -208,14 +215,14 @@
 
             <tr>
             <% if(tasks[i].category=='代購'){ %>
-            <td data-th='任務類別' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}else if(tasks[i].category=='遞送貨物'){ %>
-            <td data-th='任務類別' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' valign="middle"  style="text-align: center; vertical-align:middle;"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}else if(tasks[i].category=='交通運輸'){ %>
-            <td data-th='任務類別' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
+            <td data-th='任務類別' valign="middle" style="text-align: center; vertical-align:middle;"><i class="fa fa-taxi" aria-hidden="true"></i>&nbsp;&nbsp;<%=tasks[i].category%></td>
             <%}%>
-            <td data-th='任務名稱' valign="middle" width="500" style="text-align: center; vertical-align:middle;"><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
-            <td data-th='發布者' valign="middle" width="200" style="text-align: center; vertical-align:middle;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
+            <td data-th='任務名稱' valign="middle" width="auto" style="text-align: center; vertical-align:middle;"><a class="a-inside edit"  href="../all-task/<%=tasks[i]._id%>"><%=tasks[i].title%></a></td>
+            <td data-th='發布者' valign="middle"  style="text-align: center; vertical-align:middle;"><i class="fa fa-user-circle" aria-hidden="true"></i><a class="a-inside edit" id="icon fa-car" href="../member/<%=tasks[i].pmID._id%>"><%=tasks[i].pmID.nickname%></a></td>
             <td data-th='佣金' valign="middle" style="text-align: center; vertical-align:middle;">NT$ <%=tasks[i].reward%></td>
             <td data-th='到期時間' valign="middle" style="text-align: center; vertical-align:middle;"><%=tasks[i].due_date.toLocaleString()%></td>
                 <td>&nbsp;&nbsp;&nbsp;</td>
