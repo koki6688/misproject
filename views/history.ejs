@@ -391,7 +391,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
 
 
                         </tr>
@@ -449,7 +449,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td data-th=''>
                                 <% if(tasks[i].rCheck == true && tasks[i].pCheck == false){ %>
                                 等待對方確認
@@ -532,7 +532,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime %></td>
+                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime.toLocaleString() %></td>
                         </tr>
 
                             <% } %>

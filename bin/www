@@ -127,6 +127,7 @@ serv_io.sockets.on('connection', function (socket) {
             socket.emit('count', {'count': counting(socket.request.session)});
         }, 10000);
     }
+
 });
 
 
