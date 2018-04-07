@@ -51,6 +51,11 @@ taskSchema.statics.Complete = function (tid, callback) {
     this.update(tid, {status: 'completed', doneTime: Date.now()}, callback);
 };
 
+taskSchema.statics.findMin = function (query,sort,callback) {
+
+    this.findOne(query).sort(sort).exec(callback);
+};
+
 var Task = mongoose.model('task', taskSchema);
 
 

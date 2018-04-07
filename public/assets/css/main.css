@@ -1638,7 +1638,7 @@ body {
 body {
     color: #333;
 
-    background-color: #efefef;
+    background-color: #b5b5ef;
 }
 
 body.is-loading *, body.is-loading *:before, body.is-loading *:after {

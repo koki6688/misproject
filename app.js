@@ -6,6 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var io = require('socket.io');
+var eventproxy = require('eventproxy');
+var ep = new eventproxy();
+
+var TaskModel = require('./models/task');
+var MemberModel = require('./models/member');
+var moment = require('moment');
+var now = moment().format();
 
 var $ = require('jquery');
 
@@ -36,7 +43,31 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(busboy());
+app.use(function (req, res, next) {
+    TaskModel.findMin({status: 'available'}, {due_date: 1}, function (err, result) {
+        if (result) {
+
+            if (moment(result.due_date).isBefore(now)) {
+                var update = {$inc: {asset: result.reward}};
+
+                MemberModel.updateMember({_id: result.pmID}, update, function (err, member) {
+
+                    if (member) {
+
+                        TaskModel.removeTask({_id: result._id}, function (err, success) {
+                            if (success) {
+                                ep.emit('success', '刪除任務成功！');
+                            } else {
+                                ep.emit('info_error', 'error');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+    next();
+});
 
 //建立session
 
@@ -77,7 +108,6 @@ app.use(function (req, res, next) {
 
     next();
 });
-
 
 
 app.use('/', webRouter);
