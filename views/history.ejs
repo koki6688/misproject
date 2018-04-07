@@ -8,6 +8,7 @@
     <!--[if lte IE 8]>
     <script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/fontawesome-stars.css"/>
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
     <!--[if lte IE 8]>
@@ -21,6 +22,8 @@
 
     <!-- Header -->
     <% include ./header %>
+    <script src="assets/js/jquery.barrating.min.js"></script>
+
 
     <script>
 
@@ -47,6 +50,7 @@
                 this.blur();
             });
         });
+
     </script>
 
     <!-- Menu -->
@@ -176,10 +180,17 @@
                             <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
                             <td data-th=''>
                                 <% if(tasks[i].rCheck == true && tasks[i].pCheck==false){ %>
+                                <script>
+                                    $(function() {
+                                        $('#example-<%= tasks[i]._id %>').barrating({
+                                            theme: 'fontawesome-stars'
+                                        });
+                                    });
+                                </script>
                             <td colspan='4'>請為<%= tasks[i].rmID.nickname %>評分，以匯出報酬：
-                              <!--  <form method="post" action="/check_and_rate">
 
-                                    <input id="rater" name="<%= tasks[i]._id %>_rater" type="radio" value='true'/>正評
+
+                                    <!--  <input id="rater" name="<%= tasks[i]._id %>_rater" type="radio" value='true'/>正評
                                     <i class="fa fa-thumbs-up"></i>
                                     <input id="rater" name="<%= tasks[i]._id %>_rater" type="radio" value="false"/>負評
                                     <i class="fa fa-thumbs-down"></i>
@@ -193,19 +204,26 @@
                                 <button onclick="location.href = 'chat';" id="myButton"
                                         class="float-left submit-button">聊天室
                                 </button>-->
-
                                 <form method="post" action="/check_and_rate">
-                                    <select  id="rate" name="rate" required >
-                                        　	<option value="true">正評</option>
-                                        　	<option value="false">負評</option>
-                                    </select>
-                                    <input type="hidden" id="rater" name="rater" value="rRating"
-                                           style="display:none;">
+                                    <div class="br-wrapper br-theme-fontawesome-stars">
+                                        <select id="example-<%= tasks[i]._id %>" required>
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
 
-                                    <input type="hidden" id="checker" name="checker" value="pCheck"
-                                           style="display:none;">
-                                    <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>"
-                                           style="display:none;">
+                                    </div>
+
+                                            <input type="hidden" id="rater" name="rater" value="rRating"
+                                                   style="display:none;">
+
+                                            <input type="hidden" id="checker" name="checker" value="pCheck"
+                                                   style="display:none;">
+                                            <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>"
+                                                   style="display:none;">
                                     <input type="submit" name="submit" value="評分">
                                 </form>
 
@@ -277,7 +295,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td align="center">
                                 <a class="a-inside delete" href="/delete/<%= tasks[i]._id %>">刪除</a></td>
                         </tr>
@@ -454,13 +472,27 @@
                                 <% if(tasks[i].rCheck == true && tasks[i].pCheck == false){ %>
                                 等待對方確認
                                 <% }else if(tasks[i].rCheck == true && tasks[i].pCheck==true){ %>
+                            <script>
+                                $(function() {
+                                    $('#example-<%= tasks[i]._id %>').barrating({
+                                        theme: 'fontawesome-stars'
+                                    });
+                                });
+                                </script>
                             <td colspan='4'>請為<%= tasks[i].pmID.nickname %>評分，以取得報酬入帳：
 
                                 <form method="post" action="/check_and_rate">
-                                    <select  id="rate" name="rate" required >
-                                        　	<option value="true">正評</option>
-                                        　	<option value="false">負評</option>
-                                    </select>
+                                    <div class="br-wrapper br-theme-fontawesome-stars">
+                                        <select id="example-<%= tasks[i]._id %>" required>
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+
+                                    </div>
                                     <input type="hidden" id="rater" name="rater" value="pRating"
                                            style="display:none;">
 
@@ -532,7 +564,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime %></td>
+                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime%></td>
                         </tr>
 
                             <% } %>
@@ -552,6 +584,34 @@
 
 
 </div>
+<script>
+    var TB = function() {
+        var T$ = function(id) { return document.getElementById(id) }
+        var T$$ = function(r, t) { return (r || document).getElementsByTagName(t) }
+        var Stars = function(cid, rid, hid, config) {
+            var lis = T$$(T$(cid), 'li'), curA;
+            for (var i = 0, len = lis.length; i < len; i++) {
+                lis[i]._val = i;
+                lis[i].onclick = function() {
+                    T$(rid).innerHTML = '<em>' + (T$(hid).value = T$$(this, 'a')[0].getAttribute('star:value')) + '分</em> - ' + config.info[this._val];
+                    curA = T$$(T$(cid), 'a')[T$(hid).value / config.step - 1];
+                };
+                lis[i].onmouseout = function() {
+                    curA && (curA.className += config.curcss);
+                }
+                lis[i].onmouseover = function() {
+                    curA && (curA.className = curA.className.replace(config.curcss, ''));
+                }
+            }
+        };
+        return {Stars: Stars}
+    }().Stars('stars2', 'stars2-tips', 'stars2-input', {
+        'info' : ['写得极差', '写得不怎么好', '写得一般吧', '写得不错', '写得非常好'],
+        'curcss': ' current-rating',
+        'step': 20
+    });
+</script>
+
 
 
 </body>
