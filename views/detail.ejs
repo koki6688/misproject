@@ -51,10 +51,10 @@
                     </tr>
                         <% if(task[0]){%>
                         <tr>
-                        <td style="text-align: center; width:33.3%;"><%=task[0].due_date%> <%=task.due_time%></td>
+                        <td style="text-align: center; width:33.3%;"><%=task[0].due_date.toLocaleString()%></td>
                         <td style="text-align: center; width:33.3%;"><%=task[0].limited_level%></td>
 
-                        <td style="text-align: center; width:33.3%;"><%=task[0].pmID.nickname%></td>
+                        <td style="text-align: center; width:33.3%;"><a class="a-inside edit" id="icon fa-car" href="../member/<%=task[0].pmID._id%>"><%=task[0].pmID.nickname%></a></td>
 
                         <% }%>
                         </tr>
@@ -81,7 +81,8 @@
 
     <%}else if(task[0].limited_level > current_member.level){ %>
     <p align="center" style="background-color:#1d3e81;">您的等級不夠接取此任務</p>
-
+    <%}else if(task[0].status != "available"){ %>
+    <p align="center" style="background-color:#1d3e81;">此任務已不能接取</p>
 
     <%}else{ %>
 
