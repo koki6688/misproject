@@ -51,16 +51,30 @@
 					<div class="content" id="login_form">
 						<div class="inner">
 
-								<h1>登入</h1>
+								<h1 style="color:white;">登入</h1>
 
 							<form id="login" action="/" method="post">
-								<p>帳號：</p>
+								<p style="color:white;">帳號：</p>
+								<div class="input-group margin-bottom-sm">
+
+									<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
+									<input class="form-control" name="email" type="email" placeholder="Email address">
+								</div>
+								<p style="color:white;">密碼：</p>
+								<div class="input-group">
+
+									<span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
+									<input class="form-control" name="password" type="password" placeholder="Password">
+								</div>
+
+								<!--<p style="color:white;">帳號：</p>
+
 								<input type="email" id="email" name="email" placeholder="請輸入電子郵件">
-								<p>密碼：</p>
-								<input type="password" id="password" name="password" placeholder="請輸入密碼">
+								<p style="color:white;">密碼：</p>
+								<input type="password" id="password" name="password" placeholder="請輸入密碼">-->
                                 <% if (s_error!=null) { %>
-									<div class="err_not">
-										<i class="fa fa-exclamation-circle" aria-hidden="true">&nbsp;&nbsp;
+									<div class="err_not" style="background-color: #42B1BA;">
+										<i class="fa fa-exclamation-circle" aria-hidden="true" style="color:white;">&nbsp;&nbsp;
 											<strong>帳號或密碼輸入錯誤</strong>
 										</i>
 									</div>
@@ -69,8 +83,14 @@
 								<a>忘記密碼</a>
 										<br>
 										<ul class="actions">
-											<li style='height:56px;'><input type="submit" class="submit" id="submit" value="登入"></li>&nbsp;&nbsp;
-											<li style='height:56px;'><a href="/register" class="button" >成為會員</a></li>
+											<li style='height:56px;'><input type="submit" class="btn-light" id="btn-light" value="登入" style="color: #212529;
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);"></li>&nbsp;&nbsp;
+											<li style='height:56px;'><a href="/register" class="button" style="color: #212529;
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);">成為會員</a></li>
 										</ul>
 
 							</form>

@@ -3,6 +3,7 @@
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="/assets/js/jquery.scrolly.min.js"></script>
 <script src="/assets/js/skel.min.js"></script>
@@ -32,7 +33,7 @@
     <nav>
 
         <% if (locals.current_member) { %>
-        <font  class='hello' size="1">您好, <%= current_member.nickname %> <i class="fa fa-usd" ></i>:<%=current_member.asset%> </font>
+        <font  class='hello' size="1"><i class="fa d-inline fa-lg fa-user-circle-o " style="z-index:2000;content: '\f2be';"></i> <%= current_member.nickname %> <i class="fa fa-usd" ></i>:<%=current_member.asset%> </font>
         <i class="fa fa-bell"  id='bell' aria-hidden="true"></i>
         <a href="/history" id="count"></a>
 
@@ -48,10 +49,22 @@
     <div class="inner">
         <!-- Menu -->
         <nav id="menu">
-            <p>Menu</p>
 
+            <p></p>
+
+                <a class="button_slide slide_right" href="/home">首頁</a></br>
+            <a class="button_slide slide_right" href="/new-task">發布任務</a></br>
+                <a class="button_slide slide_right" href="/all-task">任務列表</a></br>
+                <a class="button_slide slide_right" href="/member/<%=current_member._id%>">關於我</a></br>
+                <a class="button_slide slide_right" href="/history">歷史任務</a></br>
+    <a class="button_slide slide_right" href="/signout">登出</a></br>
+<a class="button_slide slide_right" href="/history">幫助</a>
+
+
+
+<!--
             <ul>
-                <li><a href="/home">首頁</a></li>
+                <li><a class="li_befor" href="/home">首頁</a></li>
                 <li><a href="/new-task">發布任務</a></li>
                 <li>
                     <a href="/all-task">任務列表</a>
@@ -62,7 +75,7 @@
                     <a href="/signout">登出</a>
                 </li>
                 <li><a href="#">幫助</a></li>
-            </ul>
+            </ul>-->
             <nav>
             </nav>
         </nav>

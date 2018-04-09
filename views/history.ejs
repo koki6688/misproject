@@ -67,9 +67,7 @@
                 <div class="Request">
                     <h2>審核執行申請</h2>
                     <table>
-                        <tr>
-                            <td>test line:as user</td>
-                        </tr>
+
                         <% if(tasks){
                         for(var i = 0;i < tasks.length;i++) {
                         if(tasks[i].pmID._id == current_member._id && tasks[i].status == 'request'){ %>
@@ -127,7 +125,12 @@
                             <td colspan='6'>
                             <td>
                         </tr>
-                        <% }}} %>
+                        <% }}}else{%>
+                        <tr>
+                            <td colspan='6'>目前無審核執行申請任務
+                                    </td>
+                                    </tr>
+                        <%} %>
                     </table>
                     <div class="box14_ribbon"></div>
                 </div>
@@ -136,9 +139,7 @@
                     <h2>進行中任務</h2>
 
                     <table>
-                        <tr>
-                            <td>test line:as user</td>
-                        </tr>
+
 
                         <% if(tasks){
                         for(i = 0;i < tasks.length;i++) {
@@ -254,7 +255,11 @@
                             <td colspan='6'>
                             <td>
                         </tr>
-                        <% }}} %>
+                        <% }}}else{ %>                       <tr>
+                        <td colspan='6'>目前無進行中的任務
+                                </td>
+                                </tr>
+                        <%} %>
                     </table>
                 </div>
                 <div class="Available">
@@ -300,7 +305,10 @@
                                 <a class="a-inside delete" href="/delete/<%= tasks[i]._id %>">刪除</a></td>
                         </tr>
 
-                        <% }}} %>
+                        <% }}}else{ %>                       <tr>
+                        <td colspan='6'>目前無任務
+                                </td>
+                                </tr><%} %>
                     </table>
                 </div>
 
@@ -353,7 +361,10 @@
 
                         </tr>
 
-                        <% }}} %>
+                        <% }}}else{ %>                       <tr>
+                        <td colspan='6'>目前無已完成任務
+                                </td>
+                                </tr><%} %>
                     </table>
 
                 </div>
@@ -367,9 +378,7 @@
                     <h2>申請中的任務</h2>
 
                     <table>
-                        <tr>
-                            <td>test line:as task</td>
-                        </tr>
+
 
                         <% if(tasks){
                         for(i = 0;i < tasks.length;i++) {
@@ -418,16 +427,17 @@
                             <td>
                         </tr>
                         <% }
-                        }} %>
+                        }}else{  %>                      <tr>
+                            <td colspan='6'>目前無申請中的任務
+                                    </td>
+                                    </tr><%} %>
                     </table>
                 </div>
                 <div class="t_Progressing">
                     <h2>進行中任務</h2>
 
                     <table>
-                        <tr>
-                            <td>test line:as task</td>
-                        </tr>
+
 
                         <% if(tasks){
                         for(i = 0;i < tasks.length;i++) {
@@ -527,7 +537,10 @@
                             <td colspan='6'>
                             <td>
                         </tr>
-                        <% }}} %>
+                        <% }}}else{ %>                       <tr>
+                        <td colspan='6'>目前無進行中的任務
+                                </td>
+                                </tr><%} %>
                     </table>
                 </div>
                 <div class="t_Completed">
@@ -570,7 +583,10 @@
                             <% } %>
 
 
-                        <% } } %>
+                        <% } }else{ %>                       <tr>
+                        <td colspan='6'>目前無已完成任務
+                                </td>
+                                </tr><%} %>
                     </table>
 
                 </div>
@@ -584,33 +600,7 @@
 
 
 </div>
-<script>
-    var TB = function() {
-        var T$ = function(id) { return document.getElementById(id) }
-        var T$$ = function(r, t) { return (r || document).getElementsByTagName(t) }
-        var Stars = function(cid, rid, hid, config) {
-            var lis = T$$(T$(cid), 'li'), curA;
-            for (var i = 0, len = lis.length; i < len; i++) {
-                lis[i]._val = i;
-                lis[i].onclick = function() {
-                    T$(rid).innerHTML = '<em>' + (T$(hid).value = T$$(this, 'a')[0].getAttribute('star:value')) + '分</em> - ' + config.info[this._val];
-                    curA = T$$(T$(cid), 'a')[T$(hid).value / config.step - 1];
-                };
-                lis[i].onmouseout = function() {
-                    curA && (curA.className += config.curcss);
-                }
-                lis[i].onmouseover = function() {
-                    curA && (curA.className = curA.className.replace(config.curcss, ''));
-                }
-            }
-        };
-        return {Stars: Stars}
-    }().Stars('stars2', 'stars2-tips', 'stars2-input', {
-        'info' : ['写得极差', '写得不怎么好', '写得一般吧', '写得不错', '写得非常好'],
-        'curcss': ' current-rating',
-        'step': 20
-    });
-</script>
+
 
 
 
