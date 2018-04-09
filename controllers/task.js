@@ -45,7 +45,7 @@ exports.task = function (req, res) {
     var content = req.body.content;
     var limited_level = req.body.limited_level;
 
-    var cost = reward + fee;
+    var cost = parseInt(reward) + parseInt(fee);
 
 
     var query = {
@@ -61,6 +61,7 @@ exports.task = function (req, res) {
             ep.emit('info_error', 'error');
 
         } else {
+            console.log(-cost, reward);
             MemberModel.updateMember({_id: pmID}, {$inc: {asset: -cost}}, function (err, result) {
                 if (result) {
                     MemberModel.getMember({_id: pmID}, function (err, member) {
