@@ -121,7 +121,7 @@ exports.showMember = function (req, res) {
                         pCount += 1;
                     }
 
-                    MemberModel.updateMember(query, update, function (err, result) {
+                    MemberModel.updateMember (query, update, function (err, result) {
                         if (result) {
                             MemberModel.getMember(query, function (err, member) {
 
