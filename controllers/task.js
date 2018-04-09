@@ -39,15 +39,18 @@ exports.task = function (req, res) {
     var pmID = req.body.pmID;
     var title = req.body.title;
     var reward = req.body.reward;
+    var fee = req.body.fee;
     var category = req.body.category;
     var due_date = new Date(req.body.due_date);
     var content = req.body.content;
     var limited_level = req.body.limited_level;
 
+    var cost = reward + fee;
+
 
     var query = {
         pmID: pmID, title: title, category: category, content: content, reward: reward,
-        limited_level: limited_level, due_date: due_date
+        fee: fee, limited_level: limited_level, due_date: due_date
     };
 
 
@@ -58,7 +61,7 @@ exports.task = function (req, res) {
             ep.emit('info_error', 'error');
 
         } else {
-            MemberModel.updateMember({_id: pmID}, {$inc: {asset: -reward}}, function (err, result) {
+            MemberModel.updateMember({_id: pmID}, {$inc: {asset: -cost}}, function (err, result) {
                 if (result) {
                     MemberModel.getMember({_id: pmID}, function (err, member) {
                         if (member) {
@@ -81,14 +84,16 @@ exports.delete = function (req, res) {
 
     var tID = req.params.tid;
     var query = {_id: tID};
-    var field = {reward: 1};
+    var field = {reward: 1, fee: 1};
 
 
-    TaskModel.getTasks(query, field, '', '', {}, function (err, reward) {
+    TaskModel.getTasks(query, field, '', '', {}, function (err, result) {
 
-        if (reward) {
+        if (result) {
 
-            var update = {$inc: {asset: reward[0].reward}};
+            var cost = result[0].reward + result[0].fee;
+
+            var update = {$inc: {asset: cost}};
 
             MemberModel.updateMember({_id: req.session.member._id}, update, function (err, result) {
 
