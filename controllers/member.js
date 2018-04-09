@@ -108,29 +108,28 @@ exports.showMember = function (req, res) {
     TaskModel.getTasks(count_query1, field, path_select, field_select, sort, function (err, suc) {
 
         if (suc) {
-            for (var i = 0; i < suc[0].length; i++) {
-                totalrRating += suc[0][i].rRating;
+            for (var i = 0; i < suc.length; i++) {
+                totalrRating += suc[i].rRating;
                 rCount += 1;
             }
-        }
-    });
 
-    TaskModel.getTasks(count_query2, field, path_select, field_select, sort, function (err, suc) {
+            TaskModel.getTasks(count_query2, field, path_select, field_select, sort, function (err, suc) {
 
-        if (suc) {
-            for (var i = 0; i < suc[0].length; i++) {
-                totalpRating += suc[0][i].pRating;
-                pCount += 1;
-            }
-        }
-    });
+                if (suc) {
+                    for (var i = 0; i < suc.length; i++) {
+                        totalpRating += suc[i].pRating;
+                        pCount += 1;
+                    }
 
+                    MemberModel.updateMember(query, update, function (err, result) {
+                        if (result) {
+                            MemberModel.getMember(query, function (err, member) {
 
-    MemberModel.updateMember(query, update, function (err, result) {
-        if (result) {
-            MemberModel.getMember(query, function (err, member) {
-
-                res.render('member', {member: member});
+                                res.render('member', {member: member});
+                            });
+                        }
+                    });
+                }
             });
         }
     });
