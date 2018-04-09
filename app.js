@@ -43,6 +43,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//檢查並處裡過期任務
+
 app.use(function (req, res, next) {
     TaskModel.findMin({status: 'available'}, {due_date: 1}, function (err, result) {
         if (result) {

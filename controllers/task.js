@@ -238,7 +238,7 @@ exports.check_and_rate = function (req, res) {
                 TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, result) {
                     if (result) {
 
-                        if (result[0].pCheck === true && result[0].rCheck === true && typeof result[0].pRating !== "undefined" && typeof result[0].rRating !== "undefined") {
+                        if (result[0].pCheck === true && result[0].rCheck === true && result[0].pRating !== 0 && result[0].rRating !== 0) {
 
                             reward = result[0].reward;
 
