@@ -97,6 +97,7 @@ exports.showMember = function (req, res) {
 
     var count_query1 = {rmID: mID, status: "completed"};
     var count_query2 = {pmID: mID, status: "completed"};
+    var update = {};
 
     TaskModel.getTasks(count_query1, field, path_select, field_select, sort, function (err, suc) {
 
@@ -120,10 +121,18 @@ exports.showMember = function (req, res) {
                         pCount += 1;
                     }
 
-                    var update = {tasker_Ratings: totalrRating / rCount, user_Ratings: totalpRating / pCount};
+                    if (rCount === 0 && pCount !== 0) {
+                        update = {user_Ratings: totalpRating / pCount};
+                    } else if (rCount !== 0 && pCount === 0) {
+                        update = {tasker_Ratings: totalrRating / rCount};
+                    } else if (rCount !== 0 && pCount !== 0)  {
+                        update = {tasker_Ratings: totalrRating / rCount, user_Ratings: totalpRating / pCount};
+                    }
+
 
                     MemberModel.updateMember(query, update, function (err, result) {
                         if (result) {
+                            console.log(totalpRating, pCount, update);
                             MemberModel.getMember(query, function (err, member) {
 
                                 res.render('member', {member: member});

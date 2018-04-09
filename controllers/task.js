@@ -238,6 +238,7 @@ exports.check_and_rate = function (req, res) {
 
         TaskModel.updateTask(query, update, function (err, result) {
             if (result) {
+
                 ep.emit('success', '評分成功！');
 
                 //兩方皆確認則任務完成
