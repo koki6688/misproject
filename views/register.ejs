@@ -182,7 +182,17 @@
 
 				</tr>
 				<tr>
-					<td >生日：<input data-th="生日：" type="date" id="bDate" name="bDate"  placeholder="" required></td>
+					<script>
+                        window.onload = function(){
+                            var today = new Date().toISOString().split('T')[0];
+                            document.getElementsByName("bDate")[0].setAttribute('max', today);
+                            alert(today);
+
+                        };
+
+
+					</script>
+					<td >生日：<input data-th="生日：" type="date" id="bDate" name="bDate"  placeholder="" required ></td>
 					<td>手機：<input data-th="手機：" type="text" id="cell" name="cell"  placeholder="" required  maxlength="10"></td>
 				</tr>
 				<tr>
