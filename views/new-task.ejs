@@ -118,6 +118,7 @@
 
                         </td>
                         <td><label for="reward">佣金：NT$</label><input name="reward" type="number" id="reward" min='0' max="<%= current_member.asset %>" required title="佣金：NT$ "><p id="servicepay"></p>
+                            <input name="fee" type="hidden" id="fee" >
 
                         </td>
                     <tr>
@@ -155,9 +156,11 @@
 </div>
 <script>
     $( "#reward" ).change(function() {
-        var pay=Math.round(document.getElementById("reward").value*1.1);
+        var pay=Math.ceil(document.getElementById("reward").value*1.1);
 
         document.getElementById("servicepay").innerHTML = "+10%=NT$"+pay;
+        document.getElementById("fee").value=Math.ceil(document.getElementById("reward").value*0.1)
+        //alert(document.getElementById("fee").value);
     });
 
 
