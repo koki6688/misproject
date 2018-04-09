@@ -5,9 +5,11 @@
     <title>Project-任務列表</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
     <!--[if lte IE 8]-->
-    <script src="assets/js/ie/html5shiv.js"></script><!--[endif]-->
+    <!--[endif]-->
     <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/fontawesome-stars.css"/>
     <!--[if lte IE 9]-->
     <link rel="stylesheet" href="/assets/css/ie9.css"/><!--[endif]-->
     <!--[if lte IE 8]-->
@@ -15,11 +17,14 @@
 </head>
 <body>
 
+
 <!-- Wrapper -->
 <div id="rapper">
 
     <!-- Header -->
     <% include ./header %>
+    <script src="../../assets/js/jquery.barrating.min.js"></script>
+
 
     <%if(member._id !=  current_member._id ){%>
     <h2 align="center"><%=member.nickname%>的個人首頁</h2>
@@ -47,12 +52,76 @@
         </tr>
         <tr>
             <td>As User評分</td>
-            <td><i class="fa fa-thumbs-up"></i> <%=member.user_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.user_badRatings%></td>
-            <td>As Tasker評分</td>
-            <td><i class="fa fa-thumbs-up"></i> <%=member.tasker_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.tasker_badRatings%></td>
-            <td>等級</td>
+            <script type="text/javascript">
+                $(function() {
+                    $('#user_Ratings').barrating({
+                        theme: 'fontawesome-stars',
+                        initialRating:Math.round(<%=member.user_Ratings%>),
+                        readonly:true
+
+                    });
+                    $('#tasker_Ratings').barrating({
+                        theme: 'fontawesome-stars',
+                        initialRating:Math.round(<%=member.tasker_Ratings%>),
+                        readonly:true
+
+                    });
+                });
+            </script>
+
+
             <td>
-            <p ><%=member.level%>&nbsp;<%=member.char%></p></td>
+                <div class="br-wrapper br-theme-fontawesome-stars">
+                    <select id="user_Ratings">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                (<%=member.user_Ratings%>)
+                </div>
+
+            </td>
+            <td>As Tasker評分</td>
+
+            <td><div class="br-wrapper br-theme-fontawesome-stars">
+                    <select id="tasker_Ratings">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                (<%=member.tasker_Ratings%>)
+                </div></td>
+            <td>等級</td>
+
+                <%if(member.level==1){%>
+            <td><p style="background-image: url('../../images/level_01.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==2){%>
+            <td><p  class="level_p"style="background-image: url('../../images/level_02.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==3){%>
+            <td><p style="background-image: url('../../images/level_03.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==4){%>
+            <td><p style="background-image: url('../../images/level_04.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==5){%>
+            <td><p style="background-image: url('../../images/level_05.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==6){%>
+            <td><p style="background-image: url('../../images/level_06.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==7){%>
+            <td><p style="background-image: url('../../images/level_07.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==8){%>
+            <td><p style="background-image: url('../../images/level_08.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==9){%>
+            <td><p style="background-image: url('../../images/level_09.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==10){%>
+            <td><p style="background-image: url('../../images/level_10.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}else if(member.level==11){%>
+            <td><p style="background-image: url('../../images/level_11.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+            <%}%>
         </tr>
         <tr>
             <td>個人簡介</td>
@@ -147,16 +216,51 @@
             </tr>
 
             <tr>
+                <script type="text/javascript">
+                    $(function() {
+                        $('#user_Ratings').barrating({
+                            theme: 'fontawesome-stars',
+                            initialRating:Math.round(<%=member.user_Ratings%>),
+                            readonly:true
+
+                        });
+                        $('#tasker_Ratings').barrating({
+                            theme: 'fontawesome-stars',
+                            initialRating:Math.round(<%=member.tasker_Ratings%>),
+                            readonly:true
+
+                        });
+                    });
+                </script>
                 <td>As User評分</td>
 
-                <td><span class="fa-stack fa-lg">
-  <i class="fa fa-thumbs-up fa-stack-2x"></i>
-  <p class="fa-stack-lg" style="color:#fff;"><%=member.user_greatRatings%></p>
-</span>
-
-                    <i class="fa fa-thumbs-up"></i> <%=member.user_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.user_badRatings%></td>
+                <td>                <div class="br-wrapper br-theme-fontawesome-stars">
+                        <select id="user_Ratings">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    (<%=member.user_Ratings%>)
+                    </div>
+                </td>
                 <td>As Tasker評分</td>
-                <td><i class="fa fa-thumbs-up"></i> <%=member.tasker_greatRatings%> <i class="fa fa-thumbs-down"></i> <%=member.tasker_badRatings%></td>
+                <td>
+                <div class="br-wrapper br-theme-fontawesome-stars">
+                    <select id="tasker_Ratings">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    (<%=member.tasker_Ratings%>)
+
+                </div>
+                </td>
                 <td>等級</td>
                 <!--<td><p ><%=member.level%>&nbsp;<%=member.char%></p></td>-->
                 <%if(member.level==1){%>
