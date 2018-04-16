@@ -89,45 +89,59 @@ exports.showMember = function (req, res) {
 
     var mID = req.params.mid;
     var query = {_id: mID};
+    var field = {pRating: 1, rRating: 1};
+    var path_select = '';
+    var field_select = '';
+    var sort = {};
 
 
-    var tasker_great = 0;
-    var tasker_bad = 0;
-    var user_great = 0;
-    var user_bad = 0;
+    var count_query1 = {rmID: mID, status: "completed"};
+    var count_query2 = {pmID: mID, status: "completed"};
+    var update = {};
 
-    var count_query1 = {rmID: mID, status: "completed", rRating: true};
-    var count_query2 = {rmID: mID, status: "completed", rRating: false};
-    var count_query3 = {pmID: mID, status: "completed", pRating: true};
-    var count_query4 = {pmID: mID, status: "completed", pRating: false};
+    TaskModel.getTasks(count_query1, field, path_select, field_select, sort, function (err, suc) {
+
+        var totalrRating = 0;
+        var rCount = 0;
+
+        if (suc) {
+            for (var i = 0; i < suc.length; i++) {
+                totalrRating += suc[i].rRating;
+                rCount += 1;
+            }
+
+            TaskModel.getTasks(count_query2, field, path_select, field_select, sort, function (err, suc) {
+
+                if (suc) {
+                    var totalpRating = 0;
+                    var pCount = 0;
+
+                    for (var i = 0; i < suc.length; i++) {
+                        totalpRating += suc[i].pRating;
+                        pCount += 1;
+                    }
+
+                    if (rCount === 0 && pCount !== 0) {
+                        update = {user_Ratings: totalpRating / pCount};
+                    } else if (rCount !== 0 && pCount === 0) {
+                        update = {tasker_Ratings: totalrRating / rCount};
+                    } else if (rCount !== 0 && pCount !== 0)  {
+                        update = {tasker_Ratings: totalrRating / rCount, user_Ratings: totalpRating / pCount};
+                    }
 
 
-    TaskModel.count(count_query1, function (err, result) {
-        tasker_great = result;
-        TaskModel.count(count_query2, function (err, result) {
-            tasker_bad = result;
-            TaskModel.count(count_query3, function (err, result) {
-                user_great = result;
-                TaskModel.count(count_query4, function (err, result) {
-                    user_bad = result;
-                    var update = {
-                        tasker_greatRatings: tasker_great,
-                        tasker_badRatings: tasker_bad,
-                        user_greatRatings: user_great,
-                        user_badRatings: user_bad
-                    };
-
-                    MemberModel.updateMember(query, update,function (err, result) {
+                    MemberModel.updateMember(query, update, function (err, result) {
                         if (result) {
+                            console.log(totalpRating, pCount, update);
                             MemberModel.getMember(query, function (err, member) {
 
                                 res.render('member', {member: member});
                             });
                         }
                     });
-                });
+                }
             });
-        });
+        }
     });
 };
 

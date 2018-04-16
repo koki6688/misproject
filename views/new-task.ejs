@@ -115,10 +115,10 @@
                                 <option value="4">4</option>
 
                             </select>
-
+                            <input name="fee" type="hidden" id="fee" >
                         </td>
                         <td><label for="reward">佣金：NT$</label><input name="reward" type="number" id="reward" min='0' max="<%= current_member.asset %>" required title="佣金：NT$ "><p id="servicepay"></p>
-                            <input name="fee" type="hidden" id="fee" >
+
 
                         </td>
                     <tr>
@@ -156,7 +156,7 @@
 </div>
 <script>
     $( "#reward" ).change(function() {
-        var pay=Math.ceil(document.getElementById("reward").value*1.1);
+        var pay=Math.ceil(document.getElementById("reward").value*11/10);
 
         document.getElementById("servicepay").innerHTML = "+10%=NT$"+pay;
         document.getElementById("fee").value=Math.ceil(document.getElementById("reward").value*0.1)
@@ -170,9 +170,14 @@
         var h = dateToday.getHours();
         var m = dateToday.getMinutes();
         var time=h + ":" + m;
+        var starttime = dateToday; //設定開始時間格式 yyyy/mm/dd 00:00:00 中間記得要空格
+        var endtime = document.getElementById("due_date").value; //設定結束時間格式
+
         //var date=dateToday.toLocaleString('en-us',options);
         if(document.getElementById("due_date").value.substr(0,10)==date){
-            if(document.getElementById("due_date").value.substr(11,18)<time) {
+
+            if(Date.parse(endtime).valueOf()<Date.parse(starttime).valueOf()) {
+                //alert(time);
                 alert("您無法選取過去的時間作為到期時間");
             }
         }

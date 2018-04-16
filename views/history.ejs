@@ -104,7 +104,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td data-th=''>
                                 <form action="/accept" method="post" style="display:inline;">
                                     <input type="hidden" id="tID" name="tID" value="<%= tasks[i]._id %>"
@@ -178,7 +178,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td data-th=''>
                                 <% if(tasks[i].rCheck == true && tasks[i].pCheck==false){ %>
                                 <script>
@@ -207,7 +207,7 @@
                                 </button>-->
                                 <form method="post" action="/check_and_rate">
                                     <div class="br-wrapper br-theme-fontawesome-stars">
-                                        <select id="example-<%= tasks[i]._id %>" required>
+                                        <select id="example-<%= tasks[i]._id %>" required name="rate">
                                             <option value=""></option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -349,7 +349,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td data-th='狀態'>
                                 <% if(tasks[i].status == 'completed'){ %>
                                 <%= tasks[i].rmID.nickname %>完成此任務
@@ -418,7 +418,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
 
 
                         </tr>
@@ -477,7 +477,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='到期時間' align="center"><%= tasks[i].due_date %></td>
+                            <td data-th='到期時間' align="center"><%= tasks[i].due_date.toLocaleString() %></td>
                             <td data-th=''>
                                 <% if(tasks[i].rCheck == true && tasks[i].pCheck == false){ %>
                                 等待對方確認
@@ -493,7 +493,7 @@
 
                                 <form method="post" action="/check_and_rate">
                                     <div class="br-wrapper br-theme-fontawesome-stars">
-                                        <select id="example-<%= tasks[i]._id %>" required>
+                                        <select id="example-<%= tasks[i]._id %>" required name="rate">
                                             <option value=""></option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
