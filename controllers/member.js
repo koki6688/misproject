@@ -125,16 +125,17 @@ exports.showMember = function (req, res) {
                         update = {user_Ratings: totalpRating / pCount};
                     } else if (rCount !== 0 && pCount === 0) {
                         update = {tasker_Ratings: totalrRating / rCount};
-                    } else if (rCount !== 0 && pCount !== 0)  {
+                    } else if (rCount !== 0 && pCount !== 0) {
                         update = {tasker_Ratings: totalrRating / rCount, user_Ratings: totalpRating / pCount};
+                    }else{
+                        update={tasker_Ratings: 0, user_Ratings: 0};
                     }
 
 
                     MemberModel.updateMember(query, update, function (err, result) {
                         if (result) {
-                            console.log(totalpRating, pCount, update);
-                            MemberModel.getMember(query, function (err, member) {
 
+                            MemberModel.getMember(query, function (err, member) {
                                 res.render('member', {member: member});
                             });
                         }
