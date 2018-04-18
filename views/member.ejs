@@ -26,6 +26,7 @@
     <script src="../../assets/js/jquery.barrating.min.js"></script>
 
 
+
     <%if(member._id !=  current_member._id ){%>
     <h2 align="center"><%=member.nickname%>的個人首頁</h2>
     <table class="memberPage">
@@ -72,30 +73,30 @@
 
             <td>
                 <div class="br-wrapper br-theme-fontawesome-stars">
-                    <select id="user_Ratings">
+                    <span style="display:inline-block;"><select id="user_Ratings">
                         <option value=""></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                    </select>
-                (<%=member.user_Ratings%>)
+                        </select></span>
+                    <span style="display:inline-block;">(<%=member.user_Ratings%>)</span>
                 </div>
 
             </td>
             <td>As Tasker評分</td>
 
             <td><div class="br-wrapper br-theme-fontawesome-stars">
-                    <select id="tasker_Ratings">
+                    <span style="display:inline-block;"><select id="tasker_Ratings">
                         <option value=""></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                    </select>
-                (<%=member.tasker_Ratings%>)
+                        </select></span>
+                    <span style="display:inline-block;">(<%=member.tasker_Ratings%>)</span>
                 </div></td>
             <td>等級</td>
 
@@ -203,11 +204,11 @@
             </tr>
             <tr><td>信箱</td>
                 <td><%=member.email%></td>
-                <td>手機</td>
-                <td><input type="text" id="cell" name="cell" placeholder="" value="<%=member.cell%>"></td>
-                <td>主修</td>
+                <td>手機&nbsp;<i class="fa fa-pencil-square-o" id="cell_pencil" aria-hidden="true"></i></td>
+                <td><input type="text" id="cell" name="cell" placeholder="" value="<%=member.cell%>" disabled style="background:#f3f3f3;"></td>
+                <td>主修&nbsp;<i class="fa fa-pencil-square-o" id="major_pencil" aria-hidden="true"></i></td>
 
-                <td><select id="major" name="major">
+                <td><select id="major" name="major" disabled style="background:#f3f3f3;">
                         <option value="communication">傳播學系</option>　
                         <option value="mis">資訊管理學系</option>
                         　
@@ -235,29 +236,29 @@
                 <td>As User評分</td>
 
                 <td>                <div class="br-wrapper br-theme-fontawesome-stars">
-                        <select id="user_Ratings">
+                        <span style="display:inline-block;"><select id="user_Ratings">
                             <option value=""></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                        </select>
-                    (<%=member.user_Ratings%>)
+                            </select></span>
+                        <span style="display:inline-block;">(<%=member.user_Ratings%>)</span>
                     </div>
                 </td>
                 <td>As Tasker評分</td>
                 <td>
                 <div class="br-wrapper br-theme-fontawesome-stars">
-                    <select id="tasker_Ratings">
+                    <span style="display:inline-block;"><select id="tasker_Ratings">
                         <option value=""></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                    </select>
-                    (<%=member.tasker_Ratings%>)
+                        </select></span>
+                    <span style="display:inline-block;">(<%=member.tasker_Ratings%>)</span>
 
                 </div>
                 </td>
@@ -293,8 +294,8 @@
 
 
             <tr>
-                <td>個人簡介</td>
-                <td colspan="6"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>"></td>
+                <td>個人簡介&nbsp;<i class="fa fa-pencil-square-o" id="self_info_pencil" aria-hidden="true"></i></td>
+                <td colspan="6"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>" disabled style="background:#f3f3f3;"></td>
             </tr>
 
 
@@ -317,6 +318,22 @@
 </div>
 <script>
     $("#major option[value=<%=member.major%>]").attr("selected",true);
+    $("#cell_pencil").click(function(){
+        $('#cell').removeAttr('disabled');
+            document.getElementById("cell").style.background = "#ffffff";
+    });
+    $("#self_info_pencil").click(function(){
+        $('#self_info').removeAttr('disabled');
+        document.getElementById("self_info").style.background = "#ffffff";
+    });
+    $("#major_pencil").click(function(){
+        $('#major').removeAttr('disabled');
+        document.getElementById("major").style.background = "#ffffff";
+    });
+
+    //$('#cell').removeAttr('style');
+
+
 
 </script>
 
