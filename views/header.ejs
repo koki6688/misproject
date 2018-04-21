@@ -14,20 +14,91 @@
 
 <script>
     var socket = io.connect();
+    var count_o;
+    var count;
+    var noti;
     socket.on('count', function(data) {
         if(data.count!=null) {
             $('#count').text(data.count);
             console.log(data.count);
             $('#bell').hide();
+            count_o=count;
+            count=data.count;
+            noti=count-count_o;
         }
         else{
             $('#bell').show();
         }
     });
 
+    $('#count').text.change(function(){
+
+    })
+
+
+</script>
+<script>
+
+            if (Notification && Notification.permission === "granted") {
+
+                var n = new Notification("<%= current_member.nickname %>: " + t, options);
+                n.onclick = function () {
+                    window.location = "/history";
+                };
+                n.onclose = function () {
+                    console.log("notification closed!");
+                };
+                n.onerror = function () {
+                    console.log("An error accured");
+                }
+            }
+        }
+    }
+    Notification.requestPermission().then(function(result) {
+        console.log(result);
+    });
+    window.addEventListener("load", function(){
+        if(Notification && Notification.permission !== "granted"){
+            Notification.requestPermission(function(status){
+                if(Notification.permission !== status){
+                    Notification.permission = status;
+                }
+            });
+        }
+        if(noti>0) {
+
+            var t = new Date().toLocaleString();
+            var options = {
+                dir: "ltr",
+                lang: "utf-8",
+                icon: "/assets/images/notificationicon.png",
+                body: "您有新通知("+count+")，請至歷史任務頁面查看"
+            };
+            if (Notification && Notification.permission === "granted") {
+
+                var n = new Notification("<%= current_member.nickname %>: " + t, options);
+                n.onclick = function () {
+                    window.location = "/history";
+                };
+                n.onclose = function () {
+                    console.log("notification closed!");
+                };
+                n.onerror = function () {
+                    console.log("An error accured");
+                }
+            } else if (Notification && Notification.permission !== "denied") {
+                Notification.requestPermission(function (status) {
+                    if (Notification.permission !== status) {
+                        Notification.permission = status;
+                    }
+                });
+            }
+        }
+
+    });
 </script>
 <header id="header" class="alt">
-    <a href="/home" class="logo"><strong>project</strong> <span>LOGO</span></a>
+    <a href="/home" class="logo"><span>i-</span> <strong>Sharing</strong></a>
     <!-- Scripts -->
 
     <nav>
