@@ -205,10 +205,10 @@
             <tr><td>信箱</td>
                 <td><%=member.email%></td>
                 <td>手機&nbsp;<i class="fa fa-pencil-square-o" id="cell_pencil" aria-hidden="true"></i></td>
-                <td><input type="text" id="cell" name="cell" placeholder="" value="<%=member.cell%>" disabled style="background:#f3f3f3;"></td>
+                <td><input type="text" id="cell" name="cell" placeholder="" value="<%=member.cell%>" readonly style="background:#f3f3f3;"></td>
                 <td>主修&nbsp;<i class="fa fa-pencil-square-o" id="major_pencil" aria-hidden="true"></i></td>
 
-                <td><select id="major" name="major" disabled style="background:#f3f3f3;">
+                <td><select id="major" name="major" readonly style="background:#f3f3f3;">
                         <option value="communication">傳播學系</option>　
                         <option value="mis">資訊管理學系</option>
                         　
@@ -295,7 +295,7 @@
 
             <tr>
                 <td>個人簡介&nbsp;<i class="fa fa-pencil-square-o" id="self_info_pencil" aria-hidden="true"></i></td>
-                <td colspan="6"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>" disabled style="background:#f3f3f3;"></td>
+                <td colspan="6"><input type="text" id="self_intro" name="self_intro"  placeholder="" value="<%=member.self_intro%>" readonly style="background:#f3f3f3;"></td>
             </tr>
 
 
@@ -319,15 +319,15 @@
 <script>
     $("#major option[value=<%=member.major%>]").attr("selected",true);
     $("#cell_pencil").click(function(){
-        $('#cell').removeAttr('disabled');
+        $('#cell').removeAttr('readonly');
             document.getElementById("cell").style.background = "#ffffff";
     });
     $("#self_info_pencil").click(function(){
-        $('#self_intro').removeAttr('disabled');
+        $('#self_intro').removeAttr('readonly');
         document.getElementById("self_intro").style.background = "#ffffff";
     });
     $("#major_pencil").click(function(){
-        $('#major').removeAttr('disabled');
+        $('#major').removeAttr('readonly');
         document.getElementById("major").style.background = "#ffffff";
     });
 
