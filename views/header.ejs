@@ -31,16 +31,13 @@
         }
     });
 
-    $('#count').text.change(function(){
 
-    })
 
 
 </script>
 <script>
 
             if (Notification && Notification.permission === "granted") {
-
                 var n = new Notification("<%= current_member.nickname %>: " + t, options);
                 n.onclick = function () {
                     window.location = "/history";
@@ -52,8 +49,7 @@
                     console.log("An error accured");
                 }
             }
-        }
-    }
+
     Notification.requestPermission().then(function(result) {
         console.log(result);
     });
