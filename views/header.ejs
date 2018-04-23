@@ -38,7 +38,7 @@
 <script>
 
             if (Notification && Notification.permission === "granted") {
-                var n = new Notification("<%= current_member.nickname %>: " + t, options);
+                var n = new Notification("<%= current_member.nickname %>: " + options);
                 n.onclick = function () {
                     window.location = "/history";
                 };
