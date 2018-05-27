@@ -209,8 +209,61 @@
                 <td>主修&nbsp;<i class="fa fa-pencil-square-o" id="major_pencil" aria-hidden="true"></i></td>
 
                 <td><select id="major" name="major" readonly style="background:#f3f3f3;">
-                        <option value="communication">傳播學系</option>　
-                        <option value="mis">資訊管理學系</option>
+                        <optgroup label="文學院">
+                            <option value="chinese">中國文學系</option>
+                            <option value="history">歷史學系</option>
+                            <option value="philosophy">哲學系</option>
+
+                        </optgroup>
+                        <optgroup label="理學院">
+                            <option value="math">應用數學系</option>
+                            <option value="psychology">心理學系</option>
+                            <option value="cs">資訊科學系</option>
+                        </optgroup>
+                        <optgroup label="社會科學院">
+                            <option value="politics">政治學系</option>
+                            <option value="sociology">社會學系</option>
+                            <option value="pf">財政學系</option>
+                            <option value="pa">公共行政學系</option>
+                            <option value="landeconomics">地政學系</option>
+                            <option value="econo">經濟學系</option>
+                            <option value="ethnos">民族學系</option>
+                        </optgroup>
+                        <optgroup label="法學院">
+                            <option value="law">法律學系</option>
+
+                        </optgroup>
+                        <optgroup label="商學院">
+                            <option value="banking">金融學系</option>
+                            <option value="ib">國際經營與貿易學系</option>
+                            <option value="acct">會計學系</option>
+                            <option value="stat">統計學系</option>
+                            <option value="ba">企業管理學系</option>
+                            <option value="mis">資訊管理學系</option>
+                            <option value="finance">財務管理學系</option>
+                            <option value="rmi">風險管理與保險學系</option>
+                        </optgroup>
+                        <optgroup label="外國語文學院">
+                            <option value="english">英國語文學系</option>
+                            <option value="arabic">阿拉伯語文學系</option>
+                            <option value="slavic">斯拉夫語文學系</option>
+                            <option value="japanese">日本語文學系</option>
+                            <option value="korean">韓國語文學系</option>
+                            <option value="turkish">土耳其語文學系</option>
+                            <option value="european">歐洲語文學系</option>
+                        </optgroup>
+                        <optgroup label="傳播學院">
+                            <option value="journalism">新聞學系</option>
+                            <option value="ad">廣告學系</option>
+                            <option value="rtv">廣播電視學系</option>
+                            <option value="communication">傳播學院大一大二不分系</option>
+                        </optgroup>
+                        <optgroup label="國際事務學院">
+                            <option value="diplomacy">外交學系</option>
+                        </optgroup>
+                        <optgroup label="教育學院">
+                            <option value="edu">教育學系</option>
+                        </optgroup>
                         　
                     </select></td>
 
@@ -264,8 +317,11 @@
                 </td>
                 <td>等級</td>
                 <!--<td><p ><%=member.level%>&nbsp;<%=member.char%></p></td>-->
-                <%if(member.level==1){%>
-                <td><p style="background-image: url('../../images/level_01.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+                <%if(member.level==0){%>
+                <td><p style="background-image: url('../../images/level_0.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+                <%}else if(member.level==1){%>
+                <td><p  class="level_p"style="background-image: url('../../images/level_02.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
+
                 <%}else if(member.level==2){%>
                 <td><p  class="level_p"style="background-image: url('../../images/level_02.png'); line-height: 37px;background-repeat:no-repeat;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.char%></p></td>
                 <%}else if(member.level==3){%>
