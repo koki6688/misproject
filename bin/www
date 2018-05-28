@@ -98,14 +98,12 @@ io.listen(server);
 var serv_io = io.listen(server);
 
 
-
 function counting_req(member) {
 
     var c = 0;
 
     var query = {
-        $or: [{pmID: member.member._id, status: "request"},
-            {rmID: member.member._id, status: "progressing", rCheck: false}]
+        $or: [{pmID: member.member._id, status: "request"}]
     };
 
     TaskModel.count(query, function (err, count) {
@@ -120,8 +118,7 @@ function counting_pro(member) {
     var c = 0;
 
     var query = {
-        $or: [{pmID: member.member._id, status: "progressing", rCheck: true, pCheck: false},
-            {rmID: member.member._id, status: "progressing", pCheck: true}]
+        $or: [{rmID: member.member._id, status: "progressing", rCheck: false}]
     };
 
     TaskModel.count(query, function (err, count) {
@@ -130,6 +127,37 @@ function counting_pro(member) {
     });
     return c;
 }
+
+function counting_rch(member) {
+
+    var c = 0;
+
+    var query = {
+        $or: [{pmID: member.member._id, status: "progressing", rCheck: true, pCheck: false}]
+    };
+
+    TaskModel.count(query, function (err, count) {
+
+        c = count;
+    });
+    return c;
+}
+
+function counting_pch(member) {
+
+    var c = 0;
+
+    var query = {
+        $or: [{rmID: member.member._id, status: "progressing", pCheck: true}]
+    };
+
+    TaskModel.count(query, function (err, count) {
+
+        c = count;
+    });
+    return c;
+}
+
 
 serv_io.use(function (socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
@@ -140,12 +168,14 @@ serv_io.sockets.on('connection', function (socket) {
 
     if (socket.request.session.member) {
         setInterval(function () {
-            socket.emit('count', {'count': counting_req(socket.request.session)});
+            socket.emit('count', {
+                'count_req': counting_req(socket.request.session),
+                'count_pro': counting_pro(socket.request.session),
+                'count_rch': counting_rch(socket.request.session),
+                'count_pch': counting_pch(socket.request.session)
+            });
         }, 10000);
 
-        setInterval(function () {
-            socket.emit('count_pro', {'count_pro': counting_pro(socket.request.session)});
-        }, 10000);
     }
 
 });
