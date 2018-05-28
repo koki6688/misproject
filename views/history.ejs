@@ -357,7 +357,7 @@
                                 此任務因效期而取消
                                 <% } %>
                             </td>
-                            <td><%= tasks[i].doneTime %></td>
+                            <td><%= tasks[i].doneTime.toLocaleString() %></td>
 
                         </tr>
 
@@ -577,7 +577,7 @@
                             <% } %>
                             <td data-th='發布時間' align="center"
                                 class="accept-creatime"><%= tasks[i].createTime.toLocaleString() %></td>
-                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime%></td>
+                            <td data-th='確認完成時間' align="center"><%= tasks[i].doneTime.toLocaleString()%></td>
                         </tr>
 
                             <% } %>
