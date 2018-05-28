@@ -5,6 +5,7 @@ var memberController = require('../controllers/member');
 var SignInController = require('../controllers/signin');
 var taskController = require('../controllers/task');
 var chatController = require('../controllers/server');
+var helpController = require('../controllers/help');
 
 
 /* 顯示登入頁面 */
@@ -80,6 +81,9 @@ router.post('/all-task/filter', taskController.filter);
 
 /* 用戶上傳圖片 */
 router.post('/upload/:mid', memberController.upload);
+
+/* 顯示help頁面 */
+router.get('/help',helpController.showHelp);
 
 router.get('/chat/:tid', chatController.chat);
 

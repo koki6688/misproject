@@ -29,6 +29,7 @@ exports.register = function (req, res) {
     var email = req.body.email;
     var nickname = req.body.nickname;
     var major = req.body.major;
+    var gender=req.body.gender;
 
 
     //檢驗內容
@@ -68,7 +69,7 @@ exports.register = function (req, res) {
         bcrypt.hash(password, saltRounds, function (err, hash) {
             MemberModel.addMember({
                 name: name, password: hash, bDate: bDate, cell: cell,
-                email: email, nickname: nickname, major: major
+                email: email, nickname: nickname, major: major,gender:gender
             }, function (err, result) {
                 if (result) {
                     var send = req.flash('success', 'success register');

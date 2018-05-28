@@ -1,30 +1,12 @@
 var express = require('express');
 var app = express();
-var mongoose = require('mongoose');
+
 
 var serverModel = require('../models/chat');
 var MemberModel = require('../models/member');
 //Listen on port 5000
-server = app.listen(4000)
-var mongoURI = 'mongodb://localhost/misproject';
+server = app.listen(4000);
 
-mongoose.connect(mongoURI, {
-    useMongoClient: true }, function(err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('mongoDB Connected...');
-    }
-});
-var chatSchema = mongoose.Schema({
-    tid: String,
-    pmID: {type: mongoose.Schema.Types.ObjectId, ref: 'tasks'},
-    rmID: {type: mongoose.Schema.Types.ObjectId, ref: 'tasks', default: null},
-    username: String,
-    message: String,
-    created: {type: Date, default: Date.now}
-});
-var misproject = mongoose.model('chats', chatSchema);
 
 
 //*CHAT*//
