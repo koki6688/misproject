@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
-
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <!--[if lte IE 9]>
@@ -17,86 +17,108 @@
 
     <!-- Header -->
 
-<section class="chat">
+    <section class="chat">
 
-<section>
-    <div id="change_username">
-        <input id="username" type="text" />
-        <button id="send_username" type="button">Change username</button>
-    </div>
-</section>
+        <section>
+            <div id="change_username">
+                <input id="username" type="text" />
+                <button id="send_username" type="button">Change username</button>
+            </div>
+        </section>
 
-<section id="chatroom">
-    <section id="feedback"></section>
-</section>
-
-
-
-<section id="input_zone">
-    <input id="message" class="vertical-align" type="text" />
-    <button id="send_message" class="vertical-align" type="button">Send</button>
-</section>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-        $(function(){
-            //make connection
-            var socket = io.connect('http://localhost:4000')
+        <section id="chatroom">
+            <section id="feedback"></section>
+        </section>
 
 
-            //buttons and inputs
-            var message = $("#message")
-            var username = $("#username")
-            var send_message = $("#send_message")
-            var send_username = $("#send_username")
-            var chatroom = $("#chatroom")
-            var feedback = $("#feedback")
 
-            //Emit message
-            send_message.click(function(){
-                socket.emit('new_message', {message : message.val()})
-            })
+        <section id="input_zone">
+            <input id="message" class="vertical-align" type="text" />
+            <div class="filebutton">Send Image<input type="file" id="imagefile" accept="image/*"></div>
+            <button id="send_message" class="vertical-align" type="button">Send</button>
+        </section>
+
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $(function(){
+                //make connection
+
+                var socket = io.connect('http://localhost:4000')
+
+
+                socket.emit("channelfixer", "socket")
+                //buttons and inputs
+                var message = $("#message")
+                var username =$("#username")
+                var send_message = $("#send_message")
+                var send_username = $("#send_username")
+                var chatroom = $("#chatroom")
+                var feedback = $("#feedback")
 
 
 
 
-            socket.on('load old msgs', function(docs){
-                for(var i = docs.length-1 ; i >= 0 ; i--){
-                    displayMsg(docs[i]);
+                //Emit message
+                send_message.click(function(){
+                    socket.emit('new_message', {message : message.val()})
+                })
+
+                //addimage
+                socket.on('user image', image);
+                    function image (from, base64Image) {
+                        $('#input_zone').append($('<p>').append($('<b>').text(from),
+                            '<img src="' + base64Image + '"/>'));
+                    }
+                $(function(){
+                    $("#imagefile").on('change',function(e){
+                        var file = e.originalEvent.target.files[0];
+                        reader = new FileReader();
+                        reader.onload = function(evt){
+                            socket.emit('user image', evt.target.result);
+                        };
+                        reader.readAsDataURL(file);
+                    })
+                });
+
+
+                //Listen on new_message
+                socket.on("new_message", function(data) {
+
+                    feedback.html('');
+                    message.val('');
+                    displayMsg(data);
+                });
+
+                function displayMsg(data){
+                    chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
                 }
-            })
 
 
-            //Listen on new_message
-            socket.on("new_message", function(data) {
-                feedback.html('');
-                message.val('');
-                displayMsg(data);
+
+                socket.on('load old msgs', function(docs){
+                    for(var i = docs.length-1 ; i >= 0 ; i--){
+                        displayMsg(docs[i]);
+                    }
+                })
+
+                //Emit a username
+                send_username.click(function(){
+                    socket.emit('change_username', {username : username.val()})
+                })
+
+                //Emit typing
+                message.bind("keypress", function()  {
+                    socket.emit('typing')
+                })
+
+                //Listen on typing
+                socket.on('typing', function(data)  {
+                    feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
+                })
             });
+        </script>
 
-            function displayMsg(data){
-                chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
-            }
-
-
-            //Emit a username
-            send_username.click(function(){
-                socket.emit('change_username', {username : username.val()})
-            })
-
-            //Emit typing
-            message.bind("keypress", () => {
-                socket.emit('typing')
-        })
-
-            //Listen on typing
-            socket.on('typing', (data) => {
-                feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
-        })
-        });
-    </script>
-
-</section>
+    </section>
 </div>
 </body>
 </html>
