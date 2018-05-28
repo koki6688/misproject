@@ -96,10 +96,12 @@ function onListening() {
 
 io.listen(server);
 var serv_io = io.listen(server);
-var c = null;
+
 
 
 function counting_req(member) {
+
+    var c = 0;
 
     var query = {
         $or: [{pmID: member.member._id, status: "request"},
@@ -115,8 +117,10 @@ function counting_req(member) {
 
 function counting_pro(member) {
 
+    var c = 0;
+
     var query = {
-        $or: [{pmID: member.member._id, status: "progressing", rCheck: true},
+        $or: [{pmID: member.member._id, status: "progressing", rCheck: true, pCheck: false},
             {rmID: member.member._id, status: "progressing", pCheck: true}]
     };
 
