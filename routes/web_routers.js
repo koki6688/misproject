@@ -83,7 +83,7 @@ router.post('/upload/:mid', memberController.upload);
 
 router.get('/chat/:tid', chatController.chat);
 
-router.post('/chat/:tid', chatController.chat);
+
 
 
 

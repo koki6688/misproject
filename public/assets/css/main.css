@@ -4277,7 +4277,7 @@ body.is-loading #banner > .inner {
 /* Main */
 
 #main {
-	background-color: #2a2f4a;
+	background-color: #afba25;
 }
 
 #main > * {
@@ -4488,7 +4488,7 @@ body.is-loading #banner > .inner {
 	-webkit-transition: margin-right 0.5s ease, box-shadow 0.5s ease;
 	-ms-transition: margin-right 0.5s ease, box-shadow 0.5s ease;
 	transition: margin-right 0.5s ease, box-shadow 0.5s ease;
-	background-color: #efefef;
+	background-color: #24ef28;
 	font-size: 0.9em;
 	position: relative;
 	width: 13em;

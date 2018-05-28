@@ -35,4 +35,8 @@ MemberSchema.statics.updateMember = function (query, update, callback) {
     this.update(query, update, callback);
 };
 
+MemberSchema.statics.getNickname = function (query, field, path_select, field_select,  callback){
+    this.find(query, field).populate(path_select, field_select).exec(callback);
+}
+
 module.exports = mongoose.model('Member', MemberSchema);
