@@ -1,7 +1,9 @@
 var mongoose = require('../db').mongoose;
 
+
 var chatSchema = mongoose.Schema({
     tid: String,
+    pmID: {type: mongoose.Schema.Types.ObjectId, ref: 'Member'},
     rmID: {type: mongoose.Schema.Types.ObjectId, ref: 'Member', default: null},
     username: String,
     message: String,
@@ -13,4 +15,8 @@ var chatSchema = mongoose.Schema({
         this.find(query, field).populate(path_select, field_select).exec(callback);
 };
 
-module.exports = mongoose.model('chat', chatSchema);
+
+
+var misproject = mongoose.model('chats', chatSchema);
+
+module.exports = misproject;
