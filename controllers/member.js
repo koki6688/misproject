@@ -231,6 +231,7 @@ exports.upload = function (req, res) {
         if (!fs.existsSync(targetDir)) {
             fs.mkdir(targetDir);
         }
+        console.log(targetDir);
         var fileExt = filePath.substring(filePath.lastIndexOf('.'));
         //判斷文件類型是否允許上傳
         if (('.jpg.jpeg.png.gif').indexOf(fileExt.toLowerCase()) === -1) {

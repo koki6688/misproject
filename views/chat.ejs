@@ -40,7 +40,9 @@
         </section>
         <form method="post" action=""+location.pathname   enctype="multipart/form-data">
             <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
+
             <br>   <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="上傳圖片">
+
         </form>
 
 
@@ -113,7 +115,7 @@
                     var text="";
                     for(var i = docs.length-1 ; i >= 0 ; i--){
                         if(docs[i].message.toString().includes("upload") ){
-                            text=text+"<span>"+docs[i].username+":</span><img src ='/"+docs[i].message+"'height='50%' width='50%'></br>"
+                            text=text+"<p>"+docs[i].username+":</p><img src ='/"+docs[i].message+"'height='25%' width='25%'></br>"
                         }else {
 
                             //if(docs{i}.message)

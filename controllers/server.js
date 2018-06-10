@@ -9,6 +9,7 @@ var ep = new eventproxy();
 var fs = require('fs');
 server = app.listen(4000);
 var io = require("socket.io")(server);
+var name="";
 
 
 
@@ -59,7 +60,7 @@ exports.chat = function (req, res) {
                     socket.emit("load old msgs", docs);
                 })
 
-            },10000);
+            },1000);
         function querydb() {
             var query = misproject.find({tid: tid});
             query.sort('-created').limit(5).exec(function (err, docs) {
@@ -77,6 +78,7 @@ exports.chat = function (req, res) {
 //listen on change_username
         socket.on('change_username', function (data) {
             socket.username = data.username;
+            name=data.username;
         });
 
 //share images
@@ -121,8 +123,11 @@ exports.chat = function (req, res) {
 exports.uploads = function (req, res) {
 
     var tid = req.params.tid;
+
     var query = {_id: tid};
-    console.log(tid);
+
+
+
 
     var form = new formidable.IncomingForm();
     //文件保存目錄為當前項目下之tmp folder
@@ -171,7 +176,7 @@ exports.uploads = function (req, res) {
                 } else {
                     console.log("movefile");
 
-                    var newMsg = new misproject({ message:"upload/"+fileName, tid: tid});
+                    var newMsg = new misproject({ message:"upload/"+fileName, username: name, tid: tid});
                     newMsg.save(function (err) {
                             if (err) {
                                 console.log("err!");

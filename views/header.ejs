@@ -27,7 +27,7 @@
         if(data.count_req!=null) {
             $('#count').text(data.count_req+data.count_pro+data.count_rch+data.count_pch);
             console.log(data.count_pro);
-            console.log("count_eqr:"+data.count_req);
+            console.log("count_req:"+data.count_req);
             console.log("count_pro:"+data.count_pro);
             console.log("count_pch:"+data.count_pch);
             console.log("count_rch:"+data.count_rch);
@@ -66,8 +66,10 @@
     var delayTime = 2000;
     timer = setInterval(notify_interval(), delayTime);
 
+
     Notification.requestPermission().then(function(result) {
         console.log(result);
+        console.log("<%=current_member.nickname%>");
     });
     function notify_interval() {
 
@@ -131,7 +133,7 @@
         if (Notification && Notification.permission === "granted") {
             console.log(<%= current_member.nickname %>);
 
-            var n = new Notification("<%= current_member.nickname %>: " + t, options);
+            var n = new Notification(current_member.nickname+": " + t, options);
             n.onclick = function () {
                 window.location = "/history";
             };
