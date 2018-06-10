@@ -14,17 +14,38 @@
 
 <script>
     var socket = io.connect();
-    var count_o;
-    var count;
-    var noti;
+    var count_req_o=0;
+    var count_req;
+    var count_pro_o=0;
+    var count_pro;
+    var count_rch_o=0;
+    var count_rch;
+    var count_pch_o=0;
+    var count_pch;
+    var noti={req:0, pro:0, rch:0, pch:0};
     socket.on('count', function(data) {
-        if(data.count!=null) {
-            $('#count').text(data.count);
-            console.log(data.count_req,data.count_pro,data.count_rch,data.count_pch);
+        if(data.count_req!=null) {
+            $('#count').text(data.count_req+data.count_pro+data.count_rch+data.count_pch);
+            console.log(data.count_pro);
+            console.log("count:"+data.count);
             $('#bell').hide();
-            count_o=count;
-            count=data.count;
-            noti=count-count_o;
+            if(count_req>count_req_o){
+             noti.req=count_req-count_req_o;
+             count_req_o=count_req;
+            }
+            if(count_pro>count_pro_o){
+                noti.pro=count_pro-count_pro_o;
+                count_pro_o=count_pro;
+            }
+            if(count_rch>count_rch_o){
+                noti.rch=count_rch-count_rch_o;
+                count_rch_o=count_rch;
+            }
+            if(count_pch>count_pch_o){
+                noti.pch=count_pro-count_pch_o;
+                count_pch_o=count_pch;
+            }
+
         }
         else{
             $('#bell').show();
@@ -61,37 +82,75 @@
                 }
             });
         }
-        if(noti>0) {
+        if(noti.req>0) {
 
             var t = new Date().toLocaleString();
             var options = {
                 dir: "ltr",
                 lang: "utf-8",
                 icon: "/assets/images/notificationicon.png",
-                body: "您有新通知("+count+")，請至歷史任務頁面查看"
+                body: "您有新任務申請，請至歷史任務頁面查看"
             };
-            if (Notification && Notification.permission === "granted") {
+            notify(t,options);
+        }
+        if(noti.pro>0) {
 
-                var n = new Notification("<%= current_member.nickname %>: " + t, options);
-                n.onclick = function () {
-                    window.location = "/history";
-                };
-                n.onclose = function () {
-                    console.log("notification closed!");
-                };
-                n.onerror = function () {
-                    console.log("An error accured");
-                }
-            } else if (Notification && Notification.permission !== "denied") {
-                Notification.requestPermission(function (status) {
-                    if (Notification.permission !== status) {
-                        Notification.permission = status;
-                    }
-                });
-            }
+            var t = new Date().toLocaleString();
+            var options = {
+                dir: "ltr",
+                lang: "utf-8",
+                icon: "/assets/images/notificationicon.png",
+                body: "您有新任務被同意，請至歷史任務頁面查看，並開始執行任務"
+            };
+            notify(t,options);
+        }
+        if(noti.rch>0) {
+
+            var t = new Date().toLocaleString();
+            var options = {
+                dir: "ltr",
+                lang: "utf-8",
+                icon: "/assets/images/notificationicon.png",
+                body: "您有新任務被回報完成，請至歷史任務頁面查看，並進行評分"
+            };
+            notify(t,options);
+        }
+        if(noti.pch>0) {
+
+            var t = new Date().toLocaleString();
+            var options = {
+                dir: "ltr",
+                lang: "utf-8",
+                icon: "/assets/images/notificationicon.png",
+                body: "您有執行的任務被確認評分，請至歷史任務頁面查看，並進行評分"
+            };
+            notify(t,options);
         }
 
     });
+    function notify(t,options) {
+        if (Notification && Notification.permission === "granted") {
+
+            var n = new Notification("<%= current_member.nickname %>: " + t, options);
+            n.onclick = function () {
+                window.location = "/history";
+            };
+            n.onclose = function () {
+                console.log("notification closed!");
+            };
+            n.onerror = function () {
+                console.log("An error accured");
+            }
+        } else if (Notification && Notification.permission !== "denied") {
+            Notification.requestPermission(function (status) {
+                if (Notification.permission !== status) {
+                    Notification.permission = status;
+                }
+            });
+        }
+
+
+            }
 </script>
 <header id="header" class="alt">
     <a href="/home" class="logo"><span>i-</span> <strong>Sharing</strong></a>
