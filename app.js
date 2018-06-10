@@ -49,10 +49,12 @@ var sessionMiddleware = session({
     secret: 'asasasas',
     store: new RedisStore({
 
-        //port: redisPort,
-        //host: redisHost
-        port: 6379,
-        host: '127.0.0.1'
+        port: redisPort,
+        host: redisHost,
+        name:"i-Sharing",
+        password:"ezOIjDRc4lsSrS0JkAfjzNxwkCZiQMiH"
+        //port: 6379,
+        //host: '127.0.0.1'
     }),
     resave: true,
     saveUninitialized: true
