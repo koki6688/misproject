@@ -53,14 +53,14 @@ exports.chat = function (req, res) {
         setInterval(
             function(){
                 var query = misproject.find({tid: tid});
-                query.sort('-created').limit(5).exec(function (err, docs) {
+                query.sort('-created').limit(100).exec(function (err, docs) {
                     if (err) throw err;
                     console.log('sending old msgs');
                     console.log(docs);
                     socket.emit("load old msgs", docs);
                 })
 
-            },1000);
+            },500);
         function querydb() {
             var query = misproject.find({tid: tid});
             query.sort('-created').limit(5).exec(function (err, docs) {

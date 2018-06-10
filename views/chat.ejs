@@ -38,6 +38,7 @@
         <section id="input_zone1">
 
         </section>
+
         <form method="post" action=""+location.pathname   enctype="multipart/form-data">
             <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
 
@@ -123,6 +124,11 @@
                         }
                     }
                     displayMsg(text);
+                    $('html, body').animate({
+                        scrollTop: $("#input_zone1").offset().top
+                    },10);
+
+
                 })
 
                 //Emit a username
