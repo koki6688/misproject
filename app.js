@@ -73,8 +73,8 @@ app.use(function (req, res, next) {
 
 //建立session
 
-var redisHost = 'redis-17940.c1.ap-southeast-1-1.ec2.cloud.redislabs.com';
-var redisPort = 17940;
+var redisHost = 'redis-17889.c1.ap-southeast-1-1.ec2.cloud.redislabs.com';
+var redisPort = 17889;
 
 var sessionMiddleware = session({
     secret: 'asasasas',
