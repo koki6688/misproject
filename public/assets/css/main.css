@@ -4488,7 +4488,7 @@ body.is-loading #banner > .inner {
 	-webkit-transition: margin-right 0.5s ease, box-shadow 0.5s ease;
 	-ms-transition: margin-right 0.5s ease, box-shadow 0.5s ease;
 	transition: margin-right 0.5s ease, box-shadow 0.5s ease;
-	background-color: #24ef28;
+	background-color: #efefef;
 	font-size: 0.9em;
 	position: relative;
 	width: 13em;
@@ -4701,7 +4701,7 @@ body.is-loading #banner > .inner {
 		margin-left: 0;
 	}
 	.flip,.cancel{
-		width:13%;
+		width:20%;
 	}
 
 	#sidebar .toggle {
@@ -4970,8 +4970,21 @@ div.tab_container .tab_content h2 {
 	background-color: rgba(249, 249, 249, 0.76);
 
 }
+.chat{
+	width:80%;
+	margin-left: 10%;
+	margin-top: 5%;
+	height:80%;
 
 
+}
+#chatroom{
+	/*border:solid 2px #3ABCB1;*/
+	height:70%;
+}
+#message{
+	width:100%;
+}
 @media screen and (max-width: 1024px) {
 	ul.tabs li a {
 		font-size: 18px;

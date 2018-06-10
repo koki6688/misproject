@@ -27,7 +27,11 @@
         if(data.count_req!=null) {
             $('#count').text(data.count_req+data.count_pro+data.count_rch+data.count_pch);
             console.log(data.count_pro);
-            console.log("count:"+data.count);
+            console.log("count_eqr:"+data.count_req);
+            console.log("count_pro:"+data.count_pro);
+            console.log("count_pch:"+data.count_pch);
+            console.log("count_rch:"+data.count_rch);
+
             $('#bell').hide();
             if(count_req>count_req_o){
              noti.req=count_req-count_req_o;
@@ -58,76 +62,71 @@
 </script>
 <script>
 
-            if (Notification && Notification.permission === "granted") {
-                var n = new Notification("<%= current_member.nickname %>: " + options);
-                n.onclick = function () {
-                    window.location = "/history";
-                };
-                n.onclose = function () {
-                    console.log("notification closed!");
-                };
-                n.onerror = function () {
-                    console.log("An error accured");
-                }
-            }
+    var timer = null;
+    var delayTime = 2000;
+    timer = setInterval(notify_interval(), delayTime);
 
     Notification.requestPermission().then(function(result) {
         console.log(result);
     });
-    window.addEventListener("load", function(){
-        if(Notification && Notification.permission !== "granted"){
-            Notification.requestPermission(function(status){
-                if(Notification.permission !== status){
-                    Notification.permission = status;
-                }
-            });
-        }
-        if(noti.req>0) {
+    function notify_interval() {
 
-            var t = new Date().toLocaleString();
-            var options = {
-                dir: "ltr",
-                lang: "utf-8",
-                icon: "/assets/images/notificationicon.png",
-                body: "您有新任務申請，請至歷史任務頁面查看"
-            };
-            notify(t,options);
-        }
-        if(noti.pro>0) {
+        window.addEventListener("load", function () {
 
-            var t = new Date().toLocaleString();
-            var options = {
-                dir: "ltr",
-                lang: "utf-8",
-                icon: "/assets/images/notificationicon.png",
-                body: "您有新任務被同意，請至歷史任務頁面查看，並開始執行任務"
-            };
-            notify(t,options);
-        }
-        if(noti.rch>0) {
+            if (Notification && Notification.permission !== "granted") {
+                Notification.requestPermission(function (status) {
+                    if (Notification.permission !== status) {
+                        Notification.permission = status;
+                    }
+                });
+            }
+            if (noti.req > 0) {
 
-            var t = new Date().toLocaleString();
-            var options = {
-                dir: "ltr",
-                lang: "utf-8",
-                icon: "/assets/images/notificationicon.png",
-                body: "您有新任務被回報完成，請至歷史任務頁面查看，並進行評分"
-            };
-            notify(t,options);
-        }
-        if(noti.pch>0) {
+                var t = new Date().toLocaleString();
+                var options = {
+                    dir: "ltr",
+                    lang: "utf-8",
+                    icon: "/assets/images/notificationicon.png",
+                    body: "您有新任務申請，請至歷史任務頁面查看"
+                };
+                notify(t, options);
+            }
+            if (noti.pro > 0) {
 
-            var t = new Date().toLocaleString();
-            var options = {
-                dir: "ltr",
-                lang: "utf-8",
-                icon: "/assets/images/notificationicon.png",
-                body: "您有執行的任務被確認評分，請至歷史任務頁面查看，並進行評分"
-            };
-            notify(t,options);
-        }
+                var t = new Date().toLocaleString();
+                var options = {
+                    dir: "ltr",
+                    lang: "utf-8",
+                    icon: "/assets/images/notificationicon.png",
+                    body: "您有新任務被同意，請至歷史任務頁面查看，並開始執行任務"
+                };
+                notify(t, options);
+            }
+            if (noti.rch > 0) {
 
-    });
+                var t = new Date().toLocaleString();
+                var options = {
+                    dir: "ltr",
+                    lang: "utf-8",
+                    icon: "/assets/images/notificationicon.png",
+                    body: "您有新任務被回報完成，請至歷史任務頁面查看，並進行評分"
+                };
+                notify(t, options);
+            }
+            if (noti.pch > 0) {
+
+                var t = new Date().toLocaleString();
+                var options = {
+                    dir: "ltr",
+                    lang: "utf-8",
+                    icon: "/assets/images/notificationicon.png",
+                    body: "您有執行的任務被確認評分，請至歷史任務頁面查看，並進行評分"
+                };
+                notify(t, options);
+            }
+
+        });
+    }
     function notify(t,options) {
         if (Notification && Notification.permission === "granted") {
 
@@ -184,7 +183,7 @@
                 <a class="button_slide slide_right" href="/member/<%=current_member._id%>">關於我</a></br>
                 <a class="button_slide slide_right" href="/history">歷史任務</a></br>
     <a class="button_slide slide_right" href="/signout">登出</a></br>
-<a class="button_slide slide_right" href="/history">幫助</a>
+
 
 
 
