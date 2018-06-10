@@ -129,6 +129,7 @@
     }
     function notify(t,options) {
         if (Notification && Notification.permission === "granted") {
+            console.log(<%= current_member.nickname %>);
 
             var n = new Notification("<%= current_member.nickname %>: " + t, options);
             n.onclick = function () {

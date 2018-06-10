@@ -38,6 +38,10 @@
         <section id="input_zone1">
 
         </section>
+        <form method="post" action=""+location.pathname   enctype="multipart/form-data">
+            <input type="file" id="image" name="image" accept="image/gif, image/jpeg, image/png,image/jpg"/>
+            <br>   <input type="submit" id="pSubmit" name="pSubmit" class="pSubmit" value="上傳圖片">
+        </form>
 
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -45,16 +49,10 @@
             //$( document ).ready(function() {
             //    upload();
            // });
+            console.log(location.pathname);
             $(function(){
                 //make connection
 
-                function upload(){
-                    var text_upload="";
-                    text_upload="<form method='post' action='/upload/'"+location.pathname+"enctype='multipart/form-data\'><input type='file' id='image' name='image' accept='image/gif, image/jpeg, image/png,image/jpg\'/><br> <input type='submit' id='pSubmit' name='pSubmit' class='pSubmit' value='上傳圖片'><br> </form>"
-                    document.getElementById("input_zone1").innerHTML=text_upload;
-
-                }
-                upload();
 
                 var socket = io.connect('http://localhost:4000')
 
@@ -114,10 +112,13 @@
                 socket.on('load old msgs', function(docs){
                     var text="";
                     for(var i = docs.length-1 ; i >= 0 ; i--){
+                        if(docs[i].message.toString().includes("upload") ){
+                            text=text+"<span>"+docs[i].username+":</span><img src ='/"+docs[i].message+"'height='50%' width='50%'></br>"
+                        }else {
 
-                        //if(docs{i}.message)
-                        text=text+"<p class='message'>" + docs[i].username + ": " +docs[i].message + "</p>";
-
+                            //if(docs{i}.message)
+                            text = text + "<p class='message'>" + docs[i].username + ": " + docs[i].message + "</p>";
+                        }
                     }
                     displayMsg(text);
                 })

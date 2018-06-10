@@ -7,10 +7,12 @@ var formidable = require('formidable');
 var eventproxy = require('eventproxy');
 var ep = new eventproxy();
 var fs = require('fs');
+server = app.listen(4000);
+var io = require("socket.io")(server);
 
 
 
-server = app.listen(4000)
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 //*CHAT*//
@@ -29,11 +31,11 @@ exports.chat = function (req, res) {
     serverModel.getChat(query, field, path_select, field_select, function (err, tasks) {
 
             res.render('chat', {tasks: tasks});
-            console.log(tid)
+            console.log(tid);
 
         }
     );
-    var io = require("socket.io")(server);
+
 
     //listen on every connection
     io.sockets.on('connection', function(socket)  {
@@ -43,7 +45,7 @@ exports.chat = function (req, res) {
             //console.log(mychannel)
             socket.join(mychannel);
             console.log(socket.rooms);
-        })
+        });
 
 
 
@@ -120,6 +122,7 @@ exports.uploads = function (req, res) {
 
     var tid = req.params.tid;
     var query = {_id: tid};
+    console.log(tid);
 
     var form = new formidable.IncomingForm();
     //文件保存目錄為當前項目下之tmp folder
@@ -156,6 +159,7 @@ exports.uploads = function (req, res) {
             ep.emit('error', '此類型文件不允許上傳！');
         } else {
             //以time stamp rename files
+            console.log("renamefile");
             var fileName = new Date().getTime() + fileExt;
             var targetFile = path.join(targetDir, fileName);
 
@@ -165,11 +169,18 @@ exports.uploads = function (req, res) {
 
                     ep.emit('error', '移動失敗！');
                 } else {
+                    console.log("movefile");
 
-                    var newMsg = new misproject({ message:"upload/"+fileName, username: socket.username , tid: tid});
+                    var newMsg = new misproject({ message:"upload/"+fileName, tid: tid});
                     newMsg.save(function (err) {
-                            if (err) {throw err}else{res.redirect('/chat/' + tid);}
-
+                            if (err) {
+                                console.log("err!");
+                                throw err;
+                            }
+                            else{
+                                console.log("redirect");
+                                res.redirect('/chat/' + tid);
+                            }
                         }
 
                     );
@@ -180,3 +191,4 @@ exports.uploads = function (req, res) {
         }
     });
 };
+

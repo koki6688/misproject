@@ -87,7 +87,7 @@ router.get('/help',helpController.showHelp);
 
 router.get('/chat/:tid', chatController.chat);
 
-router.post('/upload', chatController.uploads);
+router.post('/chat/:tid', chatController.uploads);
 
 
 
