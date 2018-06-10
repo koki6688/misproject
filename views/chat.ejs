@@ -19,12 +19,7 @@
 
     <section class="chat">
 
-        <section>
-            <div id="change_username">
-                <input id="username" type="text" />
-                <button id="send_username" type="button">Change username</button>
-            </div>
-        </section>
+
 
         <section id="chatroom">
             <section id="feedback"></section>
@@ -34,19 +29,38 @@
 
         <section id="input_zone">
             <input id="message" class="vertical-align" type="text" />
-            <div class="filebutton">Send Image<input type="file" id="imagefile" accept="image/*"></div>
+
             <button id="send_message" class="vertical-align" type="button">Send</button>
+
+
         </section>
+
+        <section id="input_zone1">
+
+        </section>
+
 
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
+            //$( document ).ready(function() {
+            //    upload();
+           // });
             $(function(){
                 //make connection
 
+                function upload(){
+                    var text_upload="";
+                    text_upload="<form method='post' action='/upload/'"+location.pathname+"enctype='multipart/form-data\'><input type='file' id='image' name='image' accept='image/gif, image/jpeg, image/png,image/jpg\'/><br> <input type='submit' id='pSubmit' name='pSubmit' class='pSubmit' value='上傳圖片'><br> </form>"
+                    document.getElementById("input_zone1").innerHTML=text_upload;
+
+                }
+                upload();
+
                 var socket = io.connect('http://localhost:4000')
 
+                socket.emit("channelfixer",location.href)
 
-                socket.emit("channelfixer", "socket")
+
                 //buttons and inputs
                 var message = $("#message")
                 var username =$("#username")
@@ -60,7 +74,7 @@
 
                 //Emit message
                 send_message.click(function(){
-                    socket.emit('new_message', {message : message.val()})
+                    socket.emit('new_message', {message : message.val(),room:location.href})
                 })
 
                 //addimage
@@ -84,26 +98,33 @@
                 //Listen on new_message
                 socket.on("new_message", function(data) {
 
+
                     feedback.html('');
                     message.val('');
                     displayMsg(data);
                 });
 
                 function displayMsg(data){
-                    chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+                    document.getElementById("chatroom").innerHTML=data;
+                    //chatroom.innerHTML("<p class='message'>" + data.username + ": " + data.message + "</p>")
                 }
 
 
 
                 socket.on('load old msgs', function(docs){
+                    var text="";
                     for(var i = docs.length-1 ; i >= 0 ; i--){
-                        displayMsg(docs[i]);
+
+                        //if(docs{i}.message)
+                        text=text+"<p class='message'>" + docs[i].username + ": " +docs[i].message + "</p>";
+
                     }
+                    displayMsg(text);
                 })
 
                 //Emit a username
-                send_username.click(function(){
-                    socket.emit('change_username', {username : username.val()})
+                $(function(){
+                    socket.emit('change_username', {username:"<%=current_member.nickname%>"})
                 })
 
                 //Emit typing
