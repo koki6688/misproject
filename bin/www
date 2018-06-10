@@ -7,8 +7,8 @@
 var app = require('../app').express;
 var debug = require('debug')('misproject:server');
 var http = require('http');
-var io = require('socket.io');
 var sessionMiddleware = require('../app').sessionMiddleware;
+var io = require('socket.io');
 var TaskModel = require('../models/task');
 
 
