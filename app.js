@@ -1,31 +1,31 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var flash = require('connect-flash');
-var io = require('socket.io');
-var eventproxy = require('eventproxy');
-var ep = new eventproxy();
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const io = require('socket.io');
+const eventproxy = require('eventproxy');
+const ep = new eventproxy();
 
 //導入 session 外部插件
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 
-var TaskModel = require('./models/task');
-var MemberModel = require('./models/member');
-var moment = require('moment');
-var now = moment().format();
+const TaskModel = require('./models/task');
+const MemberModel = require('./models/member');
+const moment = require('moment');
+const now = moment().format();
 
-var $ = require('jquery');
+const $ = require('jquery');
 
 
 //導入busboy以處裡上傳檔案
-var busboy = require('connect-busboy');
+const busboy = require('connect-busboy');
 
-var webRouter = require('./routes/web_routers');
-var app = express();
+const webRouter = require('./routes/web_routers');
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,17 +42,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //建立session
 
-var redisHost = 'redis-17993.c1.ap-southeast-1-1.ec2.cloud.redislabs.com';
-var redisPort = 17993;
+const redisHost = 'redis-17993.c1.ap-southeast-1-1.ec2.cloud.redislabs.com';
+const redisPort = 17993;
 
-var sessionMiddleware = session({
+const sessionMiddleware = session({
     secret: 'asasasas',
     store: new RedisStore({
 
         port: redisPort,
         host: redisHost,
-        name:"i-Sharing",
-        password:"ezOIjDRc4lsSrS0JkAfjzNxwkCZiQMiH"
+        name: "i-Sharing",
+        password: "ezOIjDRc4lsSrS0JkAfjzNxwkCZiQMiH"
         //port: 6379,
         //host: '127.0.0.1'
     }),
@@ -68,7 +68,7 @@ app.use(function (req, res, next) {
         if (result) {
 
             if (moment(result.due_date).isBefore(now)) {
-                var update = {$inc: {asset: result.reward}};
+                const update = {$inc: {asset: result.reward}};
 
                 MemberModel.updateMember({_id: result.pmID}, update, function (err, member) {
 
@@ -98,13 +98,13 @@ app.use(flash());
 
 app.use(function (req, res, next) {
     app.locals.user = req.session.user;
-    var suc = req.flash('success');
+    const suc = req.flash('success');
     res.locals.r_success = suc.length ? suc : null;
 
-    var err = req.flash('error');
+    const err = req.flash('error');
     res.locals.r_error = err.length ? err : null;
 
-    var s_err = req.flash('s_error');
+    const s_err = req.flash('s_error');
     res.locals.s_error = s_err.length ? s_err : null;
 
 
@@ -117,7 +117,7 @@ app.use('/', webRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

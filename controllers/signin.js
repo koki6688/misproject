@@ -1,17 +1,17 @@
-var eventproxy = require('eventproxy');
-var ep = new eventproxy();
+const eventproxy = require('eventproxy');
+const ep = new eventproxy();
 
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var MemberModel = require('../models/member');
-var TaskModel = require('../models/task');
+const MemberModel = require('../models/member');
+const TaskModel = require('../models/task');
 
 exports.signin = function (req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
+    let email = req.body.email;
+    let password = req.body.password;
 
-    var query = {email: email};
+    const query = {email: email};
 
     if (!email || !password) {
         res.status(422);

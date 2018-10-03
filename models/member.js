@@ -1,6 +1,6 @@
-var mongoose = require('../db').mongoose;
+const mongoose = require('../db').mongoose;
 
-var MemberSchema = new mongoose.Schema({
+const MemberSchema = new mongoose.Schema({
     name: String,
     password: String,
     bDate: String,

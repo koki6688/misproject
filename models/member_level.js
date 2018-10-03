@@ -1,4 +1,4 @@
-var level = [{"0": [{"exp": 0}, {"char": "初心者"}]}, {"1": [{"exp": 1}, {"char": "學徒"}]},
+const level = [{"0": [{"exp": 0}, {"char": "初心者"}]}, {"1": [{"exp": 1}, {"char": "學徒"}]},
     {"2": [{"exp": 3}, {"char": "魔法見習生"}]}, {"3": [{"exp": 6}, {"char": "初級魔法師"}]},
     {"4": [{"exp": 11}, {"char": "中級魔法師"}]}, {"5": [{"exp": 19}, {"char": "高級魔法師"}]},
     {"6": [{"exp": 32}, {"char": "大魔法師"}]}, {"7": [{"exp": 53}, {"char": "聖魔法師"}]},
@@ -6,9 +6,9 @@ var level = [{"0": [{"exp": 0}, {"char": "初心者"}]}, {"1": [{"exp": 1}, {"ch
     {"10": [{"exp": 231}, {"char": "聖魔導士"}]}, {"11": [{"exp": 375}, {"char": "究極魔導士"}]}];
 
 function getLevel(exp) {
-    var memberLevel;
-    var char;
-    for (var i = 0; i < level.length - 1; i++) {
+    let memberLevel;
+    let char;
+    for (let i = 0; i < level.length - 1; i++) {
 
         if (level[i][i][0].exp <= exp && exp < level[i + 1][i + 1][0].exp) {
 

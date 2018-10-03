@@ -1,18 +1,15 @@
-var express = require('express');
-var app = express();
-var misproject = require('../models/chat');
-var serverModel = require('../models/chat');
-var path = require('path');
-var formidable = require('formidable');
-var eventproxy = require('eventproxy');
-var ep = new eventproxy();
-var fs = require('fs');
+const express = require('express');
+const app = express();
+const misproject = require('../models/chat');
+const serverModel = require('../models/chat');
+const path = require('path');
+const formidable = require('formidable');
+const eventproxy = require('eventproxy');
+const ep = new eventproxy();
+const fs = require('fs');
 server = app.listen(4000);
-var io = require("socket.io")(server);
-var name="";
-
-
-
+const io = require("socket.io")(server);
+let name = "";
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,11 +19,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 exports.chat = function (req, res) {
 
-    var tid = req.params.tid;
-    var query = {_id: tid};
-    var field = {};
-    var path_select = 'tid';
-    var field_select = 'username message';
+    const tid = req.params.tid;
+    const query = {_id: tid};
+    const field = {};
+    const path_select = 'tid';
+    const field_select = 'username message';
 
 
     serverModel.getChat(query, field, path_select, field_select, function (err, tasks) {
@@ -52,7 +49,7 @@ exports.chat = function (req, res) {
 
         setInterval(
             function(){
-                var query = misproject.find({tid: tid});
+                const query = misproject.find({tid: tid});
                 query.sort('-created').limit(100).exec(function (err, docs) {
                     if (err) throw err;
                     console.log('sending old msgs');
@@ -62,7 +59,7 @@ exports.chat = function (req, res) {
 
             },500);
         function querydb() {
-            var query = misproject.find({tid: tid});
+            const query = misproject.find({tid: tid});
             query.sort('-created').limit(5).exec(function (err, docs) {
                 if (err) throw err;
                 console.log('sending old msgs');
@@ -91,7 +88,7 @@ exports.chat = function (req, res) {
 
 //listen on new_message
         socket.on('new_message', function (data) {
-            var newMsg = new misproject({ message:data.message, username: socket.username , tid: tid});
+            const newMsg = new misproject({message: data.message, username: socket.username, tid: tid});
             newMsg.save(function (err) {
                 if (err) throw err;
             });
@@ -122,14 +119,12 @@ exports.chat = function (req, res) {
 };
 exports.uploads = function (req, res) {
 
-    var tid = req.params.tid;
+    const tid = req.params.tid;
 
-    var query = {_id: tid};
-
-
+    const query = {_id: tid};
 
 
-    var form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm();
     //文件保存目錄為當前項目下之tmp folder
     form.uploadDir = path.join(process.cwd(), 'public', 'tmp');
     console.log(process.cwd());
@@ -138,7 +133,7 @@ exports.uploads = function (req, res) {
     //使用文件的原擴展
     form.keepExtensions = true;
     form.parse(req, function (err, fields, file) {
-        var filePath = '';
+        let filePath = '';
         /*如果提交文件的form中將上傳文件的input名設置為tmpFile，就從tmpFile中取上傳文件。
           否則取for in循環第一個上傳的文件。*/
         if (file.tmpFile) {
@@ -146,7 +141,7 @@ exports.uploads = function (req, res) {
         }
 
         else {
-            for (var key in file) {
+            for (let key in file) {
                 if (file[key].path && filePath === '') {
                     filePath = file[key].path;
                     break;
@@ -154,19 +149,19 @@ exports.uploads = function (req, res) {
             }
         }
         //文件移動的目錄文件夾，不存在時創建目標文件夾
-        var targetDir = path.join(process.cwd(), 'public', 'upload');
+        const targetDir = path.join(process.cwd(), 'public', 'upload');
         if (!fs.existsSync(targetDir)) {
             fs.mkdir(targetDir);
         }
-        var fileExt = filePath.substring(filePath.lastIndexOf('.'));
+        const fileExt = filePath.substring(filePath.lastIndexOf('.'));
         //判斷文件類型是否允許上傳
         if (('.jpg.jpeg.png.gif').indexOf(fileExt.toLowerCase()) === -1) {
             ep.emit('error', '此類型文件不允許上傳！');
         } else {
             //以time stamp rename files
             console.log("renamefile");
-            var fileName = new Date().getTime() + fileExt;
-            var targetFile = path.join(targetDir, fileName);
+            const fileName = new Date().getTime() + fileExt;
+            const targetFile = path.join(targetDir, fileName);
 
             //移動文件
             fs.rename(filePath, targetFile, function (err) {
@@ -176,7 +171,7 @@ exports.uploads = function (req, res) {
                 } else {
                     console.log("movefile");
 
-                    var newMsg = new misproject({ message:"upload/"+fileName, username: name, tid: tid});
+                    const newMsg = new misproject({message: "upload/" + fileName, username: name, tid: tid});
                     newMsg.save(function (err) {
                             if (err) {
                                 console.log("err!");

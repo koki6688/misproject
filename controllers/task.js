@@ -1,23 +1,23 @@
-var eventproxy = require('eventproxy');
-var ep = new eventproxy();
-var path = require('path');
-var fs = require('fs');
-var moment = require('moment');
+const eventproxy = require('eventproxy');
+const ep = new eventproxy();
+const path = require('path');
+const fs = require('fs');
+const moment = require('moment');
 
 
-var TaskModel = require('../models/task');
-var MemberModel = require('../models/member');
-var level = require('../models/member_level').level;
-var getLevel = require('../models/member_level').getLevel;
+const TaskModel = require('../models/task');
+const MemberModel = require('../models/member');
+const level = require('../models/member_level').level;
+const getLevel = require('../models/member_level').getLevel;
 
 
 exports.showTask = function (req, res) {
 
-    var query = {status: 'available'};
-    var field = {category: 1, title: 1, reward: 1, due_date: 1};
-    var sort = {createTime: -1};
-    var path_select = 'pmID';
-    var field_select = '_id nickname';
+    const query = {status: 'available'};
+    const field = {category: 1, title: 1, reward: 1, due_date: 1};
+    const sort = {createTime: -1};
+    const path_select = 'pmID';
+    const field_select = '_id nickname';
 
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
         if (err) {
@@ -36,19 +36,19 @@ exports.task = function (req, res) {
 
     //獲取輸入內容
 
-    var pmID = req.body.pmID;
-    var title = req.body.title;
-    var reward = req.body.reward;
-    var fee = req.body.fee;
-    var category = req.body.category;
-    var due_date = new Date(req.body.due_date);
-    var content = req.body.content;
-    var limited_level = req.body.limited_level;
+    const pmID = req.body.pmID;
+    const title = req.body.title;
+    const reward = req.body.reward;
+    const fee = req.body.fee;
+    const category = req.body.category;
+    const due_date = new Date(req.body.due_date);
+    const content = req.body.content;
+    const limited_level = req.body.limited_level;
 
-    var cost = parseInt(reward) + parseInt(fee);
+    let cost = parseInt(reward) + parseInt(fee);
 
 
-    var query = {
+    const query = {
         pmID: pmID, title: title, category: category, content: content, reward: reward,
         fee: fee, limited_level: limited_level, due_date: due_date
     };
@@ -74,7 +74,7 @@ exports.task = function (req, res) {
                 }
             });
 
-            var send = req.flash('success', '任務發布成功');
+            const send = req.flash('success', '任務發布成功');
             res.render('home', {t_success: send});
             //res.redirect('/home');
         }
@@ -83,18 +83,18 @@ exports.task = function (req, res) {
 
 exports.delete = function (req, res) {
 
-    var tID = req.params.tid;
-    var query = {_id: tID};
-    var field = {reward: 1, fee: 1};
+    const tID = req.params.tid;
+    const query = {_id: tID};
+    const field = {reward: 1, fee: 1};
 
 
     TaskModel.getTasks(query, field, '', '', {}, function (err, result) {
 
         if (result) {
 
-            var cost = result[0].reward + result[0].fee;
+            const cost = result[0].reward + result[0].fee;
 
-            var update = {$inc: {asset: cost}};
+            const update = {$inc: {asset: cost}};
 
             MemberModel.updateMember({_id: req.session.member._id}, update, function (err, result) {
 
@@ -127,13 +127,13 @@ exports.delete = function (req, res) {
 
 exports.request = function (req, res) {
 
-    var rmID = req.body.rmID;
-    var tID = req.body.tID;
-    var status = 'request';
-    var date = moment().format();
+    const rmID = req.body.rmID;
+    const tID = req.body.tID;
+    const status = 'request';
+    const date = moment().format();
 
-    var query = {_id: tID};
-    var update = {rmID: rmID, status: status, requestTime: date};
+    const query = {_id: tID};
+    const update = {rmID: rmID, status: status, requestTime: date};
 
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
@@ -145,12 +145,12 @@ exports.request = function (req, res) {
 };
 
 exports.detail = function (req, res) {
-    var tID = req.params.tid;
-    var query = {_id: tID};
-    var field = {status: 1, category: 1, title: 1, reward: 1, due_date: 1, limited_level: 1, content: 1};
-    var path_select = 'pmID';
-    var field_select = '_id nickname';
-    var sort = {createTime: 1};
+    const tID = req.params.tid;
+    const query = {_id: tID};
+    const field = {status: 1, category: 1, title: 1, reward: 1, due_date: 1, limited_level: 1, content: 1};
+    const path_select = 'pmID';
+    const field_select = '_id nickname';
+    const sort = {createTime: 1};
 
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, task) {
         if (err) {
@@ -162,12 +162,12 @@ exports.detail = function (req, res) {
 
 exports.accept = function (req, res) {
 
-    var tID = req.body.tID;
-    var status = 'progressing';
-    var date = moment().format();
+    const tID = req.body.tID;
+    const status = 'progressing';
+    const date = moment().format();
 
-    var query = {_id: tID};
-    var update = {status: status, acceptTime: date};
+    const query = {_id: tID};
+    const update = {status: status, acceptTime: date};
 
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
@@ -181,13 +181,13 @@ exports.accept = function (req, res) {
 
 exports.decline = function (req, res) {
 
-    var rmID = null;
-    var tID = req.body.tID;
-    var status = 'available';
-    var date = null;
+    const rmID = null;
+    const tID = req.body.tID;
+    const status = 'available';
+    const date = null;
 
-    var query = {_id: tID};
-    var update = {rmID: rmID, status: status, requestTime: date};
+    const query = {_id: tID};
+    const update = {rmID: rmID, status: status, requestTime: date};
 
     TaskModel.updateTask(query, update, function (err, result) {
         if (result) {
@@ -200,14 +200,14 @@ exports.decline = function (req, res) {
 
 exports.check_and_rate = function (req, res) {
 
-    var tID = req.body.tID;
+    const tID = req.body.tID;
 
-    var query = {_id: tID};
-    var update = {};
+    const query = {_id: tID};
+    const update = {};
 
     if (req.body.checker) {
 
-        var checker = req.body.checker;
+        const checker = req.body.checker;
 
         update[checker] = true;
 
@@ -226,13 +226,13 @@ exports.check_and_rate = function (req, res) {
     }
 
     if (req.body.rater) {
-        var rater = req.body.rater;
+        const rater = req.body.rater;
 
-        var field = {rCheck: 1, pCheck: 1, pRating: 1, rRating: 1, reward: 1};
-        var path_select = '';
-        var field_select = '';
-        var sort = {};
-        var reward = 0;
+        const field = {rCheck: 1, pCheck: 1, pRating: 1, rRating: 1, reward: 1};
+        const path_select = '';
+        const field_select = '';
+        const sort = {};
+        let reward = 0;
 
         update[rater] = req.body.rate;
 
@@ -260,9 +260,9 @@ exports.check_and_rate = function (req, res) {
                                         }, function (err, count) {
                                             if (count) {
 
-                                                var member_level_and_char = getLevel(count);
+                                                const member_level_and_char = getLevel(count);
 
-                                                var update_member = {
+                                                const update_member = {
                                                     level: member_level_and_char[0],
                                                     char: member_level_and_char[1],
                                                     $inc: {asset: reward}
@@ -308,15 +308,15 @@ exports.check_and_rate = function (req, res) {
 
 exports.filter = function (req, res) {
 
-    var category = req.body.category;
-    var reward = req.body.reward;
-    var level = req.body.level;
-    var due_date = req.body.due_date;
-    var reward_minusFifty = reward - 50;
-    var m = moment().format();
-    var m_plus_hr = moment(m).add(due_date, 'hours');
+    const category = req.body.category;
+    const reward = req.body.reward;
+    const level = req.body.level;
+    const due_date = req.body.due_date;
+    const reward_minusFifty = reward - 50;
+    const m = moment().format();
+    const m_plus_hr = moment(m).add(due_date, 'hours');
 
-    var query = {status: 'available'};
+    const query = {status: 'available'};
 
 
     if (category) {
@@ -333,10 +333,10 @@ exports.filter = function (req, res) {
     }
 
 
-    var field = {category: 1, title: 1, reward: 1, due_date: 1};
-    var sort = {createTime: -1};
-    var path_select = 'pmID';
-    var field_select = '_id nickname';
+    const field = {category: 1, title: 1, reward: 1, due_date: 1};
+    const sort = {createTime: -1};
+    const path_select = 'pmID';
+    const field_select = '_id nickname';
 
     TaskModel.getTasks(query, field, path_select, field_select, sort, function (err, tasks) {
         if (err) {
@@ -349,13 +349,13 @@ exports.filter = function (req, res) {
 
 exports.history = function (req, res) {
 
-    var query = {$or: [{pmID: req.session.member._id}, {rmID: req.session.member._id}]};
-    var field = {};
-    var path_select1 = 'pmID';
-    var field_select1 = '_id nickname';
-    var path_select2 = 'rmID';
-    var field_select2 = '_id nickname';
-    var sort = {requestTime: -1};
+    const query = {$or: [{pmID: req.session.member._id}, {rmID: req.session.member._id}]};
+    const field = {};
+    const path_select1 = 'pmID';
+    const field_select1 = '_id nickname';
+    const path_select2 = 'rmID';
+    const field_select2 = '_id nickname';
+    const sort = {requestTime: -1};
 
     TaskModel.getHistory(query, field, path_select1, field_select1, path_select2, field_select2,
         sort, function (err, tasks) {

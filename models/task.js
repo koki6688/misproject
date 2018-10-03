@@ -1,7 +1,7 @@
-var mongoose = require('../db').mongoose;
+const mongoose = require('../db').mongoose;
 
 
-var taskSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
 
     pmID: {type: mongoose.Schema.Types.ObjectId, ref: 'Member'},
     rmID: {type: mongoose.Schema.Types.ObjectId, ref: 'Member', default: null},
@@ -56,7 +56,7 @@ taskSchema.statics.findMin = function (query,sort,callback) {
     this.findOne(query).sort(sort).exec(callback);
 };
 
-var Task = mongoose.model('task', taskSchema);
+const Task = mongoose.model('task', taskSchema);
 
 
 module.exports = Task;
