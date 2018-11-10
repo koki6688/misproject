@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-const memberController = require('../controllers/member');
-const SignInController = require('../controllers/signin');
-const taskController = require('../controllers/task');
-const chatController = require('../controllers/server');
-const helpController = require('../controllers/help');
+var memberController = require('../controllers/member');
+var SignInController = require('../controllers/signin');
+var taskController = require('../controllers/task');
+var chatController = require('../controllers/server');
+var helpController = require('../controllers/help');
 
 
 /* 顯示登入頁面 */
